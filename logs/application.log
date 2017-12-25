@@ -1,0 +1,283 @@
+INFO  [2017-12-25 23:52:00,565] org.eclipse.jetty.util.log: Logging initialized @2028ms to org.eclipse.jetty.util.log.Slf4jLog
+INFO  [2017-12-25 23:52:00,667] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2017-12-25 23:52:00,669] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2017-12-25 23:52:00,670] io.dropwizard.assets.AssetsBundle: Registering AssetBundle with name: assets for path /assets/*
+INFO  [2017-12-25 23:52:00,892] org.hibernate.Version: HHH000412: Hibernate Core {5.2.12.Final}
+INFO  [2017-12-25 23:52:00,895] org.hibernate.cfg.Environment: HHH000206: hibernate.properties not found
+INFO  [2017-12-25 23:52:00,912] io.dropwizard.hibernate.SessionFactoryFactory: Entity classes: [pw.choochoo.core.Person]
+INFO  [2017-12-25 23:52:00,944] org.hibernate.annotations.common.Version: HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+ERROR [2017-12-25 23:52:01,044] org.apache.tomcat.jdbc.pool.ConnectionPool: Unable to create initial connections of pool.
+! java.lang.ClassNotFoundException: org.h2.Driver
+! at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+! at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+! at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:335)
+! at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+! at java.lang.Class.forName0(Native Method)
+! at java.lang.Class.forName(Class.java:348)
+! at org.apache.tomcat.jdbc.pool.ClassLoaderUtil.loadClass(ClassLoaderUtil.java:38)
+! ... 47 common frames omitted
+! Causing: java.lang.ClassNotFoundException: Unable to load class: org.h2.Driver from ClassLoader:sun.misc.Launcher$AppClassLoader@18b4aac2;ClassLoader:sun.misc.Launcher$AppClassLoader@18b4aac2
+! at org.apache.tomcat.jdbc.pool.ClassLoaderUtil.loadClass(ClassLoaderUtil.java:56)
+! at org.apache.tomcat.jdbc.pool.PooledConnection.connectUsingDriver(PooledConnection.java:272)
+! ... 46 common frames omitted
+! Causing: java.sql.SQLException: Unable to load class: org.h2.Driver from ClassLoader:sun.misc.Launcher$AppClassLoader@18b4aac2;ClassLoader:sun.misc.Launcher$AppClassLoader@18b4aac2
+! at org.apache.tomcat.jdbc.pool.PooledConnection.connectUsingDriver(PooledConnection.java:283)
+! at org.apache.tomcat.jdbc.pool.PooledConnection.connect(PooledConnection.java:203)
+! at org.apache.tomcat.jdbc.pool.ConnectionPool.createConnection(ConnectionPool.java:735)
+! at org.apache.tomcat.jdbc.pool.ConnectionPool.borrowConnection(ConnectionPool.java:667)
+! at org.apache.tomcat.jdbc.pool.ConnectionPool.init(ConnectionPool.java:482)
+! at org.apache.tomcat.jdbc.pool.ConnectionPool.<init>(ConnectionPool.java:154)
+! at org.apache.tomcat.jdbc.pool.DataSourceProxy.pCreatePool(DataSourceProxy.java:118)
+! at org.apache.tomcat.jdbc.pool.DataSourceProxy.createPool(DataSourceProxy.java:107)
+! at org.apache.tomcat.jdbc.pool.DataSourceProxy.getConnection(DataSourceProxy.java:131)
+! at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+! at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:180)
+! at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+! at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+! at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:88)
+! at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:259)
+! at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:233)
+! at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210)
+! at org.hibernate.engine.jdbc.internal.JdbcServicesImpl.configure(JdbcServicesImpl.java:51)
+! at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:94)
+! at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:242)
+! at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210)
+! at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.handleTypes(MetadataBuildingProcess.java:352)
+! at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:111)
+! at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.build(MetadataBuildingProcess.java:83)
+! at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:418)
+! at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:87)
+! at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:691)
+! at io.dropwizard.hibernate.SessionFactoryFactory.buildSessionFactory(SessionFactoryFactory.java:96)
+! at io.dropwizard.hibernate.SessionFactoryFactory.build(SessionFactoryFactory.java:49)
+! at io.dropwizard.hibernate.SessionFactoryFactory.build(SessionFactoryFactory.java:39)
+! at io.dropwizard.hibernate.HibernateBundle.run(HibernateBundle.java:62)
+! at io.dropwizard.hibernate.HibernateBundle.run(HibernateBundle.java:15)
+! at io.dropwizard.setup.Bootstrap.run(Bootstrap.java:200)
+! at io.dropwizard.testing.DropwizardTestSupport$2.run(DropwizardTestSupport.java:200)
+! at io.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:42)
+! at io.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:85)
+! at io.dropwizard.testing.DropwizardTestSupport.startIfRequired(DropwizardTestSupport.java:227)
+! at io.dropwizard.testing.DropwizardTestSupport.before(DropwizardTestSupport.java:141)
+! at io.dropwizard.testing.junit.DropwizardAppRule.before(DropwizardAppRule.java:154)
+! at org.junit.rules.ExternalResource$1.evaluate(ExternalResource.java:46)
+! at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+! at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+! at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+! at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+! at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+! at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+! at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+WARN  [2017-12-25 23:52:01,047] org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator: HHH000342: Could not obtain connection to query metadata : Unable to load class: org.h2.Driver from ClassLoader:sun.misc.Launcher$AppClassLoader@18b4aac2;ClassLoader:sun.misc.Launcher$AppClassLoader@18b4aac2
+INFO  [2017-12-25 23:53:07,255] org.eclipse.jetty.util.log: Logging initialized @4338ms to org.eclipse.jetty.util.log.Slf4jLog
+INFO  [2017-12-25 23:53:07,336] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2017-12-25 23:53:07,338] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2017-12-25 23:53:07,340] io.dropwizard.assets.AssetsBundle: Registering AssetBundle with name: assets for path /assets/*
+INFO  [2017-12-25 23:53:07,538] org.hibernate.Version: HHH000412: Hibernate Core {5.2.12.Final}
+INFO  [2017-12-25 23:53:07,540] org.hibernate.cfg.Environment: HHH000206: hibernate.properties not found
+INFO  [2017-12-25 23:53:07,553] io.dropwizard.hibernate.SessionFactoryFactory: Entity classes: [pw.choochoo.core.Person]
+INFO  [2017-12-25 23:53:07,598] org.hibernate.annotations.common.Version: HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+ERROR [2017-12-25 23:53:07,685] org.apache.tomcat.jdbc.pool.ConnectionPool: Unable to create initial connections of pool.
+! java.lang.ClassNotFoundException: org.h2.Driver
+! at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+! at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+! at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:335)
+! at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+! at java.lang.Class.forName0(Native Method)
+! at java.lang.Class.forName(Class.java:348)
+! at org.apache.tomcat.jdbc.pool.ClassLoaderUtil.loadClass(ClassLoaderUtil.java:38)
+! ... 47 common frames omitted
+! Causing: java.lang.ClassNotFoundException: Unable to load class: org.h2.Driver from ClassLoader:sun.misc.Launcher$AppClassLoader@18b4aac2;ClassLoader:sun.misc.Launcher$AppClassLoader@18b4aac2
+! at org.apache.tomcat.jdbc.pool.ClassLoaderUtil.loadClass(ClassLoaderUtil.java:56)
+! at org.apache.tomcat.jdbc.pool.PooledConnection.connectUsingDriver(PooledConnection.java:272)
+! ... 46 common frames omitted
+! Causing: java.sql.SQLException: Unable to load class: org.h2.Driver from ClassLoader:sun.misc.Launcher$AppClassLoader@18b4aac2;ClassLoader:sun.misc.Launcher$AppClassLoader@18b4aac2
+! at org.apache.tomcat.jdbc.pool.PooledConnection.connectUsingDriver(PooledConnection.java:283)
+! at org.apache.tomcat.jdbc.pool.PooledConnection.connect(PooledConnection.java:203)
+! at org.apache.tomcat.jdbc.pool.ConnectionPool.createConnection(ConnectionPool.java:735)
+! at org.apache.tomcat.jdbc.pool.ConnectionPool.borrowConnection(ConnectionPool.java:667)
+! at org.apache.tomcat.jdbc.pool.ConnectionPool.init(ConnectionPool.java:482)
+! at org.apache.tomcat.jdbc.pool.ConnectionPool.<init>(ConnectionPool.java:154)
+! at org.apache.tomcat.jdbc.pool.DataSourceProxy.pCreatePool(DataSourceProxy.java:118)
+! at org.apache.tomcat.jdbc.pool.DataSourceProxy.createPool(DataSourceProxy.java:107)
+! at org.apache.tomcat.jdbc.pool.DataSourceProxy.getConnection(DataSourceProxy.java:131)
+! at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+! at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:180)
+! at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+! at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+! at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:88)
+! at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:259)
+! at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:233)
+! at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210)
+! at org.hibernate.engine.jdbc.internal.JdbcServicesImpl.configure(JdbcServicesImpl.java:51)
+! at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:94)
+! at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:242)
+! at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210)
+! at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.handleTypes(MetadataBuildingProcess.java:352)
+! at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:111)
+! at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.build(MetadataBuildingProcess.java:83)
+! at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:418)
+! at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:87)
+! at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:691)
+! at io.dropwizard.hibernate.SessionFactoryFactory.buildSessionFactory(SessionFactoryFactory.java:96)
+! at io.dropwizard.hibernate.SessionFactoryFactory.build(SessionFactoryFactory.java:49)
+! at io.dropwizard.hibernate.SessionFactoryFactory.build(SessionFactoryFactory.java:39)
+! at io.dropwizard.hibernate.HibernateBundle.run(HibernateBundle.java:62)
+! at io.dropwizard.hibernate.HibernateBundle.run(HibernateBundle.java:15)
+! at io.dropwizard.setup.Bootstrap.run(Bootstrap.java:200)
+! at io.dropwizard.testing.DropwizardTestSupport$2.run(DropwizardTestSupport.java:200)
+! at io.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:42)
+! at io.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:85)
+! at io.dropwizard.testing.DropwizardTestSupport.startIfRequired(DropwizardTestSupport.java:227)
+! at io.dropwizard.testing.DropwizardTestSupport.before(DropwizardTestSupport.java:141)
+! at io.dropwizard.testing.junit.DropwizardAppRule.before(DropwizardAppRule.java:154)
+! at org.junit.rules.ExternalResource$1.evaluate(ExternalResource.java:46)
+! at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+! at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+! at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+! at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+! at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+! at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+! at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+WARN  [2017-12-25 23:53:07,690] org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator: HHH000342: Could not obtain connection to query metadata : Unable to load class: org.h2.Driver from ClassLoader:sun.misc.Launcher$AppClassLoader@18b4aac2;ClassLoader:sun.misc.Launcher$AppClassLoader@18b4aac2
+INFO  [2017-12-25 23:53:17,835] org.eclipse.jetty.util.log: Logging initialized @2297ms to org.eclipse.jetty.util.log.Slf4jLog
+INFO  [2017-12-25 23:53:17,936] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2017-12-25 23:53:17,937] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2017-12-25 23:53:17,939] io.dropwizard.assets.AssetsBundle: Registering AssetBundle with name: assets for path /assets/*
+INFO  [2017-12-25 23:53:18,133] org.hibernate.Version: HHH000412: Hibernate Core {5.2.12.Final}
+INFO  [2017-12-25 23:53:18,134] org.hibernate.cfg.Environment: HHH000206: hibernate.properties not found
+INFO  [2017-12-25 23:53:18,145] io.dropwizard.hibernate.SessionFactoryFactory: Entity classes: [pw.choochoo.core.Person]
+INFO  [2017-12-25 23:53:18,181] org.hibernate.annotations.common.Version: HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  [2017-12-25 23:53:18,558] org.hibernate.dialect.Dialect: HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+INFO  [2017-12-25 23:53:18,979] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.util.Currency] overrides previous : org.hibernate.type.CurrencyType@5fdd97c1
+INFO  [2017-12-25 23:53:18,979] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Duration] overrides previous : org.hibernate.type.DurationType@3b5a19ed
+INFO  [2017-12-25 23:53:18,979] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Instant] overrides previous : org.hibernate.type.InstantType@6b9c42bd
+INFO  [2017-12-25 23:53:18,979] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDate] overrides previous : org.hibernate.type.LocalDateType@33324c05
+INFO  [2017-12-25 23:53:18,980] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDateTime] overrides previous : org.hibernate.type.LocalDateTimeType@37d3e140
+INFO  [2017-12-25 23:53:18,980] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalTime] overrides previous : org.hibernate.type.LocalTimeType@33eb0d4
+INFO  [2017-12-25 23:53:18,980] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetDateTime] overrides previous : org.hibernate.type.OffsetDateTimeType@224d86d2
+INFO  [2017-12-25 23:53:18,980] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetTime] overrides previous : org.hibernate.type.OffsetTimeType@a3cba3a
+INFO  [2017-12-25 23:53:18,980] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.ZonedDateTime] overrides previous : org.hibernate.type.ZonedDateTimeType@2aea717c
+INFO  [2017-12-25 23:53:19,233] org.hibernate.hql.internal.QueryTranslatorFactoryInitiator: HHH000397: Using ASTQueryTranslatorFactory
+INFO  [2017-12-25 23:53:19,347] io.dropwizard.server.ServerFactory: Starting choo-choo
+INFO  [2017-12-25 23:53:19,479] org.eclipse.jetty.setuid.SetUIDListener: Opened application@1682e6a{HTTP/1.1,[http/1.1]}{0.0.0.0:64097}
+INFO  [2017-12-25 23:53:19,479] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@505d2bac{HTTP/1.1,[http/1.1]}{0.0.0.0:64098}
+INFO  [2017-12-25 23:53:19,484] org.eclipse.jetty.server.Server: jetty-9.4.7.v20170914
+INFO  [2017-12-25 23:53:20,153] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /filtered/hello (pw.choochoo.resources.FilteredResource)
+    GET     /hello-world (pw.choochoo.resources.HelloWorldResource)
+    POST    /hello-world (pw.choochoo.resources.HelloWorldResource)
+    GET     /hello-world/date (pw.choochoo.resources.HelloWorldResource)
+    GET     /people (pw.choochoo.resources.PeopleResource)
+    POST    /people (pw.choochoo.resources.PeopleResource)
+    GET     /people/{personId} (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_freemarker (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_mustache (pw.choochoo.resources.PersonResource)
+    GET     /protected (pw.choochoo.resources.ProtectedResource)
+    GET     /protected/admin (pw.choochoo.resources.ProtectedResource)
+    GET     /views/iso88591.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/iso88591.mustache (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.mustache (pw.choochoo.resources.ViewResource)
+
+INFO  [2017-12-25 23:53:20,155] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@615ef20{/,null,AVAILABLE}
+INFO  [2017-12-25 23:53:20,159] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/echo (pw.choochoo.tasks.EchoTask)
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2017-12-25 23:53:20,166] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@5c60c08{/,null,AVAILABLE}
+INFO  [2017-12-25 23:53:20,183] org.eclipse.jetty.server.AbstractConnector: Started application@1682e6a{HTTP/1.1,[http/1.1]}{0.0.0.0:64097}
+INFO  [2017-12-25 23:53:20,184] org.eclipse.jetty.server.AbstractConnector: Started admin@505d2bac{HTTP/1.1,[http/1.1]}{0.0.0.0:64098}
+INFO  [2017-12-25 23:53:20,184] org.eclipse.jetty.server.Server: Started @4647ms
+INFO  [2017-12-25 23:53:21,009] liquibase: Successfully acquired change log lock
+INFO  [2017-12-25 23:53:21,036] liquibase: Successfully released change log lock
+INFO  [2017-12-25 23:53:21,054] org.eclipse.jetty.server.AbstractConnector: Stopped application@1682e6a{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-25 23:53:21,055] org.eclipse.jetty.server.AbstractConnector: Stopped admin@505d2bac{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-25 23:53:21,057] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@5c60c08{/,null,UNAVAILABLE}
+INFO  [2017-12-25 23:53:21,068] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@615ef20{/,null,UNAVAILABLE}
+INFO  [2017-12-25 23:56:16,336] org.eclipse.jetty.util.log: Logging initialized @2146ms to org.eclipse.jetty.util.log.Slf4jLog
+INFO  [2017-12-25 23:56:16,448] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2017-12-25 23:56:16,449] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2017-12-25 23:56:16,451] io.dropwizard.assets.AssetsBundle: Registering AssetBundle with name: assets for path /assets/*
+INFO  [2017-12-25 23:56:16,655] org.hibernate.Version: HHH000412: Hibernate Core {5.2.12.Final}
+INFO  [2017-12-25 23:56:16,656] org.hibernate.cfg.Environment: HHH000206: hibernate.properties not found
+INFO  [2017-12-25 23:56:16,668] io.dropwizard.hibernate.SessionFactoryFactory: Entity classes: [pw.choochoo.core.Person]
+INFO  [2017-12-25 23:56:16,701] org.hibernate.annotations.common.Version: HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  [2017-12-25 23:56:17,046] org.hibernate.dialect.Dialect: HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+INFO  [2017-12-25 23:56:17,418] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.util.Currency] overrides previous : org.hibernate.type.CurrencyType@5fdd97c1
+INFO  [2017-12-25 23:56:17,418] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Duration] overrides previous : org.hibernate.type.DurationType@3b5a19ed
+INFO  [2017-12-25 23:56:17,418] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Instant] overrides previous : org.hibernate.type.InstantType@6b9c42bd
+INFO  [2017-12-25 23:56:17,418] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDate] overrides previous : org.hibernate.type.LocalDateType@33324c05
+INFO  [2017-12-25 23:56:17,418] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDateTime] overrides previous : org.hibernate.type.LocalDateTimeType@37d3e140
+INFO  [2017-12-25 23:56:17,418] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalTime] overrides previous : org.hibernate.type.LocalTimeType@33eb0d4
+INFO  [2017-12-25 23:56:17,418] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetDateTime] overrides previous : org.hibernate.type.OffsetDateTimeType@224d86d2
+INFO  [2017-12-25 23:56:17,419] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetTime] overrides previous : org.hibernate.type.OffsetTimeType@a3cba3a
+INFO  [2017-12-25 23:56:17,419] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.ZonedDateTime] overrides previous : org.hibernate.type.ZonedDateTimeType@2aea717c
+INFO  [2017-12-25 23:56:17,705] org.hibernate.hql.internal.QueryTranslatorFactoryInitiator: HHH000397: Using ASTQueryTranslatorFactory
+INFO  [2017-12-25 23:56:17,834] io.dropwizard.server.ServerFactory: Starting choo-choo
+                           web-scale hello world dP for the web
+                                                 88
+  .d8888b. dP.  .dP .d8888b. 88d8b.d8b. 88d888b. 88 .d8888b.
+  88ooood8  `8bd8'  88'  `88 88'`88'`88 88'  `88 88 88ooood8
+  88.  ...  .d88b.  88.  .88 88  88  88 88.  .88 88 88.  ...
+  `88888P' dP'  `dP `88888P8 dP  dP  dP 88Y888P' dP `88888P'
+                                        88
+                                        dP
+
+INFO  [2017-12-25 23:56:17,959] org.eclipse.jetty.setuid.SetUIDListener: Opened application@1682e6a{HTTP/1.1,[http/1.1]}{0.0.0.0:64280}
+INFO  [2017-12-25 23:56:17,960] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@505d2bac{HTTP/1.1,[http/1.1]}{0.0.0.0:64281}
+INFO  [2017-12-25 23:56:17,961] org.eclipse.jetty.server.Server: jetty-9.4.7.v20170914
+INFO  [2017-12-25 23:56:18,606] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /filtered/hello (pw.choochoo.resources.FilteredResource)
+    GET     /hello-world (pw.choochoo.resources.HelloWorldResource)
+    POST    /hello-world (pw.choochoo.resources.HelloWorldResource)
+    GET     /hello-world/date (pw.choochoo.resources.HelloWorldResource)
+    GET     /people (pw.choochoo.resources.PeopleResource)
+    POST    /people (pw.choochoo.resources.PeopleResource)
+    GET     /people/{personId} (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_freemarker (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_mustache (pw.choochoo.resources.PersonResource)
+    GET     /protected (pw.choochoo.resources.ProtectedResource)
+    GET     /protected/admin (pw.choochoo.resources.ProtectedResource)
+    GET     /views/iso88591.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/iso88591.mustache (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.mustache (pw.choochoo.resources.ViewResource)
+
+INFO  [2017-12-25 23:56:18,608] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@615ef20{/,null,AVAILABLE}
+INFO  [2017-12-25 23:56:18,611] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/echo (pw.choochoo.tasks.EchoTask)
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2017-12-25 23:56:18,617] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@5c60c08{/,null,AVAILABLE}
+INFO  [2017-12-25 23:56:18,629] org.eclipse.jetty.server.AbstractConnector: Started application@1682e6a{HTTP/1.1,[http/1.1]}{0.0.0.0:64280}
+INFO  [2017-12-25 23:56:18,629] org.eclipse.jetty.server.AbstractConnector: Started admin@505d2bac{HTTP/1.1,[http/1.1]}{0.0.0.0:64281}
+INFO  [2017-12-25 23:56:18,629] org.eclipse.jetty.server.Server: Started @4441ms
+INFO  [2017-12-25 23:56:19,430] liquibase: Successfully acquired change log lock
+INFO  [2017-12-25 23:56:20,039] liquibase: Creating database history table with name: PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-25 23:56:20,042] liquibase: Reading from PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-25 23:56:20,052] liquibase: migrations.xml: migrations.xml::1::codahale: Table people created
+INFO  [2017-12-25 23:56:20,052] liquibase: migrations.xml: migrations.xml::1::codahale: ChangeSet migrations.xml::1::codahale ran successfully in 5ms
+INFO  [2017-12-25 23:56:20,058] liquibase: Successfully released change log lock
+INFO  [2017-12-25 23:56:20,747] org.hibernate.engine.internal.StatisticalLoggingSessionEventListener: Session Metrics {
+    89117 nanoseconds spent acquiring 2 JDBC connections;
+    85924 nanoseconds spent releasing 2 JDBC connections;
+    7875523 nanoseconds spent preparing 1 JDBC statements;
+    1476229 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    3034986 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+INFO  [2017-12-25 23:56:20,791] org.eclipse.jetty.server.AbstractConnector: Stopped application@1682e6a{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-25 23:56:20,792] org.eclipse.jetty.server.AbstractConnector: Stopped admin@505d2bac{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-25 23:56:20,794] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@5c60c08{/,null,UNAVAILABLE}
+INFO  [2017-12-25 23:56:20,796] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@615ef20{/,null,UNAVAILABLE}
