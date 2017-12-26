@@ -1,10 +1,6 @@
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
-
-plugins {
-    id 'com.github.johnrengelman.shadow' version '1.2.4'
-}
+//plugins {
+//    id 'com.github.johnrengelman.shadow' version '1.2.4'
+//}
 
 version '1.0-SNAPSHOT'
 group 'pw.choochoo'
@@ -13,12 +9,27 @@ description 'Choo choo choose me'
 apply plugin: 'java'
 apply plugin: 'application'
 
-//sourceCompatibility = 1.8
-//targetCompatibility = 1.8
-
 repositories {
     mavenCentral()
 }
+
+//sourceCompatibility = 1.8
+//targetCompatibility = 1.8
+
+//apply plugin: 'checkstyle'
+//checkstyle {
+//    toolVersion = '8.5'
+//}
+//
+//checkstyleMain {
+//    configFile = file("${rootDir}/config/checkstyle.xml")
+//    configProperties = [ "suppressionFile" : project(':').file('${rootDir}/config/checkstyle-suppressions.xml')]
+//}
+//
+//checkstyleTest {
+//    configFile = file("${rootDir}/config/checkstyle.xml")
+//    configProperties = [ "suppressionFile" : project(':').file('${rootDir}/config/checkstyle-suppressions.xml')]
+//}
 
 
 dependencies {
@@ -37,7 +48,9 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     testCompile group: 'org.mockito', name: 'mockito-core', version: '2.13.0'
-    testCompile group: 'org.glassfish.jersey.test-framework.providers', name: 'jersey-test-framework-provider-grizzly2', version: '2.0-m05-1'
+    testCompile group: 'org.glassfish.jersey.test-framework.providers', name: 'jersey-test-framework-provider-grizzly2', version: '2.25.1'
+    testCompile group: 'org.glassfish.jersey.test-framework.providers', name: 'jersey-test-framework-provider-inmemory', version: '2.25.1'
+
     testCompile group: 'com.h2database', name: 'h2', version: '1.4.196'
 }
 
@@ -47,18 +60,18 @@ run {
     args = ['server', 'config.yml']
 }
 
-shadowJar {
-    mergeServiceFiles()
-    exclude 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.SF'
-    manifest {
-        attributes 'Implementation-Title': rootProject.name
-        attributes 'Implementation-Version': rootProject.version
-        attributes 'Implementation-Vendor-Id': rootProject.group
-        attributes 'Build-Time': ZonedDateTime.now(ZoneId.of("UTC"))
-                .format(DateTimeFormatter.ISO_ZONED_DATE_TIME)
-        attributes 'Built-By': InetAddress.localHost.hostName
-        attributes 'Created-By': 'Gradle ' + gradle.gradleVersion
-        attributes 'Main-Class': mainClassName
-    }
-    archiveName 'choochoo-server.jar'
-}
+//shadowJar {
+//    mergeServiceFiles()
+//    exclude 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.SF'
+//    manifest {
+//        attributes 'Implementation-Title': rootProject.name
+//        attributes 'Implementation-Version': rootProject.version
+//        attributes 'Implementation-Vendor-Id': rootProject.group
+//        attributes 'Build-Time': ZonedDateTime.now(ZoneId.of("UTC"))
+//                .format(DateTimeFormatter.ISO_ZONED_DATE_TIME)
+//        attributes 'Built-By': InetAddress.localHost.hostName
+//        attributes 'Created-By': 'Gradle ' + gradle.gradleVersion
+//        attributes 'Main-Class': mainClassName
+//    }
+//    archiveName 'choochoo-server.jar'
+//}

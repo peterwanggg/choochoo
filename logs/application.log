@@ -281,3 +281,733 @@ INFO  [2017-12-25 23:56:20,791] org.eclipse.jetty.server.AbstractConnector: Stop
 INFO  [2017-12-25 23:56:20,792] org.eclipse.jetty.server.AbstractConnector: Stopped admin@505d2bac{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
 INFO  [2017-12-25 23:56:20,794] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@5c60c08{/,null,UNAVAILABLE}
 INFO  [2017-12-25 23:56:20,796] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@615ef20{/,null,UNAVAILABLE}
+INFO  [2017-12-26 00:05:41,128] org.eclipse.jetty.util.log: Logging initialized @2339ms to org.eclipse.jetty.util.log.Slf4jLog
+INFO  [2017-12-26 00:05:41,235] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2017-12-26 00:05:41,236] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2017-12-26 00:05:41,237] io.dropwizard.assets.AssetsBundle: Registering AssetBundle with name: assets for path /assets/*
+INFO  [2017-12-26 00:05:41,458] org.hibernate.Version: HHH000412: Hibernate Core {5.2.12.Final}
+INFO  [2017-12-26 00:05:41,459] org.hibernate.cfg.Environment: HHH000206: hibernate.properties not found
+INFO  [2017-12-26 00:05:41,473] io.dropwizard.hibernate.SessionFactoryFactory: Entity classes: [pw.choochoo.core.Person]
+INFO  [2017-12-26 00:05:41,511] org.hibernate.annotations.common.Version: HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  [2017-12-26 00:05:41,902] org.hibernate.dialect.Dialect: HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+INFO  [2017-12-26 00:05:42,272] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.util.Currency] overrides previous : org.hibernate.type.CurrencyType@5fdd97c1
+INFO  [2017-12-26 00:05:42,272] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Duration] overrides previous : org.hibernate.type.DurationType@3b5a19ed
+INFO  [2017-12-26 00:05:42,272] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Instant] overrides previous : org.hibernate.type.InstantType@6b9c42bd
+INFO  [2017-12-26 00:05:42,272] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDate] overrides previous : org.hibernate.type.LocalDateType@33324c05
+INFO  [2017-12-26 00:05:42,272] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDateTime] overrides previous : org.hibernate.type.LocalDateTimeType@37d3e140
+INFO  [2017-12-26 00:05:42,272] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalTime] overrides previous : org.hibernate.type.LocalTimeType@33eb0d4
+INFO  [2017-12-26 00:05:42,273] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetDateTime] overrides previous : org.hibernate.type.OffsetDateTimeType@224d86d2
+INFO  [2017-12-26 00:05:42,273] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetTime] overrides previous : org.hibernate.type.OffsetTimeType@a3cba3a
+INFO  [2017-12-26 00:05:42,273] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.ZonedDateTime] overrides previous : org.hibernate.type.ZonedDateTimeType@2aea717c
+INFO  [2017-12-26 00:05:42,516] org.hibernate.hql.internal.QueryTranslatorFactoryInitiator: HHH000397: Using ASTQueryTranslatorFactory
+INFO  [2017-12-26 00:05:42,654] io.dropwizard.server.ServerFactory: Starting choo-choo
+                           web-scale hello world dP for the web
+                                                 88
+  .d8888b. dP.  .dP .d8888b. 88d8b.d8b. 88d888b. 88 .d8888b.
+  88ooood8  `8bd8'  88'  `88 88'`88'`88 88'  `88 88 88ooood8
+  88.  ...  .d88b.  88.  .88 88  88  88 88.  .88 88 88.  ...
+  `88888P' dP'  `dP `88888P8 dP  dP  dP 88Y888P' dP `88888P'
+                                        88
+                                        dP
+
+INFO  [2017-12-26 00:05:42,774] org.eclipse.jetty.setuid.SetUIDListener: Opened application@1682e6a{HTTP/1.1,[http/1.1]}{0.0.0.0:65053}
+INFO  [2017-12-26 00:05:42,774] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@505d2bac{HTTP/1.1,[http/1.1]}{0.0.0.0:65054}
+INFO  [2017-12-26 00:05:42,776] org.eclipse.jetty.server.Server: jetty-9.4.7.v20170914
+INFO  [2017-12-26 00:05:43,436] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /filtered/hello (pw.choochoo.resources.FilteredResource)
+    GET     /hello-world (pw.choochoo.resources.HelloWorldResource)
+    POST    /hello-world (pw.choochoo.resources.HelloWorldResource)
+    GET     /hello-world/date (pw.choochoo.resources.HelloWorldResource)
+    GET     /people (pw.choochoo.resources.PeopleResource)
+    POST    /people (pw.choochoo.resources.PeopleResource)
+    GET     /people/{personId} (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_freemarker (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_mustache (pw.choochoo.resources.PersonResource)
+    GET     /protected (pw.choochoo.resources.ProtectedResource)
+    GET     /protected/admin (pw.choochoo.resources.ProtectedResource)
+    GET     /views/iso88591.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/iso88591.mustache (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.mustache (pw.choochoo.resources.ViewResource)
+
+INFO  [2017-12-26 00:05:43,438] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@615ef20{/,null,AVAILABLE}
+INFO  [2017-12-26 00:05:43,441] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/echo (pw.choochoo.tasks.EchoTask)
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2017-12-26 00:05:43,448] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@5c60c08{/,null,AVAILABLE}
+INFO  [2017-12-26 00:05:43,461] org.eclipse.jetty.server.AbstractConnector: Started application@1682e6a{HTTP/1.1,[http/1.1]}{0.0.0.0:65053}
+INFO  [2017-12-26 00:05:43,461] org.eclipse.jetty.server.AbstractConnector: Started admin@505d2bac{HTTP/1.1,[http/1.1]}{0.0.0.0:65054}
+INFO  [2017-12-26 00:05:43,462] org.eclipse.jetty.server.Server: Started @4674ms
+INFO  [2017-12-26 00:05:44,279] liquibase: Successfully acquired change log lock
+INFO  [2017-12-26 00:05:45,174] liquibase: Creating database history table with name: PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-26 00:05:45,177] liquibase: Reading from PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-26 00:05:45,190] liquibase: migrations.xml: migrations.xml::1::codahale: Table people created
+INFO  [2017-12-26 00:05:45,191] liquibase: migrations.xml: migrations.xml::1::codahale: ChangeSet migrations.xml::1::codahale ran successfully in 6ms
+INFO  [2017-12-26 00:05:45,197] liquibase: Successfully released change log lock
+INFO  [2017-12-26 00:05:45,861] org.hibernate.engine.internal.StatisticalLoggingSessionEventListener: Session Metrics {
+    84756 nanoseconds spent acquiring 2 JDBC connections;
+    71426 nanoseconds spent releasing 2 JDBC connections;
+    8164701 nanoseconds spent preparing 1 JDBC statements;
+    1578388 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    3074300 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+INFO  [2017-12-26 00:05:45,901] org.eclipse.jetty.server.AbstractConnector: Stopped application@1682e6a{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-26 00:05:45,902] org.eclipse.jetty.server.AbstractConnector: Stopped admin@505d2bac{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-26 00:05:45,903] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@5c60c08{/,null,UNAVAILABLE}
+INFO  [2017-12-26 00:05:45,906] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@615ef20{/,null,UNAVAILABLE}
+INFO  [2017-12-26 00:22:32,411] org.eclipse.jetty.util.log: Logging initialized @3512ms to org.eclipse.jetty.util.log.Slf4jLog
+INFO  [2017-12-26 00:22:32,509] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2017-12-26 00:22:32,511] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2017-12-26 00:22:32,512] io.dropwizard.assets.AssetsBundle: Registering AssetBundle with name: assets for path /assets/*
+INFO  [2017-12-26 00:22:32,563] io.dropwizard.hibernate.SessionFactoryFactory: Entity classes: [pw.choochoo.core.Person]
+INFO  [2017-12-26 00:22:32,613] org.hibernate.dialect.Dialect: HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+INFO  [2017-12-26 00:22:32,632] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.util.Currency] overrides previous : org.hibernate.type.CurrencyType@3eb8e5eb
+INFO  [2017-12-26 00:22:32,632] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Duration] overrides previous : org.hibernate.type.DurationType@77f75ac0
+INFO  [2017-12-26 00:22:32,632] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Instant] overrides previous : org.hibernate.type.InstantType@67aa7b98
+INFO  [2017-12-26 00:22:32,632] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDate] overrides previous : org.hibernate.type.LocalDateType@7e428242
+INFO  [2017-12-26 00:22:32,632] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDateTime] overrides previous : org.hibernate.type.LocalDateTimeType@297f2d89
+INFO  [2017-12-26 00:22:32,633] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalTime] overrides previous : org.hibernate.type.LocalTimeType@fb29028
+INFO  [2017-12-26 00:22:32,633] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetDateTime] overrides previous : org.hibernate.type.OffsetDateTimeType@29a6a819
+INFO  [2017-12-26 00:22:32,633] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetTime] overrides previous : org.hibernate.type.OffsetTimeType@23ec4488
+INFO  [2017-12-26 00:22:32,633] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.ZonedDateTime] overrides previous : org.hibernate.type.ZonedDateTimeType@5d61ddfc
+INFO  [2017-12-26 00:22:32,638] org.hibernate.hql.internal.QueryTranslatorFactoryInitiator: HHH000397: Using ASTQueryTranslatorFactory
+INFO  [2017-12-26 00:22:32,662] io.dropwizard.server.ServerFactory: Starting choo-choo
+                           web-scale hello world dP for the web
+                                                 88
+  .d8888b. dP.  .dP .d8888b. 88d8b.d8b. 88d888b. 88 .d8888b.
+  88ooood8  `8bd8'  88'  `88 88'`88'`88 88'  `88 88 88ooood8
+  88.  ...  .d88b.  88.  .88 88  88  88 88.  .88 88 88.  ...
+  `88888P' dP'  `dP `88888P8 dP  dP  dP 88Y888P' dP `88888P'
+                                        88
+                                        dP
+
+INFO  [2017-12-26 00:22:32,771] org.eclipse.jetty.setuid.SetUIDListener: Opened application@6027b847{HTTP/1.1,[http/1.1]}{0.0.0.0:49503}
+INFO  [2017-12-26 00:22:32,771] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@598f7776{HTTP/1.1,[http/1.1]}{0.0.0.0:49504}
+INFO  [2017-12-26 00:22:32,773] org.eclipse.jetty.server.Server: jetty-9.4.7.v20170914
+INFO  [2017-12-26 00:22:33,390] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /filtered/hello (pw.choochoo.resources.FilteredResource)
+    GET     /hello-world (pw.choochoo.resources.HelloWorldResource)
+    POST    /hello-world (pw.choochoo.resources.HelloWorldResource)
+    GET     /hello-world/date (pw.choochoo.resources.HelloWorldResource)
+    GET     /people (pw.choochoo.resources.PeopleResource)
+    POST    /people (pw.choochoo.resources.PeopleResource)
+    GET     /people/{personId} (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_freemarker (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_mustache (pw.choochoo.resources.PersonResource)
+    GET     /protected (pw.choochoo.resources.ProtectedResource)
+    GET     /protected/admin (pw.choochoo.resources.ProtectedResource)
+    GET     /views/iso88591.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/iso88591.mustache (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.mustache (pw.choochoo.resources.ViewResource)
+
+INFO  [2017-12-26 00:22:33,392] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@5e719c37{/,null,AVAILABLE}
+INFO  [2017-12-26 00:22:33,395] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/echo (pw.choochoo.tasks.EchoTask)
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2017-12-26 00:22:33,403] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@4a35cf58{/,null,AVAILABLE}
+INFO  [2017-12-26 00:22:33,412] org.eclipse.jetty.server.AbstractConnector: Started application@6027b847{HTTP/1.1,[http/1.1]}{0.0.0.0:49503}
+INFO  [2017-12-26 00:22:33,412] org.eclipse.jetty.server.AbstractConnector: Started admin@598f7776{HTTP/1.1,[http/1.1]}{0.0.0.0:49504}
+INFO  [2017-12-26 00:22:33,412] org.eclipse.jetty.server.Server: Started @4514ms
+INFO  [2017-12-26 00:22:34,076] liquibase: Successfully acquired change log lock
+INFO  [2017-12-26 00:22:34,791] liquibase: Creating database history table with name: PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-26 00:22:34,794] liquibase: Reading from PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-26 00:22:34,806] liquibase: migrations.xml: migrations.xml::1::codahale: Table people created
+INFO  [2017-12-26 00:22:34,806] liquibase: migrations.xml: migrations.xml::1::codahale: ChangeSet migrations.xml::1::codahale ran successfully in 2ms
+INFO  [2017-12-26 00:22:34,813] liquibase: Successfully released change log lock
+INFO  [2017-12-26 00:22:35,227] org.hibernate.engine.internal.StatisticalLoggingSessionEventListener: Session Metrics {
+    69584 nanoseconds spent acquiring 2 JDBC connections;
+    41331 nanoseconds spent releasing 2 JDBC connections;
+    7066721 nanoseconds spent preparing 1 JDBC statements;
+    403117 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    123408 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+INFO  [2017-12-26 00:22:35,256] org.eclipse.jetty.server.AbstractConnector: Stopped application@6027b847{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-26 00:22:35,257] org.eclipse.jetty.server.AbstractConnector: Stopped admin@598f7776{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-26 00:22:35,258] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@4a35cf58{/,null,UNAVAILABLE}
+INFO  [2017-12-26 00:22:35,261] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@5e719c37{/,null,UNAVAILABLE}
+INFO  [2017-12-26 00:23:40,946] org.eclipse.jetty.util.log: Logging initialized @3237ms to org.eclipse.jetty.util.log.Slf4jLog
+INFO  [2017-12-26 00:23:41,040] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2017-12-26 00:23:41,041] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2017-12-26 00:23:41,042] io.dropwizard.assets.AssetsBundle: Registering AssetBundle with name: assets for path /assets/*
+INFO  [2017-12-26 00:23:41,091] io.dropwizard.hibernate.SessionFactoryFactory: Entity classes: [pw.choochoo.core.Person]
+INFO  [2017-12-26 00:23:41,131] org.hibernate.dialect.Dialect: HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+INFO  [2017-12-26 00:23:41,146] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.util.Currency] overrides previous : org.hibernate.type.CurrencyType@46695b77
+INFO  [2017-12-26 00:23:41,146] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Duration] overrides previous : org.hibernate.type.DurationType@2f66d44
+INFO  [2017-12-26 00:23:41,146] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Instant] overrides previous : org.hibernate.type.InstantType@5aa67169
+INFO  [2017-12-26 00:23:41,146] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDate] overrides previous : org.hibernate.type.LocalDateType@39e87c7
+INFO  [2017-12-26 00:23:41,147] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDateTime] overrides previous : org.hibernate.type.LocalDateTimeType@2a83d1fa
+INFO  [2017-12-26 00:23:41,147] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalTime] overrides previous : org.hibernate.type.LocalTimeType@5787698
+INFO  [2017-12-26 00:23:41,147] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetDateTime] overrides previous : org.hibernate.type.OffsetDateTimeType@357ed31f
+INFO  [2017-12-26 00:23:41,147] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetTime] overrides previous : org.hibernate.type.OffsetTimeType@1cb16ade
+INFO  [2017-12-26 00:23:41,147] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.ZonedDateTime] overrides previous : org.hibernate.type.ZonedDateTimeType@664dadba
+INFO  [2017-12-26 00:23:41,151] org.hibernate.hql.internal.QueryTranslatorFactoryInitiator: HHH000397: Using ASTQueryTranslatorFactory
+INFO  [2017-12-26 00:23:41,174] io.dropwizard.server.ServerFactory: Starting choo-choo
+                           web-scale hello world dP for the web
+                                                 88
+  .d8888b. dP.  .dP .d8888b. 88d8b.d8b. 88d888b. 88 .d8888b.
+  88ooood8  `8bd8'  88'  `88 88'`88'`88 88'  `88 88 88ooood8
+  88.  ...  .d88b.  88.  .88 88  88  88 88.  .88 88 88.  ...
+  `88888P' dP'  `dP `88888P8 dP  dP  dP 88Y888P' dP `88888P'
+                                        88
+                                        dP
+
+INFO  [2017-12-26 00:23:41,277] org.eclipse.jetty.setuid.SetUIDListener: Opened application@25da1e24{HTTP/1.1,[http/1.1]}{0.0.0.0:49527}
+INFO  [2017-12-26 00:23:41,277] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@36cec74c{HTTP/1.1,[http/1.1]}{0.0.0.0:49528}
+INFO  [2017-12-26 00:23:41,279] org.eclipse.jetty.server.Server: jetty-9.4.7.v20170914
+INFO  [2017-12-26 00:23:41,841] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /filtered/hello (pw.choochoo.resources.FilteredResource)
+    GET     /hello-world (pw.choochoo.resources.HelloWorldResource)
+    POST    /hello-world (pw.choochoo.resources.HelloWorldResource)
+    GET     /hello-world/date (pw.choochoo.resources.HelloWorldResource)
+    GET     /people (pw.choochoo.resources.PeopleResource)
+    POST    /people (pw.choochoo.resources.PeopleResource)
+    GET     /people/{personId} (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_freemarker (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_mustache (pw.choochoo.resources.PersonResource)
+    GET     /protected (pw.choochoo.resources.ProtectedResource)
+    GET     /protected/admin (pw.choochoo.resources.ProtectedResource)
+    GET     /views/iso88591.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/iso88591.mustache (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.mustache (pw.choochoo.resources.ViewResource)
+
+INFO  [2017-12-26 00:23:41,843] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@5a45d6de{/,null,AVAILABLE}
+INFO  [2017-12-26 00:23:41,845] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/echo (pw.choochoo.tasks.EchoTask)
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2017-12-26 00:23:41,851] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@49b8ad4c{/,null,AVAILABLE}
+INFO  [2017-12-26 00:23:41,859] org.eclipse.jetty.server.AbstractConnector: Started application@25da1e24{HTTP/1.1,[http/1.1]}{0.0.0.0:49527}
+INFO  [2017-12-26 00:23:41,859] org.eclipse.jetty.server.AbstractConnector: Started admin@36cec74c{HTTP/1.1,[http/1.1]}{0.0.0.0:49528}
+INFO  [2017-12-26 00:23:41,859] org.eclipse.jetty.server.Server: Started @4150ms
+INFO  [2017-12-26 00:23:42,385] liquibase: Successfully acquired change log lock
+INFO  [2017-12-26 00:23:42,992] liquibase: Creating database history table with name: PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-26 00:23:42,994] liquibase: Reading from PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-26 00:23:43,004] liquibase: migrations.xml: migrations.xml::1::codahale: Table people created
+INFO  [2017-12-26 00:23:43,004] liquibase: migrations.xml: migrations.xml::1::codahale: ChangeSet migrations.xml::1::codahale ran successfully in 2ms
+INFO  [2017-12-26 00:23:43,009] liquibase: Successfully released change log lock
+INFO  [2017-12-26 00:23:43,394] org.hibernate.engine.internal.StatisticalLoggingSessionEventListener: Session Metrics {
+    83155 nanoseconds spent acquiring 2 JDBC connections;
+    47080 nanoseconds spent releasing 2 JDBC connections;
+    6981717 nanoseconds spent preparing 1 JDBC statements;
+    394906 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    115099 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+INFO  [2017-12-26 00:23:43,418] org.eclipse.jetty.server.AbstractConnector: Stopped application@25da1e24{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-26 00:23:43,419] org.eclipse.jetty.server.AbstractConnector: Stopped admin@36cec74c{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-26 00:23:43,420] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@49b8ad4c{/,null,UNAVAILABLE}
+INFO  [2017-12-26 00:23:43,422] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@5a45d6de{/,null,UNAVAILABLE}
+INFO  [2017-12-26 00:25:31,733] org.eclipse.jetty.util.log: Logging initialized @3010ms to org.eclipse.jetty.util.log.Slf4jLog
+INFO  [2017-12-26 00:25:31,809] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2017-12-26 00:25:31,810] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2017-12-26 00:25:31,811] io.dropwizard.assets.AssetsBundle: Registering AssetBundle with name: assets for path /assets/*
+INFO  [2017-12-26 00:25:31,849] io.dropwizard.hibernate.SessionFactoryFactory: Entity classes: [pw.choochoo.core.Person]
+INFO  [2017-12-26 00:25:31,891] org.hibernate.dialect.Dialect: HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+INFO  [2017-12-26 00:25:31,905] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.util.Currency] overrides previous : org.hibernate.type.CurrencyType@4c6fbde6
+INFO  [2017-12-26 00:25:31,905] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Duration] overrides previous : org.hibernate.type.DurationType@170497cf
+INFO  [2017-12-26 00:25:31,906] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Instant] overrides previous : org.hibernate.type.InstantType@4dc39d06
+INFO  [2017-12-26 00:25:31,906] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDate] overrides previous : org.hibernate.type.LocalDateType@55cff497
+INFO  [2017-12-26 00:25:31,906] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDateTime] overrides previous : org.hibernate.type.LocalDateTimeType@5a421c02
+INFO  [2017-12-26 00:25:31,906] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalTime] overrides previous : org.hibernate.type.LocalTimeType@11d5e796
+INFO  [2017-12-26 00:25:31,906] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetDateTime] overrides previous : org.hibernate.type.OffsetDateTimeType@96480a1
+INFO  [2017-12-26 00:25:31,906] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetTime] overrides previous : org.hibernate.type.OffsetTimeType@237ee94c
+INFO  [2017-12-26 00:25:31,906] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.ZonedDateTime] overrides previous : org.hibernate.type.ZonedDateTimeType@3eed81df
+INFO  [2017-12-26 00:25:31,910] org.hibernate.hql.internal.QueryTranslatorFactoryInitiator: HHH000397: Using ASTQueryTranslatorFactory
+INFO  [2017-12-26 00:25:31,940] io.dropwizard.server.ServerFactory: Starting choo-choo
+                           web-scale hello world dP for the web
+                                                 88
+  .d8888b. dP.  .dP .d8888b. 88d8b.d8b. 88d888b. 88 .d8888b.
+  88ooood8  `8bd8'  88'  `88 88'`88'`88 88'  `88 88 88ooood8
+  88.  ...  .d88b.  88.  .88 88  88  88 88.  .88 88 88.  ...
+  `88888P' dP'  `dP `88888P8 dP  dP  dP 88Y888P' dP `88888P'
+                                        88
+                                        dP
+
+INFO  [2017-12-26 00:25:32,027] org.eclipse.jetty.setuid.SetUIDListener: Opened application@7513887b{HTTP/1.1,[http/1.1]}{0.0.0.0:49599}
+INFO  [2017-12-26 00:25:32,027] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@17bf6f2f{HTTP/1.1,[http/1.1]}{0.0.0.0:49600}
+INFO  [2017-12-26 00:25:32,029] org.eclipse.jetty.server.Server: jetty-9.4.7.v20170914
+INFO  [2017-12-26 00:25:32,594] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /filtered/hello (pw.choochoo.resources.FilteredResource)
+    GET     /hello-world (pw.choochoo.resources.HelloWorldResource)
+    POST    /hello-world (pw.choochoo.resources.HelloWorldResource)
+    GET     /hello-world/date (pw.choochoo.resources.HelloWorldResource)
+    GET     /people (pw.choochoo.resources.PeopleResource)
+    POST    /people (pw.choochoo.resources.PeopleResource)
+    GET     /people/{personId} (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_freemarker (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_mustache (pw.choochoo.resources.PersonResource)
+    GET     /protected (pw.choochoo.resources.ProtectedResource)
+    GET     /protected/admin (pw.choochoo.resources.ProtectedResource)
+    GET     /views/iso88591.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/iso88591.mustache (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.mustache (pw.choochoo.resources.ViewResource)
+
+INFO  [2017-12-26 00:25:32,596] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@55880a7a{/,null,AVAILABLE}
+INFO  [2017-12-26 00:25:32,600] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/echo (pw.choochoo.tasks.EchoTask)
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2017-12-26 00:25:32,605] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@4a8560c0{/,null,AVAILABLE}
+INFO  [2017-12-26 00:25:32,612] org.eclipse.jetty.server.AbstractConnector: Started application@7513887b{HTTP/1.1,[http/1.1]}{0.0.0.0:49599}
+INFO  [2017-12-26 00:25:32,612] org.eclipse.jetty.server.AbstractConnector: Started admin@17bf6f2f{HTTP/1.1,[http/1.1]}{0.0.0.0:49600}
+INFO  [2017-12-26 00:25:32,613] org.eclipse.jetty.server.Server: Started @3890ms
+INFO  [2017-12-26 00:25:33,120] liquibase: Successfully acquired change log lock
+INFO  [2017-12-26 00:25:33,778] liquibase: Creating database history table with name: PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-26 00:25:33,783] liquibase: Reading from PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-26 00:25:33,795] liquibase: migrations.xml: migrations.xml::1::codahale: Table people created
+INFO  [2017-12-26 00:25:33,797] liquibase: migrations.xml: migrations.xml::1::codahale: ChangeSet migrations.xml::1::codahale ran successfully in 5ms
+INFO  [2017-12-26 00:25:33,806] liquibase: Successfully released change log lock
+INFO  [2017-12-26 00:25:34,276] org.hibernate.engine.internal.StatisticalLoggingSessionEventListener: Session Metrics {
+    69248 nanoseconds spent acquiring 2 JDBC connections;
+    37762 nanoseconds spent releasing 2 JDBC connections;
+    7031700 nanoseconds spent preparing 1 JDBC statements;
+    741259 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    102054 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+INFO  [2017-12-26 00:25:34,304] org.eclipse.jetty.server.AbstractConnector: Stopped application@7513887b{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-26 00:25:34,304] org.eclipse.jetty.server.AbstractConnector: Stopped admin@17bf6f2f{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-26 00:25:34,305] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@4a8560c0{/,null,UNAVAILABLE}
+INFO  [2017-12-26 00:25:34,308] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@55880a7a{/,null,UNAVAILABLE}
+INFO  [2017-12-26 00:25:50,321] org.eclipse.jetty.util.log: Logging initialized @2970ms to org.eclipse.jetty.util.log.Slf4jLog
+INFO  [2017-12-26 00:25:50,407] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2017-12-26 00:25:50,408] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2017-12-26 00:25:50,409] io.dropwizard.assets.AssetsBundle: Registering AssetBundle with name: assets for path /assets/*
+INFO  [2017-12-26 00:25:50,452] io.dropwizard.hibernate.SessionFactoryFactory: Entity classes: [pw.choochoo.core.Person]
+INFO  [2017-12-26 00:25:50,493] org.hibernate.dialect.Dialect: HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+INFO  [2017-12-26 00:25:50,507] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.util.Currency] overrides previous : org.hibernate.type.CurrencyType@375e9e4b
+INFO  [2017-12-26 00:25:50,507] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Duration] overrides previous : org.hibernate.type.DurationType@30a1b759
+INFO  [2017-12-26 00:25:50,507] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Instant] overrides previous : org.hibernate.type.InstantType@3e520a25
+INFO  [2017-12-26 00:25:50,507] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDate] overrides previous : org.hibernate.type.LocalDateType@42735874
+INFO  [2017-12-26 00:25:50,507] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDateTime] overrides previous : org.hibernate.type.LocalDateTimeType@718bf2d3
+INFO  [2017-12-26 00:25:50,507] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalTime] overrides previous : org.hibernate.type.LocalTimeType@29a5d8ff
+INFO  [2017-12-26 00:25:50,507] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetDateTime] overrides previous : org.hibernate.type.OffsetDateTimeType@2534dc22
+INFO  [2017-12-26 00:25:50,507] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetTime] overrides previous : org.hibernate.type.OffsetTimeType@54e1fbb4
+INFO  [2017-12-26 00:25:50,507] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.ZonedDateTime] overrides previous : org.hibernate.type.ZonedDateTimeType@469ab255
+INFO  [2017-12-26 00:25:50,511] org.hibernate.hql.internal.QueryTranslatorFactoryInitiator: HHH000397: Using ASTQueryTranslatorFactory
+INFO  [2017-12-26 00:25:50,530] io.dropwizard.server.ServerFactory: Starting choo-choo
+                           web-scale hello world dP for the web
+                                                 88
+  .d8888b. dP.  .dP .d8888b. 88d8b.d8b. 88d888b. 88 .d8888b.
+  88ooood8  `8bd8'  88'  `88 88'`88'`88 88'  `88 88 88ooood8
+  88.  ...  .d88b.  88.  .88 88  88  88 88.  .88 88 88.  ...
+  `88888P' dP'  `dP `88888P8 dP  dP  dP 88Y888P' dP `88888P'
+                                        88
+                                        dP
+
+INFO  [2017-12-26 00:25:50,622] org.eclipse.jetty.setuid.SetUIDListener: Opened application@6f4c22af{HTTP/1.1,[http/1.1]}{0.0.0.0:49609}
+INFO  [2017-12-26 00:25:50,622] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@41369c06{HTTP/1.1,[http/1.1]}{0.0.0.0:49610}
+INFO  [2017-12-26 00:25:50,623] org.eclipse.jetty.server.Server: jetty-9.4.7.v20170914
+INFO  [2017-12-26 00:25:51,178] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /filtered/hello (pw.choochoo.resources.FilteredResource)
+    GET     /hello-world (pw.choochoo.resources.HelloWorldResource)
+    POST    /hello-world (pw.choochoo.resources.HelloWorldResource)
+    GET     /hello-world/date (pw.choochoo.resources.HelloWorldResource)
+    GET     /people (pw.choochoo.resources.PeopleResource)
+    POST    /people (pw.choochoo.resources.PeopleResource)
+    GET     /people/{personId} (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_freemarker (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_mustache (pw.choochoo.resources.PersonResource)
+    GET     /protected (pw.choochoo.resources.ProtectedResource)
+    GET     /protected/admin (pw.choochoo.resources.ProtectedResource)
+    GET     /views/iso88591.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/iso88591.mustache (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.mustache (pw.choochoo.resources.ViewResource)
+
+INFO  [2017-12-26 00:25:51,181] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@46efbefc{/,null,AVAILABLE}
+INFO  [2017-12-26 00:25:51,183] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/echo (pw.choochoo.tasks.EchoTask)
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2017-12-26 00:25:51,189] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@29c6f9e8{/,null,AVAILABLE}
+INFO  [2017-12-26 00:25:51,196] org.eclipse.jetty.server.AbstractConnector: Started application@6f4c22af{HTTP/1.1,[http/1.1]}{0.0.0.0:49609}
+INFO  [2017-12-26 00:25:51,196] org.eclipse.jetty.server.AbstractConnector: Started admin@41369c06{HTTP/1.1,[http/1.1]}{0.0.0.0:49610}
+INFO  [2017-12-26 00:25:51,196] org.eclipse.jetty.server.Server: Started @3845ms
+INFO  [2017-12-26 00:25:51,721] liquibase: Successfully acquired change log lock
+INFO  [2017-12-26 00:25:52,404] liquibase: Creating database history table with name: PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-26 00:25:52,406] liquibase: Reading from PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-26 00:25:52,417] liquibase: migrations.xml: migrations.xml::1::codahale: Table people created
+INFO  [2017-12-26 00:25:52,417] liquibase: migrations.xml: migrations.xml::1::codahale: ChangeSet migrations.xml::1::codahale ran successfully in 2ms
+INFO  [2017-12-26 00:25:52,424] liquibase: Successfully released change log lock
+INFO  [2017-12-26 00:25:52,870] org.hibernate.engine.internal.StatisticalLoggingSessionEventListener: Session Metrics {
+    72593 nanoseconds spent acquiring 2 JDBC connections;
+    42233 nanoseconds spent releasing 2 JDBC connections;
+    7691351 nanoseconds spent preparing 1 JDBC statements;
+    466756 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    117493 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+INFO  [2017-12-26 00:25:52,897] org.eclipse.jetty.server.AbstractConnector: Stopped application@6f4c22af{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-26 00:25:52,898] org.eclipse.jetty.server.AbstractConnector: Stopped admin@41369c06{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-26 00:25:52,899] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@29c6f9e8{/,null,UNAVAILABLE}
+INFO  [2017-12-26 00:25:52,901] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@46efbefc{/,null,UNAVAILABLE}
+INFO  [2017-12-26 00:27:03,826] org.eclipse.jetty.util.log: Logging initialized @3043ms to org.eclipse.jetty.util.log.Slf4jLog
+INFO  [2017-12-26 00:27:03,907] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2017-12-26 00:27:03,909] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2017-12-26 00:27:03,910] io.dropwizard.assets.AssetsBundle: Registering AssetBundle with name: assets for path /assets/*
+INFO  [2017-12-26 00:27:03,967] io.dropwizard.hibernate.SessionFactoryFactory: Entity classes: [pw.choochoo.core.Person]
+INFO  [2017-12-26 00:27:04,036] org.hibernate.dialect.Dialect: HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+INFO  [2017-12-26 00:27:04,053] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.util.Currency] overrides previous : org.hibernate.type.CurrencyType@3eb8e5eb
+INFO  [2017-12-26 00:27:04,054] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Duration] overrides previous : org.hibernate.type.DurationType@77f75ac0
+INFO  [2017-12-26 00:27:04,054] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Instant] overrides previous : org.hibernate.type.InstantType@67aa7b98
+INFO  [2017-12-26 00:27:04,054] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDate] overrides previous : org.hibernate.type.LocalDateType@7e428242
+INFO  [2017-12-26 00:27:04,054] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDateTime] overrides previous : org.hibernate.type.LocalDateTimeType@297f2d89
+INFO  [2017-12-26 00:27:04,054] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalTime] overrides previous : org.hibernate.type.LocalTimeType@fb29028
+INFO  [2017-12-26 00:27:04,054] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetDateTime] overrides previous : org.hibernate.type.OffsetDateTimeType@29a6a819
+INFO  [2017-12-26 00:27:04,054] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetTime] overrides previous : org.hibernate.type.OffsetTimeType@23ec4488
+INFO  [2017-12-26 00:27:04,054] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.ZonedDateTime] overrides previous : org.hibernate.type.ZonedDateTimeType@5d61ddfc
+INFO  [2017-12-26 00:27:04,059] org.hibernate.hql.internal.QueryTranslatorFactoryInitiator: HHH000397: Using ASTQueryTranslatorFactory
+INFO  [2017-12-26 00:27:04,085] io.dropwizard.server.ServerFactory: Starting choo-choo
+                           web-scale hello world dP for the web
+                                                 88
+  .d8888b. dP.  .dP .d8888b. 88d8b.d8b. 88d888b. 88 .d8888b.
+  88ooood8  `8bd8'  88'  `88 88'`88'`88 88'  `88 88 88ooood8
+  88.  ...  .d88b.  88.  .88 88  88  88 88.  .88 88 88.  ...
+  `88888P' dP'  `dP `88888P8 dP  dP  dP 88Y888P' dP `88888P'
+                                        88
+                                        dP
+
+INFO  [2017-12-26 00:27:04,274] org.eclipse.jetty.setuid.SetUIDListener: Opened application@6027b847{HTTP/1.1,[http/1.1]}{0.0.0.0:49654}
+INFO  [2017-12-26 00:27:04,275] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@598f7776{HTTP/1.1,[http/1.1]}{0.0.0.0:49655}
+INFO  [2017-12-26 00:27:04,279] org.eclipse.jetty.server.Server: jetty-9.4.7.v20170914
+INFO  [2017-12-26 00:27:04,867] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /filtered/hello (pw.choochoo.resources.FilteredResource)
+    GET     /hello-world (pw.choochoo.resources.HelloWorldResource)
+    POST    /hello-world (pw.choochoo.resources.HelloWorldResource)
+    GET     /hello-world/date (pw.choochoo.resources.HelloWorldResource)
+    GET     /people (pw.choochoo.resources.PeopleResource)
+    POST    /people (pw.choochoo.resources.PeopleResource)
+    GET     /people/{personId} (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_freemarker (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_mustache (pw.choochoo.resources.PersonResource)
+    GET     /protected (pw.choochoo.resources.ProtectedResource)
+    GET     /protected/admin (pw.choochoo.resources.ProtectedResource)
+    GET     /views/iso88591.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/iso88591.mustache (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.mustache (pw.choochoo.resources.ViewResource)
+
+INFO  [2017-12-26 00:27:04,868] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@5e719c37{/,null,AVAILABLE}
+INFO  [2017-12-26 00:27:04,871] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/echo (pw.choochoo.tasks.EchoTask)
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2017-12-26 00:27:04,876] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@4a35cf58{/,null,AVAILABLE}
+INFO  [2017-12-26 00:27:04,881] org.eclipse.jetty.server.AbstractConnector: Started application@6027b847{HTTP/1.1,[http/1.1]}{0.0.0.0:49654}
+INFO  [2017-12-26 00:27:04,881] org.eclipse.jetty.server.AbstractConnector: Started admin@598f7776{HTTP/1.1,[http/1.1]}{0.0.0.0:49655}
+INFO  [2017-12-26 00:27:04,882] org.eclipse.jetty.server.Server: Started @4099ms
+INFO  [2017-12-26 00:27:05,685] liquibase: Successfully acquired change log lock
+INFO  [2017-12-26 00:27:06,598] liquibase: Creating database history table with name: PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-26 00:27:06,601] liquibase: Reading from PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-26 00:27:06,610] liquibase: migrations.xml: migrations.xml::1::codahale: Table people created
+INFO  [2017-12-26 00:27:06,611] liquibase: migrations.xml: migrations.xml::1::codahale: ChangeSet migrations.xml::1::codahale ran successfully in 2ms
+INFO  [2017-12-26 00:27:06,617] liquibase: Successfully released change log lock
+INFO  [2017-12-26 00:27:07,007] org.hibernate.engine.internal.StatisticalLoggingSessionEventListener: Session Metrics {
+    79769 nanoseconds spent acquiring 2 JDBC connections;
+    39966 nanoseconds spent releasing 2 JDBC connections;
+    7722190 nanoseconds spent preparing 1 JDBC statements;
+    444227 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    109687 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+INFO  [2017-12-26 00:27:07,032] org.eclipse.jetty.server.AbstractConnector: Stopped application@6027b847{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-26 00:27:07,032] org.eclipse.jetty.server.AbstractConnector: Stopped admin@598f7776{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-26 00:27:07,033] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@4a35cf58{/,null,UNAVAILABLE}
+INFO  [2017-12-26 00:27:07,035] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@5e719c37{/,null,UNAVAILABLE}
+INFO  [2017-12-26 00:31:55,213] org.eclipse.jetty.util.log: Logging initialized @2072ms to org.eclipse.jetty.util.log.Slf4jLog
+INFO  [2017-12-26 00:31:55,347] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2017-12-26 00:31:55,349] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2017-12-26 00:31:55,354] io.dropwizard.assets.AssetsBundle: Registering AssetBundle with name: assets for path /assets/*
+INFO  [2017-12-26 00:39:32,023] org.eclipse.jetty.util.log: Logging initialized @2954ms to org.eclipse.jetty.util.log.Slf4jLog
+INFO  [2017-12-26 00:39:32,103] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2017-12-26 00:39:32,105] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2017-12-26 00:39:32,106] io.dropwizard.assets.AssetsBundle: Registering AssetBundle with name: assets for path /assets/*
+INFO  [2017-12-26 00:39:32,150] io.dropwizard.hibernate.SessionFactoryFactory: Entity classes: [pw.choochoo.core.Person]
+INFO  [2017-12-26 00:39:32,191] org.hibernate.dialect.Dialect: HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+INFO  [2017-12-26 00:39:32,209] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.util.Currency] overrides previous : org.hibernate.type.CurrencyType@6b46cda3
+INFO  [2017-12-26 00:39:32,209] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Duration] overrides previous : org.hibernate.type.DurationType@a0ad356
+INFO  [2017-12-26 00:39:32,209] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Instant] overrides previous : org.hibernate.type.InstantType@175a13c1
+INFO  [2017-12-26 00:39:32,209] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDate] overrides previous : org.hibernate.type.LocalDateType@51e01985
+INFO  [2017-12-26 00:39:32,209] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDateTime] overrides previous : org.hibernate.type.LocalDateTimeType@21503a17
+INFO  [2017-12-26 00:39:32,209] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalTime] overrides previous : org.hibernate.type.LocalTimeType@33b97c5c
+INFO  [2017-12-26 00:39:32,210] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetDateTime] overrides previous : org.hibernate.type.OffsetDateTimeType@36134ca4
+INFO  [2017-12-26 00:39:32,210] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetTime] overrides previous : org.hibernate.type.OffsetTimeType@791f4e22
+INFO  [2017-12-26 00:39:32,210] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.ZonedDateTime] overrides previous : org.hibernate.type.ZonedDateTimeType@71b2cd
+INFO  [2017-12-26 00:39:32,214] org.hibernate.hql.internal.QueryTranslatorFactoryInitiator: HHH000397: Using ASTQueryTranslatorFactory
+INFO  [2017-12-26 00:39:32,236] io.dropwizard.server.ServerFactory: Starting choo-choo
+                           web-scale hello world dP for the web
+                                                 88
+  .d8888b. dP.  .dP .d8888b. 88d8b.d8b. 88d888b. 88 .d8888b.
+  88ooood8  `8bd8'  88'  `88 88'`88'`88 88'  `88 88 88ooood8
+  88.  ...  .d88b.  88.  .88 88  88  88 88.  .88 88 88.  ...
+  `88888P' dP'  `dP `88888P8 dP  dP  dP 88Y888P' dP `88888P'
+                                        88
+                                        dP
+
+INFO  [2017-12-26 00:39:32,326] org.eclipse.jetty.setuid.SetUIDListener: Opened application@3cd61524{HTTP/1.1,[http/1.1]}{0.0.0.0:50226}
+INFO  [2017-12-26 00:39:32,326] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@12e84bfc{HTTP/1.1,[http/1.1]}{0.0.0.0:50227}
+INFO  [2017-12-26 00:39:32,328] org.eclipse.jetty.server.Server: jetty-9.4.7.v20170914
+INFO  [2017-12-26 00:39:32,878] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /filtered/hello (pw.choochoo.resources.FilteredResource)
+    GET     /hello-world (pw.choochoo.resources.HelloWorldResource)
+    POST    /hello-world (pw.choochoo.resources.HelloWorldResource)
+    GET     /hello-world/date (pw.choochoo.resources.HelloWorldResource)
+    GET     /people (pw.choochoo.resources.PeopleResource)
+    POST    /people (pw.choochoo.resources.PeopleResource)
+    GET     /people/{personId} (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_freemarker (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_mustache (pw.choochoo.resources.PersonResource)
+    GET     /protected (pw.choochoo.resources.ProtectedResource)
+    GET     /protected/admin (pw.choochoo.resources.ProtectedResource)
+    GET     /views/iso88591.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/iso88591.mustache (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.mustache (pw.choochoo.resources.ViewResource)
+
+INFO  [2017-12-26 00:39:32,880] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@232f7d80{/,null,AVAILABLE}
+INFO  [2017-12-26 00:39:32,883] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/echo (pw.choochoo.tasks.EchoTask)
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2017-12-26 00:39:32,889] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@45a5a3d{/,null,AVAILABLE}
+INFO  [2017-12-26 00:39:32,894] org.eclipse.jetty.server.AbstractConnector: Started application@3cd61524{HTTP/1.1,[http/1.1]}{0.0.0.0:50226}
+INFO  [2017-12-26 00:39:32,895] org.eclipse.jetty.server.AbstractConnector: Started admin@12e84bfc{HTTP/1.1,[http/1.1]}{0.0.0.0:50227}
+INFO  [2017-12-26 00:39:32,895] org.eclipse.jetty.server.Server: Started @3825ms
+INFO  [2017-12-26 00:39:33,427] liquibase: Successfully acquired change log lock
+INFO  [2017-12-26 00:39:34,069] liquibase: Creating database history table with name: PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-26 00:39:34,072] liquibase: Reading from PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-26 00:39:34,081] liquibase: migrations.xml: migrations.xml::1::codahale: Table people created
+INFO  [2017-12-26 00:39:34,082] liquibase: migrations.xml: migrations.xml::1::codahale: ChangeSet migrations.xml::1::codahale ran successfully in 2ms
+INFO  [2017-12-26 00:39:34,088] liquibase: Successfully released change log lock
+INFO  [2017-12-26 00:39:34,506] org.hibernate.engine.internal.StatisticalLoggingSessionEventListener: Session Metrics {
+    67650 nanoseconds spent acquiring 2 JDBC connections;
+    57958 nanoseconds spent releasing 2 JDBC connections;
+    7060502 nanoseconds spent preparing 1 JDBC statements;
+    677708 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    136773 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+INFO  [2017-12-26 00:39:34,535] org.eclipse.jetty.server.AbstractConnector: Stopped application@3cd61524{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-26 00:39:34,535] org.eclipse.jetty.server.AbstractConnector: Stopped admin@12e84bfc{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-26 00:39:34,537] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@45a5a3d{/,null,UNAVAILABLE}
+INFO  [2017-12-26 00:39:34,539] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@232f7d80{/,null,UNAVAILABLE}
+INFO  [2017-12-26 00:39:46,194] org.eclipse.jetty.util.log: Logging initialized @2299ms to org.eclipse.jetty.util.log.Slf4jLog
+INFO  [2017-12-26 00:39:46,303] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2017-12-26 00:39:46,305] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2017-12-26 00:39:46,306] io.dropwizard.assets.AssetsBundle: Registering AssetBundle with name: assets for path /assets/*
+INFO  [2017-12-26 00:39:46,476] org.hibernate.Version: HHH000412: Hibernate Core {5.2.12.Final}
+INFO  [2017-12-26 00:39:46,478] org.hibernate.cfg.Environment: HHH000206: hibernate.properties not found
+INFO  [2017-12-26 00:39:46,487] io.dropwizard.hibernate.SessionFactoryFactory: Entity classes: [pw.choochoo.core.Person]
+INFO  [2017-12-26 00:39:46,520] org.hibernate.annotations.common.Version: HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  [2017-12-26 00:39:46,851] org.hibernate.dialect.Dialect: HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+INFO  [2017-12-26 00:39:47,207] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.util.Currency] overrides previous : org.hibernate.type.CurrencyType@5fdd97c1
+INFO  [2017-12-26 00:39:47,207] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Duration] overrides previous : org.hibernate.type.DurationType@3b5a19ed
+INFO  [2017-12-26 00:39:47,208] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Instant] overrides previous : org.hibernate.type.InstantType@6b9c42bd
+INFO  [2017-12-26 00:39:47,208] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDate] overrides previous : org.hibernate.type.LocalDateType@33324c05
+INFO  [2017-12-26 00:39:47,208] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDateTime] overrides previous : org.hibernate.type.LocalDateTimeType@37d3e140
+INFO  [2017-12-26 00:39:47,208] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalTime] overrides previous : org.hibernate.type.LocalTimeType@33eb0d4
+INFO  [2017-12-26 00:39:47,208] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetDateTime] overrides previous : org.hibernate.type.OffsetDateTimeType@224d86d2
+INFO  [2017-12-26 00:39:47,208] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetTime] overrides previous : org.hibernate.type.OffsetTimeType@a3cba3a
+INFO  [2017-12-26 00:39:47,208] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.ZonedDateTime] overrides previous : org.hibernate.type.ZonedDateTimeType@2aea717c
+INFO  [2017-12-26 00:39:47,441] org.hibernate.hql.internal.QueryTranslatorFactoryInitiator: HHH000397: Using ASTQueryTranslatorFactory
+INFO  [2017-12-26 00:39:47,568] io.dropwizard.server.ServerFactory: Starting choo-choo
+                           web-scale hello world dP for the web
+                                                 88
+  .d8888b. dP.  .dP .d8888b. 88d8b.d8b. 88d888b. 88 .d8888b.
+  88ooood8  `8bd8'  88'  `88 88'`88'`88 88'  `88 88 88ooood8
+  88.  ...  .d88b.  88.  .88 88  88  88 88.  .88 88 88.  ...
+  `88888P' dP'  `dP `88888P8 dP  dP  dP 88Y888P' dP `88888P'
+                                        88
+                                        dP
+
+INFO  [2017-12-26 00:39:47,682] org.eclipse.jetty.setuid.SetUIDListener: Opened application@1682e6a{HTTP/1.1,[http/1.1]}{0.0.0.0:50237}
+INFO  [2017-12-26 00:39:47,682] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@505d2bac{HTTP/1.1,[http/1.1]}{0.0.0.0:50238}
+INFO  [2017-12-26 00:39:47,684] org.eclipse.jetty.server.Server: jetty-9.4.7.v20170914
+INFO  [2017-12-26 00:39:48,350] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /filtered/hello (pw.choochoo.resources.FilteredResource)
+    GET     /hello-world (pw.choochoo.resources.HelloWorldResource)
+    POST    /hello-world (pw.choochoo.resources.HelloWorldResource)
+    GET     /hello-world/date (pw.choochoo.resources.HelloWorldResource)
+    GET     /people (pw.choochoo.resources.PeopleResource)
+    POST    /people (pw.choochoo.resources.PeopleResource)
+    GET     /people/{personId} (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_freemarker (pw.choochoo.resources.PersonResource)
+    GET     /people/{personId}/view_mustache (pw.choochoo.resources.PersonResource)
+    GET     /protected (pw.choochoo.resources.ProtectedResource)
+    GET     /protected/admin (pw.choochoo.resources.ProtectedResource)
+    GET     /views/iso88591.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/iso88591.mustache (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.ftl (pw.choochoo.resources.ViewResource)
+    GET     /views/utf8.mustache (pw.choochoo.resources.ViewResource)
+
+INFO  [2017-12-26 00:39:48,352] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@615ef20{/,null,AVAILABLE}
+INFO  [2017-12-26 00:39:48,355] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/echo (pw.choochoo.tasks.EchoTask)
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2017-12-26 00:39:48,362] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@5c60c08{/,null,AVAILABLE}
+INFO  [2017-12-26 00:39:48,376] org.eclipse.jetty.server.AbstractConnector: Started application@1682e6a{HTTP/1.1,[http/1.1]}{0.0.0.0:50237}
+INFO  [2017-12-26 00:39:48,376] org.eclipse.jetty.server.AbstractConnector: Started admin@505d2bac{HTTP/1.1,[http/1.1]}{0.0.0.0:50238}
+INFO  [2017-12-26 00:39:48,377] org.eclipse.jetty.server.Server: Started @4482ms
+INFO  [2017-12-26 00:39:49,134] liquibase: Successfully acquired change log lock
+INFO  [2017-12-26 00:39:49,854] liquibase: Creating database history table with name: PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-26 00:39:49,856] liquibase: Reading from PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-26 00:39:49,874] liquibase: migrations.xml: migrations.xml::1::codahale: Table people created
+INFO  [2017-12-26 00:39:49,875] liquibase: migrations.xml: migrations.xml::1::codahale: ChangeSet migrations.xml::1::codahale ran successfully in 7ms
+INFO  [2017-12-26 00:39:49,883] liquibase: Successfully released change log lock
+INFO  [2017-12-26 00:39:50,323] org.hibernate.engine.internal.StatisticalLoggingSessionEventListener: Session Metrics {
+    90495 nanoseconds spent acquiring 2 JDBC connections;
+    51217 nanoseconds spent releasing 2 JDBC connections;
+    7875253 nanoseconds spent preparing 1 JDBC statements;
+    1520735 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    3032599 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+INFO  [2017-12-26 00:39:50,586] org.eclipse.jetty.server.AbstractConnector: Stopped application@1682e6a{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-26 00:39:50,587] org.eclipse.jetty.server.AbstractConnector: Stopped admin@505d2bac{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-26 00:39:50,589] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@5c60c08{/,null,UNAVAILABLE}
+INFO  [2017-12-26 00:39:50,591] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@615ef20{/,null,UNAVAILABLE}
+INFO  [2017-12-26 01:02:09,022] org.eclipse.jetty.util.log: Logging initialized @3536ms to org.eclipse.jetty.util.log.Slf4jLog
+INFO  [2017-12-26 01:02:09,115] io.dropwizard.server.DefaultServerFactory: Registering jersey handler with root path prefix: /
+INFO  [2017-12-26 01:02:09,126] io.dropwizard.server.DefaultServerFactory: Registering admin handler with root path prefix: /
+INFO  [2017-12-26 01:02:09,128] io.dropwizard.assets.AssetsBundle: Registering AssetBundle with name: assets for path /assets/*
+INFO  [2017-12-26 01:02:09,191] io.dropwizard.hibernate.SessionFactoryFactory: Entity classes: [com.example.helloworld.core.Person]
+INFO  [2017-12-26 01:02:09,237] org.hibernate.dialect.Dialect: HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+INFO  [2017-12-26 01:02:09,250] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.util.Currency] overrides previous : org.hibernate.type.CurrencyType@38331da
+INFO  [2017-12-26 01:02:09,250] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Duration] overrides previous : org.hibernate.type.DurationType@2aeb3e59
+INFO  [2017-12-26 01:02:09,250] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.Instant] overrides previous : org.hibernate.type.InstantType@2b741fa8
+INFO  [2017-12-26 01:02:09,250] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDate] overrides previous : org.hibernate.type.LocalDateType@657f198e
+INFO  [2017-12-26 01:02:09,250] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalDateTime] overrides previous : org.hibernate.type.LocalDateTimeType@37e95049
+INFO  [2017-12-26 01:02:09,250] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.LocalTime] overrides previous : org.hibernate.type.LocalTimeType@2f98bda9
+INFO  [2017-12-26 01:02:09,250] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetDateTime] overrides previous : org.hibernate.type.OffsetDateTimeType@663bf22
+INFO  [2017-12-26 01:02:09,250] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.OffsetTime] overrides previous : org.hibernate.type.OffsetTimeType@670c35ec
+INFO  [2017-12-26 01:02:09,250] org.hibernate.type.BasicTypeRegistry: HHH000270: Type registration [java.time.ZonedDateTime] overrides previous : org.hibernate.type.ZonedDateTimeType@6a56e3b1
+INFO  [2017-12-26 01:02:09,254] org.hibernate.hql.internal.QueryTranslatorFactoryInitiator: HHH000397: Using ASTQueryTranslatorFactory
+INFO  [2017-12-26 01:02:09,275] io.dropwizard.server.ServerFactory: Starting hello-world
+                           web-scale hello world dP for the web
+                                                 88
+  .d8888b. dP.  .dP .d8888b. 88d8b.d8b. 88d888b. 88 .d8888b.
+  88ooood8  `8bd8'  88'  `88 88'`88'`88 88'  `88 88 88ooood8
+  88.  ...  .d88b.  88.  .88 88  88  88 88.  .88 88 88.  ...
+  `88888P' dP'  `dP `88888P8 dP  dP  dP 88Y888P' dP `88888P'
+                                        88
+                                        dP
+
+INFO  [2017-12-26 01:02:09,383] org.eclipse.jetty.setuid.SetUIDListener: Opened application@35f65244{HTTP/1.1,[http/1.1]}{0.0.0.0:51188}
+INFO  [2017-12-26 01:02:09,383] org.eclipse.jetty.setuid.SetUIDListener: Opened admin@153567da{HTTP/1.1,[http/1.1]}{0.0.0.0:51189}
+INFO  [2017-12-26 01:02:09,385] org.eclipse.jetty.server.Server: jetty-9.4.7.v20170914
+INFO  [2017-12-26 01:02:09,939] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /filtered/hello (com.example.helloworld.resources.FilteredResource)
+    GET     /hello-world (com.example.helloworld.resources.HelloWorldResource)
+    POST    /hello-world (com.example.helloworld.resources.HelloWorldResource)
+    GET     /hello-world/date (com.example.helloworld.resources.HelloWorldResource)
+    GET     /people (com.example.helloworld.resources.PeopleResource)
+    POST    /people (com.example.helloworld.resources.PeopleResource)
+    GET     /people/{personId} (com.example.helloworld.resources.PersonResource)
+    GET     /people/{personId}/view_freemarker (com.example.helloworld.resources.PersonResource)
+    GET     /people/{personId}/view_mustache (com.example.helloworld.resources.PersonResource)
+    GET     /protected (com.example.helloworld.resources.ProtectedResource)
+    GET     /protected/admin (com.example.helloworld.resources.ProtectedResource)
+    GET     /views/iso88591.ftl (com.example.helloworld.resources.ViewResource)
+    GET     /views/iso88591.mustache (com.example.helloworld.resources.ViewResource)
+    GET     /views/utf8.ftl (com.example.helloworld.resources.ViewResource)
+    GET     /views/utf8.mustache (com.example.helloworld.resources.ViewResource)
+
+INFO  [2017-12-26 01:02:09,941] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@2ef97d66{/,null,AVAILABLE}
+INFO  [2017-12-26 01:02:09,944] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/echo (com.example.helloworld.tasks.EchoTask)
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+INFO  [2017-12-26 01:02:09,951] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@3cee5983{/,null,AVAILABLE}
+INFO  [2017-12-26 01:02:09,958] org.eclipse.jetty.server.AbstractConnector: Started application@35f65244{HTTP/1.1,[http/1.1]}{0.0.0.0:51188}
+INFO  [2017-12-26 01:02:09,958] org.eclipse.jetty.server.AbstractConnector: Started admin@153567da{HTTP/1.1,[http/1.1]}{0.0.0.0:51189}
+INFO  [2017-12-26 01:02:09,958] org.eclipse.jetty.server.Server: Started @4473ms
+INFO  [2017-12-26 01:02:10,538] liquibase: Successfully acquired change log lock
+INFO  [2017-12-26 01:02:11,232] liquibase: Creating database history table with name: PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-26 01:02:11,234] liquibase: Reading from PUBLIC.DATABASECHANGELOG
+INFO  [2017-12-26 01:02:11,246] liquibase: migrations.xml: migrations.xml::1::codahale: Table people created
+INFO  [2017-12-26 01:02:11,246] liquibase: migrations.xml: migrations.xml::1::codahale: ChangeSet migrations.xml::1::codahale ran successfully in 3ms
+INFO  [2017-12-26 01:02:11,253] liquibase: Successfully released change log lock
+INFO  [2017-12-26 01:02:11,683] org.hibernate.engine.internal.StatisticalLoggingSessionEventListener: Session Metrics {
+    74197 nanoseconds spent acquiring 2 JDBC connections;
+    42509 nanoseconds spent releasing 2 JDBC connections;
+    7170486 nanoseconds spent preparing 1 JDBC statements;
+    425418 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    114546 nanoseconds spent executing 1 flushes (flushing a total of 1 entities and 0 collections);
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+INFO  [2017-12-26 01:02:11,750] org.eclipse.jetty.server.AbstractConnector: Stopped application@35f65244{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-26 01:02:11,751] org.eclipse.jetty.server.AbstractConnector: Stopped admin@153567da{HTTP/1.1,[http/1.1]}{0.0.0.0:0}
+INFO  [2017-12-26 01:02:11,754] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@3cee5983{/,null,UNAVAILABLE}
+INFO  [2017-12-26 01:02:11,759] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@2ef97d66{/,null,UNAVAILABLE}
