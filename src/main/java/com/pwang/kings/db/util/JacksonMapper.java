@@ -1,12 +1,6 @@
 package com.pwang.kings.db.util;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.guava.GuavaModule;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 import com.pwang.kings.serde.ObjectMappers;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
@@ -37,6 +31,7 @@ public class JacksonMapper<T> implements ResultSetMapper<T> {
             resultsMap.put(columnName, object);
         }
 
+//        mapper.readValue
         return mapper.convertValue(resultsMap, clazz);
     }
 

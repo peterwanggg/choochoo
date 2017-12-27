@@ -15,6 +15,6 @@ import org.immutables.value.Value;
 @JsonSerialize(as = com.pwang.kings.objects.api.zomato.ImmutableRestaurantResult.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Value.Immutable
-public interface RestaurantResult {
+public interface RestaurantResult extends ZomatoObject {
     Restaurant getRestaurant();
 }

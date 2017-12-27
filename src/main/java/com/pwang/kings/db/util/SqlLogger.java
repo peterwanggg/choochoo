@@ -1,4 +1,5 @@
 package com.pwang.kings.db.util;
+
 import org.apache.log4j.Logger;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.sqlobject.SqlStatementCustomizer;
@@ -6,11 +7,7 @@ import org.skife.jdbi.v2.sqlobject.SqlStatementCustomizerFactory;
 import org.skife.jdbi.v2.sqlobject.SqlStatementCustomizingAnnotation;
 import org.skife.jdbi.v2.tweak.StatementCustomizer;
 
-import java.lang.annotation.Annotation;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 import java.lang.reflect.Method;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -37,10 +34,12 @@ public @interface SqlLogger {
                 }
 
                 @Override
-                public void afterExecution(PreparedStatement stmt, StatementContext ctx) throws SQLException { }
+                public void afterExecution(PreparedStatement stmt, StatementContext ctx) throws SQLException {
+                }
 
                 @Override
-                public void cleanup(StatementContext ctx) throws SQLException { }
+                public void cleanup(StatementContext ctx) throws SQLException {
+                }
             });
         }
 

@@ -1,7 +1,6 @@
 package com.pwang.kings.objects.model;
 
 
-
 import java.security.Principal;
 import java.util.Set;
 

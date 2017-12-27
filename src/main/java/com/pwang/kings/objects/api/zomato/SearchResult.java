@@ -16,6 +16,6 @@ import java.util.List;
 @JsonSerialize(as = com.pwang.kings.objects.api.zomato.ImmutableSearchResult.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Value.Immutable
-public interface SearchResult {
+public interface SearchResult extends ZomatoObject {
     List<RestaurantResult> getRestaurants();
 }

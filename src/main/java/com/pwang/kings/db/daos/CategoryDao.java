@@ -13,17 +13,16 @@ import java.util.Optional;
 @SqlLogger
 public interface CategoryDao {
 
-
+    @SingleValueResult(Category.class)
     @SqlQuery(
             "SELECT * FROM common.category WHERE category_id = :category_id"
     )
-    @SingleValueResult(Category.class)
-    Optional<Category> getById(@Bind("category_id") Integer id);
+    Optional<Category> getById(@Bind("category_id") Long id);
 
     @GetGeneratedKeys
     @SqlUpdate(
             "INSERT INTO common.category (category_name) values (:category.categoryName)"
     )
-    Integer create(@BindBean("category") Category category);
+    Long create(@BindBean("category") Category category);
 
 }

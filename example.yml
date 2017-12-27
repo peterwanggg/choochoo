@@ -5,7 +5,7 @@ defaultName: ${DW_DEFAULT_NAME:-Stranger}
 # Database settings.
 database:
 
-  # the name of your JDBC driver
+  # the locationName of your JDBC driver
   driverClass: org.h2.Driver
 
   # the username

@@ -36,7 +36,7 @@
         names will be relative to the specified directory. See
         http://checkstyle.sourceforge.net/5.x/config.html#Checker
 
-        <property name="basedir" value="${basedir}"/>
+        <property locationName="basedir" value="${basedir}"/>
     -->
 
     <property name="fileExtensions" value="java, properties, xml"/>
@@ -72,9 +72,9 @@
 
     <!-- Checks for Headers                                -->
     <!-- See http://checkstyle.sf.net/config_header.html   -->
-    <!-- <module name="Header"> -->
-    <!--   <property name="headerFile" value="${checkstyle.header.file}"/> -->
-    <!--   <property name="fileExtensions" value="java"/> -->
+    <!-- <module locationName="Header"> -->
+    <!--   <property locationName="headerFile" value="${checkstyle.header.file}"/> -->
+    <!--   <property locationName="fileExtensions" value="java"/> -->
     <!-- </module> -->
 
     <module name="TreeWalker">

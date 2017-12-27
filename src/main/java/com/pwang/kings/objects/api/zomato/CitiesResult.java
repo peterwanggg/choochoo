@@ -1,4 +1,4 @@
-package com.pwang.kings.objects.model;
+package com.pwang.kings.objects.api.zomato;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -7,24 +7,18 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
 
-/**
- * @author pwang on 12/26/17.
- */
+import java.util.List;
 
+/**
+ * @author pwang on 12/27/17.
+ */
+@JsonDeserialize(as = com.pwang.kings.objects.api.zomato.ImmutableCitiesResult.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonDeserialize(as = com.pwang.kings.objects.model.ImmutableCategory.class)
-@JsonSerialize(as = com.pwang.kings.objects.model.ImmutableCategory.class)
+@JsonSerialize(as = com.pwang.kings.objects.api.zomato.ImmutableCitiesResult.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Value.Immutable
-public interface Category extends KingsObject {
+public interface CitiesResult extends ZomatoObject {
 
-    @JsonProperty
-    Long getCategoryId();
-
-    @JsonProperty
-    String getCategoryName();
-
-    @JsonProperty
-    CategoryType getCategoryType();
-
+    @JsonProperty("location_suggestions")
+    List<City> locationSuggestions();
 }

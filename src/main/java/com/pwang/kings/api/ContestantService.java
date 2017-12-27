@@ -6,6 +6,7 @@ import io.dropwizard.auth.Auth;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -21,9 +22,7 @@ public interface ContestantService {
             @Auth User user,
             @QueryParam("lat") double lat,
             @QueryParam("lon") double lon,
-            @QueryParam("category-id") int categoryId);
-
-
+            @QueryParam("category-id") long categoryId) throws IOException;
 
 
 }

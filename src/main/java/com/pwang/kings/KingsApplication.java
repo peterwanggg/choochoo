@@ -1,10 +1,10 @@
 package com.pwang.kings;
 
 import com.google.maps.GeoApiContext;
-import com.hubspot.rosetta.jdbi.RosettaMapperFactory;
 import com.pwang.kings.categories.CategoryManagerFactory;
 import com.pwang.kings.clients.ZomatoService;
 import com.pwang.kings.db.daos.CategoryDao;
+import com.pwang.kings.db.daos.LocationDao;
 import com.pwang.kings.db.util.JacksonMapperFactory;
 import com.pwang.kings.resources.ContestantResource;
 import com.pwang.kings.serde.ObjectMappers;
@@ -22,7 +22,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import org.skife.jdbi.v2.DBI;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
-
 
 
 /**
@@ -64,18 +63,20 @@ public class KingsApplication extends Application<KingsConfiguration> {
         final DBIFactory factory = new DBIFactory();
         final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "jdbi");
         jdbi.registerContainerFactory(new OptionalContainerFactory());
-
-//        jdbi.registerMapper(new RosettaMapperFactory());
         jdbi.registerMapper(new JacksonMapperFactory());
-//        jdbi.register
-
 
         final CategoryDao categoryDao = jdbi.onDemand(CategoryDao.class);
+        final LocationDao locationDao = jdbi.onDemand(LocationDao.class);
+
+        // category manager
+        CategoryManagerFactory categoryManagerFactory = new CategoryManagerFactory(zomatoService, locationDao);
 
 
         // environment setup
         environment.jersey().register(new JsonProcessingExceptionMapper(true));
-        environment.jersey().register(new ContestantResource(zomatoService, categoryDao, new CategoryManagerFactory()));
+        environment.jersey().register(new ContestantResource(
+                categoryDao,
+                categoryManagerFactory));
 //        environment.jersey().register(PlacesSearchResponse.class);
 //        environment.jersey().register(LatLngConverterProvider.class);
 
@@ -96,13 +97,10 @@ public class KingsApplication extends Application<KingsConfiguration> {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://developers.zomato.com")
                 .client(builder.build())
-                .addConverterFactory(JacksonConverterFactory.create(ObjectMappers.OBJECT_MAPPER))
+                .addConverterFactory(JacksonConverterFactory.create(ObjectMappers.RETROFIT_MAPPER))
                 .build();
 
         return retrofit.create(ZomatoService.class);
     }
 
-    private CategoryManagerFactory getCategoryManagerFactory() {
-        return new CategoryManagerFactory();
-    }
 }

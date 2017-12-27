@@ -25,7 +25,7 @@ public class RenderCommand extends ConfiguredCommand<HelloWorldConfiguration> {
         subparser.addArgument("-i", "--include-default")
                 .action(Arguments.storeTrue())
                 .dest("include-default")
-                .help("Also render the template with the default name");
+                .help("Also render the template with the default locationName");
         subparser.addArgument("names").nargs("*");
     }
 
