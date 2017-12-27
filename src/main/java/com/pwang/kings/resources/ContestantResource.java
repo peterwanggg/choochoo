@@ -35,10 +35,7 @@ public final class ContestantResource implements ContestantService {
 //        return PlacesApi.nearbySearchQuery(googleContext, latLng).radius(5000).await();
 //    }
 
-    @Override
-    public List<Contestant> getContestants(User user, LatLng latLng, int categoryId) {
-        return null;
-    }
+
 
 
     @GET
@@ -57,4 +54,8 @@ public final class ContestantResource implements ContestantService {
         throw new WebApplicationException(response.message(), response.code());
     }
 
+    @Override
+    public List<Contestant> getContestants(User user, double lat, double lon, int categoryId) {
+        return null;
+    }
 }
