@@ -1,0 +1,101 @@
+{
+  "html_attributions": [],
+  "results": [
+    {
+      "geometry": {
+        "location": {
+          "lat": 47.61930489999999,
+          "lng": -122.324488
+        },
+        "viewport": {
+          "northeast": {
+            "lat": 47.62070723029149,
+            "lng": -122.3232012197085
+          },
+          "southwest": {
+            "lat": 47.61800926970849,
+            "lng": -122.3258991802915
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/cafe-71.png",
+      "id": "d09b3d6a30289c1b5d52db7ace6220b764588a76",
+      "name": "Glo's",
+      "opening_hours": {
+        "open_now": true,
+        "weekday_text": []
+      },
+      "photos": [
+        {
+          "height": 1365,
+          "html_attributions": [
+            "\u003ca href=\"https://maps.google.com/maps/contrib/104111246635874032234/photos\"\u003eZAGAT\u003c/a\u003e"
+          ],
+          "photo_reference": "CmRaAAAA7ps2c3HUtLKkv0eZEsCsQ8NTkfCn7YmrZn-p-vX4YWFLwnYSk9JhxXxJPze90Sh5yw8fzptLztaJGqiUmmmo33PQoF8GOPg5EA7NgIVlin8403pOn8l2ad9TqGDLUzmJEhAHpPXVf8Cc12JbAiMnpEfZGhQU4p7jwOTSyR6ANFgpOntFWaJarw",
+          "width": 2048
+        }
+      ],
+      "place_id": "ChIJDwvqqzMVkFQRaxy_fkj_Lw4",
+      "price_level": 2,
+      "rating": 4.5,
+      "reference": "CmRRAAAArGw_4nO9v1uscv6XS3TtBlr1GRA3xG-V8wAysd3X53oPUWKXJTB-98XPpWj7vQXfVS9WKczzbtbNJTeSmWjSoWjlGmVoUsg_AWqTg8gajnyTxupbFRf9cSEnkcjwCRu4EhB74pPm-zUuwtttSnRGqXFxGhSSPoxHrNImxl7MQ8C-_iKDY-QObQ",
+      "scope": "GOOGLE",
+      "types": [
+        "cafe",
+        "restaurant",
+        "food",
+        "store",
+        "point_of_interest",
+        "establishment"
+      ],
+      "vicinity": "1621 East Olive Way, Seattle"
+    },
+    {
+      "geometry": {
+        "location": {
+          "lat": 47.61936169999999,
+          "lng": -122.3243924
+        },
+        "viewport": {
+          "northeast": {
+            "lat": 47.6207628302915,
+            "lng": -122.3231000697085
+          },
+          "southwest": {
+            "lat": 47.6180648697085,
+            "lng": -122.3257980302915
+          }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
+      "id": "df9f6abfc405ae72bd6e40ba5f1e53c81c65af88",
+      "name": "BlueStone",
+      "opening_hours": {
+        "open_now": true,
+        "weekday_text": []
+      },
+      "photos": [
+        {
+          "height": 1080,
+          "html_attributions": [
+            "\u003ca href=\"https://maps.google.com/maps/contrib/115024212030002830475/photos\"\u003eJess C\u003c/a\u003e"
+          ],
+          "photo_reference": "CmRaAAAAZ68v-kawXP4oZm-rrlunFccJ6Dz6TnOWi0PujEfrAQMOqnhnUTPcEvazLR-x9pObZrQKuL0BV-qiaCQ3czYSRzA4_lNNgN2a5-oP8sjq1OCysfgIbtfAIhvKNridmfoYEhCXTKcubnETU-aoFXMO21YDGhTF6Ady_FXG7df56l7bXyNIzdVPPw",
+          "width": 1616
+        }
+      ],
+      "place_id": "ChIJ4aOgqzMVkFQRPs4ESTEl6gs",
+      "rating": 4.7,
+      "reference": "CmRRAAAAx9NR1Gff5eaOtbG5HdHidHNbXZ-PxHhAefwO6jO2Ycod2VuxQe3xbW2_RPxw7DB_duZLh6gQHRwzBeSR2KsOHDLS2gplzUg9zwbVR5iga7ts2XrjNXzYNjgZu0WKXCwWEhCVBWTmsDyqG8kY_7APG5LkGhTxLvJHXOfu_80SG5JNMUmuP8guqQ",
+      "scope": "GOOGLE",
+      "types": [
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "vicinity": "1631 East Olive Way, Seattle"
+    }
+  ],
+  "status": "OK"
+}

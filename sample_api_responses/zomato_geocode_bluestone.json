@@ -1,0 +1,430 @@
+{
+  "location": {
+    "entity_type": "subzone",
+    "entity_id": 113080,
+    "title": "Capitol Hill",
+    "latitude": "47.6164307916",
+    "longitude": "-122.3200142662",
+    "city_id": 279,
+    "city_name": "Seattle",
+    "country_id": 216,
+    "country_name": "United States"
+  },
+  "popularity": {
+    "popularity": "4.85",
+    "nightlife_index": "5.00",
+    "nearby_res": [
+      "16718940",
+      "16726431",
+      "16720983",
+      "16719032",
+      "16720860",
+      "16720729",
+      "16717583",
+      "16728552",
+      "16717647"
+    ],
+    "top_cuisines": [
+      "Cafe",
+      "American",
+      "Sandwich",
+      "Bar Food",
+      "Italian"
+    ],
+    "popularity_res": "100",
+    "nightlife_res": "10",
+    "subzone": "Capitol Hill",
+    "subzone_id": 113080,
+    "city": "Seattle"
+  },
+  "link": "https://www.zomato.com/seattle/capitol-hill-restaurants",
+  "nearby_restaurants": [
+    {
+      "restaurant": {
+        "R": {
+          "res_id": 16718940
+        },
+        "apikey": "f016a527ae46aff713b95cee0093383d",
+        "id": "16718940",
+        "name": "The Cheesecake Factory",
+        "url": "https://www.zomato.com/seattle/the-cheesecake-factory-downtown?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
+        "location": {
+          "address": "700 Pike Street, Seattle 98101",
+          "locality": "Downtown",
+          "city": "Seattle",
+          "city_id": 279,
+          "latitude": "47.6117778000",
+          "longitude": "-122.3332994000",
+          "zipcode": "98101",
+          "country_id": 216,
+          "locality_verbose": "Downtown, Seattle"
+        },
+        "switch_to_order_menu": 0,
+        "cuisines": "International, Desserts",
+        "average_cost_for_two": 45,
+        "price_range": 2,
+        "currency": "$",
+        "offers": [],
+        "thumb": "https://b.zmtcdn.com/data/res_imagery/16718940_RESTAURANT_8d41738e010579b278a80d6cde471af4.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+        "user_rating": {
+          "aggregate_rating": "3.4",
+          "rating_text": "Average",
+          "rating_color": "CDD614",
+          "votes": "468"
+        },
+        "photos_url": "https://www.zomato.com/seattle/the-cheesecake-factory-downtown/photos?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1#tabtop",
+        "menu_url": "https://www.zomato.com/seattle/the-cheesecake-factory-downtown/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop",
+        "featured_image": "https://b.zmtcdn.com/data/res_imagery/16718940_RESTAURANT_8d41738e010579b278a80d6cde471af4.jpg",
+        "has_online_delivery": 0,
+        "is_delivering_now": 0,
+        "deeplink": "zomato://restaurant/16718940",
+        "has_table_booking": 0,
+        "events_url": "https://www.zomato.com/seattle/the-cheesecake-factory-downtown/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1"
+      }
+    },
+    {
+      "restaurant": {
+        "R": {
+          "res_id": 16726431
+        },
+        "apikey": "f016a527ae46aff713b95cee0093383d",
+        "id": "16726431",
+        "name": "Barrio",
+        "url": "https://www.zomato.com/seattle/barrio-capitol-hill?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
+        "location": {
+          "address": "1420 12th Avenue, Seattle 98122",
+          "locality": "Capitol Hill",
+          "city": "Seattle",
+          "city_id": 279,
+          "latitude": "47.6134805556",
+          "longitude": "-122.3167333333",
+          "zipcode": "98122",
+          "country_id": 216,
+          "locality_verbose": "Capitol Hill, Seattle"
+        },
+        "switch_to_order_menu": 0,
+        "cuisines": "Mexican",
+        "average_cost_for_two": 50,
+        "price_range": 2,
+        "currency": "$",
+        "offers": [],
+        "thumb": "https://b.zmtcdn.com/data/res_imagery/16726431_RESTAURANT_93150b861d0be58622694652216f6a62.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+        "user_rating": {
+          "aggregate_rating": "3.7",
+          "rating_text": "Good",
+          "rating_color": "9ACD32",
+          "votes": "675"
+        },
+        "photos_url": "https://www.zomato.com/seattle/barrio-capitol-hill/photos?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1#tabtop",
+        "menu_url": "https://www.zomato.com/seattle/barrio-capitol-hill/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop",
+        "featured_image": "https://b.zmtcdn.com/data/res_imagery/16726431_RESTAURANT_93150b861d0be58622694652216f6a62.jpg",
+        "has_online_delivery": 0,
+        "is_delivering_now": 0,
+        "deeplink": "zomato://restaurant/16726431",
+        "has_table_booking": 0,
+        "events_url": "https://www.zomato.com/seattle/barrio-capitol-hill/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1"
+      }
+    },
+    {
+      "restaurant": {
+        "R": {
+          "res_id": 16720983
+        },
+        "apikey": "f016a527ae46aff713b95cee0093383d",
+        "id": "16720983",
+        "name": "Quinn's",
+        "url": "https://www.zomato.com/seattle/quinns-capitol-hill?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
+        "location": {
+          "address": "1001 East Pike Street 98122",
+          "locality": "Capitol Hill",
+          "city": "Seattle",
+          "city_id": 279,
+          "latitude": "47.6139250000",
+          "longitude": "-122.3193972222",
+          "zipcode": "98122",
+          "country_id": 216,
+          "locality_verbose": "Capitol Hill, Seattle"
+        },
+        "switch_to_order_menu": 0,
+        "cuisines": "Pub Food, American",
+        "average_cost_for_two": 65,
+        "price_range": 2,
+        "currency": "$",
+        "offers": [],
+        "thumb": "https://b.zmtcdn.com/data/res_imagery/16720983_RESTAURANT_8b37374579461b0c36b65ac54972f21c_c.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+        "user_rating": {
+          "aggregate_rating": "4.5",
+          "rating_text": "Excellent",
+          "rating_color": "3F7E00",
+          "votes": "1897"
+        },
+        "photos_url": "https://www.zomato.com/seattle/quinns-capitol-hill/photos?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1#tabtop",
+        "menu_url": "https://www.zomato.com/seattle/quinns-capitol-hill/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop",
+        "featured_image": "https://b.zmtcdn.com/data/res_imagery/16720983_RESTAURANT_8b37374579461b0c36b65ac54972f21c_c.jpg",
+        "has_online_delivery": 0,
+        "is_delivering_now": 0,
+        "deeplink": "zomato://restaurant/16720983",
+        "has_table_booking": 0,
+        "events_url": "https://www.zomato.com/seattle/quinns-capitol-hill/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1"
+      }
+    },
+    {
+      "restaurant": {
+        "R": {
+          "res_id": 16719032
+        },
+        "apikey": "f016a527ae46aff713b95cee0093383d",
+        "id": "16719032",
+        "name": "Honey Hole",
+        "url": "https://www.zomato.com/seattle/honey-hole-capitol-hill?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
+        "location": {
+          "address": "703 East Pike Street, Seattle 98122",
+          "locality": "Capitol Hill",
+          "city": "Seattle",
+          "city_id": 279,
+          "latitude": "47.6139833333",
+          "longitude": "-122.3233111111",
+          "zipcode": "98122",
+          "country_id": 216,
+          "locality_verbose": "Capitol Hill, Seattle"
+        },
+        "switch_to_order_menu": 0,
+        "cuisines": "Sandwich",
+        "average_cost_for_two": 30,
+        "price_range": 2,
+        "currency": "$",
+        "offers": [],
+        "thumb": "https://b.zmtcdn.com/data/res_imagery/16719032_RESTAURANT_0fd1f2678ea71dd049ee2aa7639fe665_c.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+        "user_rating": {
+          "aggregate_rating": "4.6",
+          "rating_text": "Excellent",
+          "rating_color": "3F7E00",
+          "votes": "1594"
+        },
+        "photos_url": "https://www.zomato.com/seattle/honey-hole-capitol-hill/photos?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1#tabtop",
+        "menu_url": "https://www.zomato.com/seattle/honey-hole-capitol-hill/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop",
+        "featured_image": "https://b.zmtcdn.com/data/res_imagery/16719032_RESTAURANT_0fd1f2678ea71dd049ee2aa7639fe665_c.jpg",
+        "has_online_delivery": 0,
+        "is_delivering_now": 0,
+        "deeplink": "zomato://restaurant/16719032",
+        "has_table_booking": 0,
+        "events_url": "https://www.zomato.com/seattle/honey-hole-capitol-hill/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1"
+      }
+    },
+    {
+      "restaurant": {
+        "R": {
+          "res_id": 16720860
+        },
+        "apikey": "f016a527ae46aff713b95cee0093383d",
+        "id": "16720860",
+        "name": "Café Presse",
+        "url": "https://www.zomato.com/seattle/café-presse-capitol-hill?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
+        "location": {
+          "address": "1117 12th Avenue, Seattle 98122",
+          "locality": "Capitol Hill",
+          "city": "Seattle",
+          "city_id": 279,
+          "latitude": "47.6120832000",
+          "longitude": "-122.3170860000",
+          "zipcode": "98122",
+          "country_id": 216,
+          "locality_verbose": "Capitol Hill, Seattle"
+        },
+        "switch_to_order_menu": 0,
+        "cuisines": "Cafe, French",
+        "average_cost_for_two": 45,
+        "price_range": 2,
+        "currency": "$",
+        "offers": [],
+        "thumb": "https://b.zmtcdn.com/data/res_imagery/16720860_RESTAURANT_bb1251bc620dbb9c9d8df7347d6d6064_c.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+        "user_rating": {
+          "aggregate_rating": "4.5",
+          "rating_text": "Excellent",
+          "rating_color": "3F7E00",
+          "votes": "1876"
+        },
+        "photos_url": "https://www.zomato.com/seattle/café-presse-capitol-hill/photos?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1#tabtop",
+        "menu_url": "https://www.zomato.com/seattle/café-presse-capitol-hill/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop",
+        "featured_image": "https://b.zmtcdn.com/data/res_imagery/16720860_RESTAURANT_bb1251bc620dbb9c9d8df7347d6d6064_c.jpg",
+        "has_online_delivery": 0,
+        "is_delivering_now": 0,
+        "deeplink": "zomato://restaurant/16720860",
+        "has_table_booking": 0,
+        "events_url": "https://www.zomato.com/seattle/café-presse-capitol-hill/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1"
+      }
+    },
+    {
+      "restaurant": {
+        "R": {
+          "res_id": 16720729
+        },
+        "apikey": "f016a527ae46aff713b95cee0093383d",
+        "id": "16720729",
+        "name": "Purple Cafe and Wine Bar",
+        "url": "https://www.zomato.com/seattle/purple-cafe-and-wine-bar-downtown?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
+        "location": {
+          "address": "1225 4th Avenue, Seattle 98101",
+          "locality": "Downtown",
+          "city": "Seattle",
+          "city_id": 279,
+          "latitude": "47.6079958000",
+          "longitude": "-122.3349899000",
+          "zipcode": "98101",
+          "country_id": 216,
+          "locality_verbose": "Downtown, Seattle"
+        },
+        "switch_to_order_menu": 0,
+        "cuisines": "Pacific Northwest, American",
+        "average_cost_for_two": 80,
+        "price_range": 3,
+        "currency": "$",
+        "offers": [],
+        "thumb": "https://b.zmtcdn.com/data/res_imagery/16720729_RESTAURANT_64e10a985b07adbffe9f1809bcafafd5.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+        "user_rating": {
+          "aggregate_rating": "4.0",
+          "rating_text": "Very Good",
+          "rating_color": "5BA829",
+          "votes": "1524"
+        },
+        "photos_url": "https://www.zomato.com/seattle/purple-cafe-and-wine-bar-downtown/photos?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1#tabtop",
+        "menu_url": "https://www.zomato.com/seattle/purple-cafe-and-wine-bar-downtown/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop",
+        "featured_image": "https://b.zmtcdn.com/data/res_imagery/16720729_RESTAURANT_64e10a985b07adbffe9f1809bcafafd5.jpg",
+        "has_online_delivery": 0,
+        "is_delivering_now": 0,
+        "deeplink": "zomato://restaurant/16720729",
+        "has_table_booking": 0,
+        "events_url": "https://www.zomato.com/seattle/purple-cafe-and-wine-bar-downtown/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1"
+      }
+    },
+    {
+      "restaurant": {
+        "R": {
+          "res_id": 16717583
+        },
+        "apikey": "f016a527ae46aff713b95cee0093383d",
+        "id": "16717583",
+        "name": "Lark",
+        "url": "https://www.zomato.com/seattle/lark-capitol-hill?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
+        "location": {
+          "address": "952 East Seneca Street, Seattle 98122",
+          "locality": "Capitol Hill",
+          "city": "Seattle",
+          "city_id": 279,
+          "latitude": "47.6124170000",
+          "longitude": "-122.3196570000",
+          "zipcode": "98122",
+          "country_id": 216,
+          "locality_verbose": "Capitol Hill, Seattle"
+        },
+        "switch_to_order_menu": 0,
+        "cuisines": "Pacific Northwest",
+        "average_cost_for_two": 60,
+        "price_range": 2,
+        "currency": "$",
+        "offers": [],
+        "thumb": "https://b.zmtcdn.com/data/res_imagery/16717583_RESTAURANT_94fc2a6d66aab6fdf631ebe66cbe9a0d_c.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+        "user_rating": {
+          "aggregate_rating": "4.1",
+          "rating_text": "Very Good",
+          "rating_color": "5BA829",
+          "votes": "1327"
+        },
+        "photos_url": "https://www.zomato.com/seattle/lark-capitol-hill/photos?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1#tabtop",
+        "menu_url": "https://www.zomato.com/seattle/lark-capitol-hill/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop",
+        "featured_image": "https://b.zmtcdn.com/data/res_imagery/16717583_RESTAURANT_94fc2a6d66aab6fdf631ebe66cbe9a0d_c.jpg",
+        "has_online_delivery": 0,
+        "is_delivering_now": 0,
+        "deeplink": "zomato://restaurant/16717583",
+        "has_table_booking": 0,
+        "events_url": "https://www.zomato.com/seattle/lark-capitol-hill/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1"
+      }
+    },
+    {
+      "restaurant": {
+        "R": {
+          "res_id": 16728552
+        },
+        "apikey": "f016a527ae46aff713b95cee0093383d",
+        "id": "16728552",
+        "name": "Skillet Diner",
+        "url": "https://www.zomato.com/seattle/skillet-diner-capitol-hill?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
+        "location": {
+          "address": "1400 East Union Street, Seattle 98122",
+          "locality": "Capitol Hill",
+          "city": "Seattle",
+          "city_id": 279,
+          "latitude": "47.6130111111",
+          "longitude": "-122.3141555556",
+          "zipcode": "98122",
+          "country_id": 216,
+          "locality_verbose": "Capitol Hill, Seattle"
+        },
+        "switch_to_order_menu": 0,
+        "cuisines": "Burger, Diner, American",
+        "average_cost_for_two": 45,
+        "price_range": 2,
+        "currency": "$",
+        "offers": [],
+        "thumb": "https://b.zmtcdn.com/data/res_imagery/16720948_CHAIN_cb2bb9d41108a72126bde8afa37ff1f9.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+        "user_rating": {
+          "aggregate_rating": "4.2",
+          "rating_text": "Very Good",
+          "rating_color": "5BA829",
+          "votes": "1106"
+        },
+        "photos_url": "https://www.zomato.com/seattle/skillet-diner-capitol-hill/photos?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1#tabtop",
+        "menu_url": "https://www.zomato.com/seattle/skillet-diner-capitol-hill/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop",
+        "featured_image": "https://b.zmtcdn.com/data/res_imagery/16720948_CHAIN_cb2bb9d41108a72126bde8afa37ff1f9.jpg",
+        "has_online_delivery": 0,
+        "is_delivering_now": 0,
+        "deeplink": "zomato://restaurant/16728552",
+        "has_table_booking": 0,
+        "events_url": "https://www.zomato.com/seattle/skillet-diner-capitol-hill/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1"
+      }
+    },
+    {
+      "restaurant": {
+        "R": {
+          "res_id": 16717647
+        },
+        "apikey": "f016a527ae46aff713b95cee0093383d",
+        "id": "16717647",
+        "name": "Monsoon",
+        "url": "https://www.zomato.com/seattle/monsoon-capitol-hill?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1",
+        "location": {
+          "address": "615 19th Avenue E, Seattle 98112",
+          "locality": "Capitol Hill",
+          "city": "Seattle",
+          "city_id": 279,
+          "latitude": "47.6247777778",
+          "longitude": "-122.3072750000",
+          "zipcode": "98112",
+          "country_id": 216,
+          "locality_verbose": "Capitol Hill, Seattle"
+        },
+        "switch_to_order_menu": 0,
+        "cuisines": "Vietnamese",
+        "average_cost_for_two": 75,
+        "price_range": 3,
+        "currency": "$",
+        "offers": [],
+        "thumb": "https://b.zmtcdn.com/data/res_imagery/16717647_RESTAURANT_869cfdc82781c786df086880cb20d6de_c.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+        "user_rating": {
+          "aggregate_rating": "4.1",
+          "rating_text": "Very Good",
+          "rating_color": "5BA829",
+          "votes": "1225"
+        },
+        "photos_url": "https://www.zomato.com/seattle/monsoon-capitol-hill/photos?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1#tabtop",
+        "menu_url": "https://www.zomato.com/seattle/monsoon-capitol-hill/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop",
+        "featured_image": "https://b.zmtcdn.com/data/res_imagery/16717647_RESTAURANT_869cfdc82781c786df086880cb20d6de_c.jpg",
+        "has_online_delivery": 0,
+        "is_delivering_now": 0,
+        "deeplink": "zomato://restaurant/16717647",
+        "has_table_booking": 0,
+        "events_url": "https://www.zomato.com/seattle/monsoon-capitol-hill/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1"
+      }
+    }
+  ]
+}
