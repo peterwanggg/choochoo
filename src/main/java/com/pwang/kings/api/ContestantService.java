@@ -1,7 +1,7 @@
 package com.pwang.kings.api;
 
 import com.pwang.kings.objects.model.Contestant;
-import com.pwang.helloworld.core.User;
+import com.pwang.kings.objects.model.User;
 import io.dropwizard.auth.Auth;
 
 import javax.ws.rs.*;

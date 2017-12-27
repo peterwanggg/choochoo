@@ -1,2 +1,7 @@
 googleApiKey: ${GOOGLE_API_KEY}
 zomatoApiKey: ${ZOMATO_API_KEY}
+
+database:
+  driverClass: org.postgresql.Driver
+  user: pwang
+  url: jdbc:postgresql://localhost/pwang

@@ -4,10 +4,19 @@ curl "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.
 https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CnRtAAAATLZNl354RwP_9UKbQ_5Psy40texXePv4oAlgP4qNEkdIrkyse7rPXYGd9D_Uj1rVsQdWT4oRz4QrYAJNpFX7rzqqMlZw2h2E2y5IKMUZ7ouD_SlcHxYq1yL4KbKUv3qtWgTK0A6QbGh87GB3sscrHRIQiG2RrmU_jF4tENr9wGS_YxoUSSDrYjWmrNfeEHSGSc3FyhNLlBU&key=$GOOGLE_API_KEY"
 
 
-
 ### LOCAL ###
 # helloworld
 curl -H "Content-Type: application/json" -X POST -d '{"fullName":"Other Person","jobTitle":"Other Title"}' "http://localhost:8080/people"
+
+### psql ###
+# start
+pg_ctl -D /Users/pwang/Documents/postgres -l logfile start
+
+# list schemas
+\dn
+
+# list tables
+\dt common.*
 
 
 
