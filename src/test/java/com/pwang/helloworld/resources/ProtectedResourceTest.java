@@ -3,7 +3,6 @@ package com.pwang.helloworld.resources;
 import com.pwang.helloworld.auth.ExampleAuthenticator;
 import com.pwang.helloworld.auth.ExampleAuthorizer;
 import com.pwang.helloworld.core.User;
-import com.pwang.helloworld.resources.ProtectedResource;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
@@ -50,7 +49,7 @@ public class ProtectedResourceTest {
     public void testProtectedEndpointNoCredentials401() {
         try {
             RULE.target("/protected").request()
-                .get(String.class);
+                    .get(String.class);
             failBecauseExceptionWasNotThrown(NotAuthorizedException.class);
         } catch (NotAuthorizedException e) {
             assertThat(e.getResponse().getStatus()).isEqualTo(401);
@@ -64,13 +63,13 @@ public class ProtectedResourceTest {
     public void testProtectedEndpointBadCredentials401() {
         try {
             RULE.target("/protected").request()
-                .header(HttpHeaders.AUTHORIZATION, "Basic c25lYWt5LWJhc3RhcmQ6YXNkZg==")
-                .get(String.class);
+                    .header(HttpHeaders.AUTHORIZATION, "Basic c25lYWt5LWJhc3RhcmQ6YXNkZg==")
+                    .get(String.class);
             failBecauseExceptionWasNotThrown(NotAuthorizedException.class);
         } catch (NotAuthorizedException e) {
             assertThat(e.getResponse().getStatus()).isEqualTo(401);
             assertThat(e.getResponse().getHeaders().get(HttpHeaders.WWW_AUTHENTICATE))
-                .containsOnly("Basic realm=\"SUPER SECRET STUFF\"");
+                    .containsOnly("Basic realm=\"SUPER SECRET STUFF\"");
         }
 
     }

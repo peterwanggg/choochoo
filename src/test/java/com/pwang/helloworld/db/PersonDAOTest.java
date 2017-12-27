@@ -1,7 +1,6 @@
 package com.pwang.helloworld.db;
 
 import com.pwang.helloworld.core.Person;
-import com.pwang.helloworld.db.PersonDAO;
 import io.dropwizard.testing.junit.DAOTestRule;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Before;
@@ -17,8 +16,8 @@ public class PersonDAOTest {
 
     @Rule
     public DAOTestRule daoTestRule = DAOTestRule.newBuilder()
-        .addEntityClass(Person.class)
-        .build();
+            .addEntityClass(Person.class)
+            .build();
 
     private PersonDAO personDAO;
 

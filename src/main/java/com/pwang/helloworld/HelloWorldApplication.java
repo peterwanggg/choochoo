@@ -9,12 +9,7 @@ import com.pwang.helloworld.core.User;
 import com.pwang.helloworld.db.PersonDAO;
 import com.pwang.helloworld.filter.DateRequiredFeature;
 import com.pwang.helloworld.health.TemplateHealthCheck;
-import com.pwang.helloworld.resources.FilteredResource;
-import com.pwang.helloworld.resources.HelloWorldResource;
-import com.pwang.helloworld.resources.PeopleResource;
-import com.pwang.helloworld.resources.PersonResource;
-import com.pwang.helloworld.resources.ProtectedResource;
-import com.pwang.helloworld.resources.ViewResource;
+import com.pwang.helloworld.resources.*;
 import com.pwang.helloworld.tasks.EchoTask;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
@@ -39,12 +34,12 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     }
 
     private final HibernateBundle<HelloWorldConfiguration> hibernateBundle =
-        new HibernateBundle<HelloWorldConfiguration>(Person.class) {
-            @Override
-            public DataSourceFactory getDataSourceFactory(HelloWorldConfiguration configuration) {
-                return configuration.getDataSourceFactory();
-            }
-        };
+            new HibernateBundle<HelloWorldConfiguration>(Person.class) {
+                @Override
+                public DataSourceFactory getDataSourceFactory(HelloWorldConfiguration configuration) {
+                    return configuration.getDataSourceFactory();
+                }
+            };
 
     @Override
     public String getName() {

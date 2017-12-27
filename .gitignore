@@ -2,6 +2,9 @@
 /target
 /build
 .gradle
+**generated_src
+**generated_testSrc
+**.DS_Store
 
 #IntelliJ
 *.iml

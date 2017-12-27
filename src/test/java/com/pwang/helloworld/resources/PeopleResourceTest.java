@@ -1,10 +1,9 @@
 package com.pwang.helloworld.resources;
 
-import com.pwang.helloworld.core.Person;
-import com.pwang.helloworld.db.PersonDAO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.ImmutableList;
-import com.pwang.helloworld.resources.PeopleResource;
+import com.pwang.helloworld.core.Person;
+import com.pwang.helloworld.db.PersonDAO;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.After;
 import org.junit.Before;
@@ -23,10 +22,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Unit tests for {@link PeopleResource}.
@@ -72,8 +68,8 @@ public class PeopleResourceTest {
         when(PERSON_DAO.findAll()).thenReturn(people);
 
         final List<Person> response = RESOURCES.target("/people")
-            .request().get(new GenericType<List<Person>>() {
-            });
+                .request().get(new GenericType<List<Person>>() {
+                });
 
         verify(PERSON_DAO).findAll();
         assertThat(response).containsAll(people);

@@ -2,7 +2,6 @@ package com.pwang.helloworld.resources;
 
 import com.pwang.helloworld.core.Person;
 import com.pwang.helloworld.db.PersonDAO;
-import com.pwang.helloworld.resources.PersonResource;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.glassfish.jersey.test.grizzly.GrizzlyWebTestContainerFactory;
 import org.junit.After;
@@ -14,10 +13,7 @@ import javax.ws.rs.core.Response;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Unit tests for {@link PersonResource}.

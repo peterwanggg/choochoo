@@ -1,4 +1,4 @@
-package com.pwang.serde;
+package com.pwang.clashbash.serde;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,7 +12,7 @@ import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
  * @author pwang on 12/26/17.
  */
 public interface ObjectMappers {
-
+    //    ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     ObjectMapper OBJECT_MAPPER = (new ObjectMapper()).registerModule(new GuavaModule())
             .registerModule(new Jdk8Module().configureAbsentsAsNulls(true))
             .registerModule(new AfterburnerModule())
@@ -20,6 +20,6 @@ public interface ObjectMappers {
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             .disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
             .disable(DeserializationFeature.WRAP_EXCEPTIONS)
-            .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
+//            .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
             .enable(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES);
 }

@@ -1,8 +1,8 @@
 package com.pwang.helloworld;
 
-import com.pwang.helloworld.core.Template;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.ImmutableMap;
+import com.pwang.helloworld.core.Template;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;
 import org.hibernate.validator.constraints.NotEmpty;

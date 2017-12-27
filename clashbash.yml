@@ -1,1 +1,2 @@
 googleApiKey: ${GOOGLE_API_KEY}
+zomatoApiKey: ${ZOMATO_API_KEY}
