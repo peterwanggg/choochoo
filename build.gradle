@@ -64,9 +64,9 @@ dependencies {
     processor 'org.immutables:value:2.5.5'
 }
 
-mainClassName = 'com.pwang.clashbash.ClashBashApplication'
+mainClassName = 'com.pwang.kings.KingsApplication'
 run {
-    args = ['server', 'clashbash.yml']
+    args = ['server', 'kings.yml']
 //    args = ['db', 'migrate', 'example.yml']
 }
 
