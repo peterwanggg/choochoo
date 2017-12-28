@@ -17,5 +17,5 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Value.Immutable
 public interface SearchResult extends ZomatoObject {
-    List<RestaurantResult> getRestaurants();
+    List<Restaurant> getRestaurants();
 }

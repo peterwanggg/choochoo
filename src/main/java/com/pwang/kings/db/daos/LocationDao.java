@@ -1,6 +1,5 @@
 package com.pwang.kings.db.daos;
 
-import com.pwang.kings.objects.model.Category;
 import com.pwang.kings.objects.model.Location;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.SingleValueResult;
@@ -9,14 +8,6 @@ import java.util.Optional;
 
 /**
  * @author pwang on 12/27/17.
- * <p>
- * CREATE TABLE IF NOT EXISTS common.location (
- * location_id BIGSERIAL PRIMARY KEY,
- * location_name text,
- * location_type text,
- * api_provider_type text,
- * api_provider_id text
- * );
  */
 public interface LocationDao {
 

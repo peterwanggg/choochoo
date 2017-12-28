@@ -30,11 +30,4 @@ public interface Location extends KingsObject {
     @JsonProperty
     String getLocationType();
 
-    @JsonProperty
-    String getApiProviderType();
-
-    @JsonProperty
-    String getApiProviderId();
-
-
 }

@@ -30,10 +30,5 @@ public interface Category extends KingsObject {
     @JsonProperty
     CategoryType getCategoryType();
 
-    @JsonProperty
-    String getApiProviderType();
-
-    @JsonProperty
-    String getApiProviderId();
 
 }

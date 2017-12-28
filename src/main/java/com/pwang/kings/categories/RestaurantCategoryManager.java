@@ -2,17 +2,22 @@ package com.pwang.kings.categories;
 
 import com.pwang.kings.adapters.zomato.CityToLocationAdapter;
 import com.pwang.kings.adapters.zomato.CuisineToCategoryAdapter;
+import com.pwang.kings.adapters.zomato.RestaurantToContestantAdapter;
 import com.pwang.kings.clients.ZomatoService;
 import com.pwang.kings.db.daos.CategoryDao;
+import com.pwang.kings.db.daos.ContestantDao;
 import com.pwang.kings.db.daos.LocationDao;
 import com.pwang.kings.objects.api.zomato.CitiesResult;
 import com.pwang.kings.objects.api.zomato.CuisinesResult;
+import com.pwang.kings.objects.api.zomato.EntityType;
+import com.pwang.kings.objects.api.zomato.SearchResult;
 import com.pwang.kings.objects.model.*;
 import org.eclipse.jetty.http.HttpStatus;
 import retrofit2.Response;
 
 import javax.ws.rs.WebApplicationException;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,18 +28,21 @@ import java.util.stream.Collectors;
 public final class RestaurantCategoryManager implements CategoryManager {
 
     private final CityToLocationAdapter cityToLocationAdapter = new CityToLocationAdapter();
+    private final RestaurantToContestantAdapter restaurantToContestantAdapter = new RestaurantToContestantAdapter();
     private final CuisineToCategoryAdapter cuisineToCategoryAdapter = new CuisineToCategoryAdapter();
 
     private final ZomatoService zomatoService;
     private final LocationDao locationDao;
     private final CategoryDao categoryDao;
+    private final ContestantDao contestantDao;
 
     RestaurantCategoryManager(
             ZomatoService zomatoService,
-            LocationDao locationDao, CategoryDao categoryDao) {
+            LocationDao locationDao, CategoryDao categoryDao, ContestantDao contestantDao) {
         this.zomatoService = zomatoService;
         this.locationDao = locationDao;
         this.categoryDao = categoryDao;
+        this.contestantDao = contestantDao;
     }
 
     @Override
@@ -78,8 +86,34 @@ public final class RestaurantCategoryManager implements CategoryManager {
     }
 
     @Override
-    public List<Contestant> getContestants(User user, Location location, long categoryId) {
-        return null;
+    public List<Contestant> getContestants(User user, Location location, Category category) throws IOException {
+        // TODO: get contestants from DB
+
+        Response<SearchResult> response = zomatoService.search(
+                Integer.valueOf(category.getApiProviderId()),
+                EntityType.city.toString(),
+                null,
+                null).execute();
+        if (!response.isSuccessful()) {
+            throw new WebApplicationException("zomato request failed", HttpStatus.INTERNAL_SERVER_ERROR_500);
+        }
+
+        return response.body()
+                .getRestaurants().stream()
+                .map(apiObject -> {
+                    try {
+                        return restaurantToContestantAdapter.adapt(apiObject);
+                    } catch (IOException e) {
+                        throw new UncheckedIOException(e);
+                    }
+                })
+                .map(contestant ->
+                        ImmutableContestant.builder()
+                                .from(contestant)
+                                .contestantId(contestantDao.create(contestant))
+                                .categoryId(category.getCategoryId())
+                                .build())
+                .collect(Collectors.toList());
     }
 
     @Override

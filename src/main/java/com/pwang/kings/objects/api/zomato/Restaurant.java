@@ -9,17 +9,12 @@ import org.immutables.value.Value;
 /**
  * @author pwang on 12/26/17.
  */
+
+@JsonDeserialize(as = ImmutableRestaurant.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonDeserialize(as = com.pwang.kings.objects.api.zomato.ImmutableRestaurant.class)
-@JsonSerialize(as = com.pwang.kings.objects.api.zomato.ImmutableRestaurant.class)
+@JsonSerialize(as = ImmutableRestaurant.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Value.Immutable
 public interface Restaurant extends ZomatoObject {
-
-    Integer getId();
-
-    String getName();
-
-    String getUrl();
-
+    RestaurantValue getRestaurantValue();
 }

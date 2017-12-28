@@ -9,7 +9,7 @@ import com.pwang.kings.objects.model.ImmutableCategory;
 /**
  * @author pwang on 12/27/17.
  */
-public class CuisineToCategoryAdapter implements ZomatoAdapter<Cuisine, Category> {
+public final class CuisineToCategoryAdapter implements ZomatoAdapter<Cuisine, Category> {
     @Override
     public Category adapt(Cuisine apiObject) {
         return ImmutableCategory.builder()

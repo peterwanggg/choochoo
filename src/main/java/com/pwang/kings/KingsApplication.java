@@ -5,6 +5,7 @@ import com.pwang.helloworld.HelloWorldConfiguration;
 import com.pwang.kings.categories.CategoryManagerFactory;
 import com.pwang.kings.clients.ZomatoService;
 import com.pwang.kings.db.daos.CategoryDao;
+import com.pwang.kings.db.daos.ContestantDao;
 import com.pwang.kings.db.daos.LocationDao;
 import com.pwang.kings.db.util.JacksonMapperFactory;
 import com.pwang.kings.objects.model.CategoryType;
@@ -75,10 +76,11 @@ public class KingsApplication extends Application<KingsConfiguration> {
 
         final CategoryDao categoryDao = jdbi.onDemand(CategoryDao.class);
         final LocationDao locationDao = jdbi.onDemand(LocationDao.class);
+        final ContestantDao contestantDao = jdbi.onDemand(ContestantDao.class);
 
         // category manager
         CategoryManagerFactory categoryManagerFactory = new CategoryManagerFactory(
-                zomatoService, locationDao, categoryDao);
+                zomatoService, locationDao, categoryDao, contestantDao);
 
         // environment setup
         environment.admin().addTask(new InitializeCategoryLocationTask(

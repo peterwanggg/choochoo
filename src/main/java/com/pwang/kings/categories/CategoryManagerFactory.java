@@ -3,8 +3,8 @@ package com.pwang.kings.categories;
 import com.google.common.collect.ImmutableMap;
 import com.pwang.kings.clients.ZomatoService;
 import com.pwang.kings.db.daos.CategoryDao;
+import com.pwang.kings.db.daos.ContestantDao;
 import com.pwang.kings.db.daos.LocationDao;
-import com.pwang.kings.objects.model.Category;
 import com.pwang.kings.objects.model.CategoryType;
 
 import java.util.Collection;
@@ -20,13 +20,15 @@ public class CategoryManagerFactory {
     public CategoryManagerFactory(
             ZomatoService zomatoService,
             LocationDao locationDao,
-            CategoryDao categoryDao
+            CategoryDao categoryDao,
+            ContestantDao contestantDao
     ) {
         categoryManagers = ImmutableMap.of(
                 CategoryType.restaurant, new RestaurantCategoryManager(
                         zomatoService,
                         locationDao,
-                        categoryDao)
+                        categoryDao,
+                        contestantDao)
         );
     }
 
