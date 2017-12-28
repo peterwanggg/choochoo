@@ -25,7 +25,7 @@
 // */
 //public class KingsIntegrationTest {
 //
-//    private static final String TMP_FILE = createTempFile();
+////    private static final String TMP_FILE = createTempFile();
 //    private static final String CONFIG_PATH = ResourceHelpers.resourceFilePath("kings_config_integ_test.yml");
 //
 //    @ClassRule
@@ -37,13 +37,13 @@
 //        RULE.getApplication().run("db", "migrate", CONFIG_PATH);
 //    }
 //
-//    private static String createTempFile() {
-//        try {
-//            return File.createTempFile("test-example", null).getAbsolutePath();
-//        } catch (IOException e) {
-//            throw new IllegalStateException(e);
-//        }
-//    }
+////    private static String createTempFile() {
+////        try {
+////            return File.createTempFile("test-example", null).getAbsolutePath();
+////        } catch (IOException e) {
+////            throw new IllegalStateException(e);
+////        }
+////    }
 //
 //    @Test
 //    public void testHelloWorld() throws Exception {
