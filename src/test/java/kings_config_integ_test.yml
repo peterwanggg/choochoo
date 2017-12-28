@@ -1,0 +1,7 @@
+googleApiKey: abcd
+zomatoApiKey: efgh
+
+database:
+  driverClass: org.postgresql.Driver
+  user: pwang
+  url: jdbc:postgresql://localhost/pwang

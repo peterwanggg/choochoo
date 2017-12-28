@@ -1,6 +1,7 @@
 package com.pwang.kings;
 
 import com.google.maps.GeoApiContext;
+import com.pwang.helloworld.HelloWorldConfiguration;
 import com.pwang.kings.categories.CategoryManagerFactory;
 import com.pwang.kings.clients.ZomatoService;
 import com.pwang.kings.db.daos.CategoryDao;
@@ -13,9 +14,11 @@ import com.pwang.kings.tasks.InitializeCategoryLocationTask;
 import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
+import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.jdbi.OptionalContainerFactory;
 import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
+import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import okhttp3.OkHttpClient;
@@ -42,6 +45,17 @@ public class KingsApplication extends Application<KingsConfiguration> {
                         bootstrap.getConfigurationSourceProvider(),
                         new EnvironmentVariableSubstitutor())
         );
+        bootstrap.addBundle(new MigrationsBundle<KingsConfiguration>() {
+            @Override
+            public String getMigrationsFileName() {
+                return "migrations.sql";
+            }
+
+            @Override
+            public DataSourceFactory getDataSourceFactory(KingsConfiguration configuration) {
+                return configuration.getDataSourceFactory();
+            }
+        });
     }
 
     @Override
@@ -78,10 +92,6 @@ public class KingsApplication extends Application<KingsConfiguration> {
                 categoryDao,
                 categoryManagerFactory));
     }
-//
-//    private initializeCategories() {
-//
-//    }
 
     private ZomatoService getZomatoService(String apiKey) {
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
