@@ -9,5 +9,5 @@ import java.io.IOException;
  */
 public interface Adapter<A, K extends KingsObject> {
 
-    K adapt(A apiObject) throws IOException;
+    K adapt(A apiObject);
 }

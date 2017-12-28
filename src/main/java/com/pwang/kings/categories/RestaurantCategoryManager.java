@@ -17,7 +17,6 @@ import retrofit2.Response;
 
 import javax.ws.rs.WebApplicationException;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,6 +25,7 @@ import java.util.stream.Collectors;
  * @author pwang on 12/26/17.
  */
 public final class RestaurantCategoryManager implements CategoryManager {
+
 
     private final CityToLocationAdapter cityToLocationAdapter = new CityToLocationAdapter();
     private final RestaurantToContestantAdapter restaurantToContestantAdapter = new RestaurantToContestantAdapter();
@@ -87,7 +87,7 @@ public final class RestaurantCategoryManager implements CategoryManager {
 
     @Override
     public List<Contestant> getContestants(User user, Location location, Category category) throws IOException {
-        // TODO: get contestants from DB
+        // TODO: get contestants from DB and only get new ones
 
         Response<SearchResult> response = zomatoService.search(
                 Integer.valueOf(category.getApiProviderId()),
@@ -97,22 +97,30 @@ public final class RestaurantCategoryManager implements CategoryManager {
         if (!response.isSuccessful()) {
             throw new WebApplicationException("zomato request failed", HttpStatus.INTERNAL_SERVER_ERROR_500);
         }
-
         return response.body()
                 .getRestaurants().stream()
-                .map(apiObject -> {
-                    try {
-                        return restaurantToContestantAdapter.adapt(apiObject);
-                    } catch (IOException e) {
-                        throw new UncheckedIOException(e);
-                    }
-                })
+                .map(restaurantToContestantAdapter::adapt)
                 .map(contestant ->
                         ImmutableContestant.builder()
                                 .from(contestant)
-                                .contestantId(contestantDao.create(contestant))
                                 .categoryId(category.getCategoryId())
                                 .build())
+                .map(contestant -> {
+                    Optional<Contestant> fromDb = contestantDao.getByApiId(
+                            contestant.getApiProviderType(), contestant.getApiProviderId());
+                    Long contestantId;
+
+                    if (fromDb.isPresent()) {
+                        contestantId = fromDb.get().getContestantId();
+                    } else {
+                        contestantId = contestantDao.create(contestant, contestant.getImageUrl().toString());
+                    }
+
+                    return ImmutableContestant.builder()
+                            .from(contestant)
+                            .contestantId(contestantId)
+                            .build();
+                })
                 .collect(Collectors.toList());
     }
 

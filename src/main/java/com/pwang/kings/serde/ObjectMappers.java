@@ -21,8 +21,12 @@ public interface ObjectMappers {
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             .disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
             .disable(DeserializationFeature.WRAP_EXCEPTIONS)
+            .setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE)
 //            .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
-            .enable(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES);
+//            .enable(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES)
+            .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
+            ;
+
 
     ObjectMapper DB_MAPPER = (new ObjectMapper()).registerModule(new GuavaModule())
             .registerModule(new Jdk8Module().configureAbsentsAsNulls(true))

@@ -4,23 +4,49 @@ import com.pwang.kings.objects.api.zomato.Restaurant;
 import com.pwang.kings.objects.model.ApiProviderType;
 import com.pwang.kings.objects.model.Contestant;
 import com.pwang.kings.objects.model.ImmutableContestant;
+import org.apache.log4j.Logger;
 
-import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Optional;
 
 /**
  * @author pwang on 12/27/17.
  */
 public final class RestaurantToContestantAdapter implements ZomatoAdapter<Restaurant, Contestant> {
 
+    private static final Logger LOGGER = Logger.getLogger(RestaurantToContestantAdapter.class);
+
     @Override
-    public Contestant adapt(Restaurant apiObject) throws IOException {
+    public Contestant adapt(Restaurant apiObject) {
         return ImmutableContestant.builder()
-                .contestantName(apiObject.getRestaurantValue().getName())
-                .imageUrl(new URL(apiObject.getRestaurantValue().getFeaturedImage()))
+                .contestantName(apiObject.getRestaurant().getName())
+                .imageUrl(getUrl(apiObject.getRestaurant().getFeaturedImage()))
                 .apiProviderType(ApiProviderType.zomato.toString())
-                .apiProviderId(apiObject.getRestaurantValue().getId().toString())
+                .apiProviderId(apiObject.getRestaurant().getId().toString())
                 .build();
     }
+
+    private static URL getUrl(Optional<String> urlString) {
+        if (!urlString.isPresent()) {
+            return getDefaultUrl();
+        }
+        try {
+            return new URL(urlString.get());
+        } catch (MalformedURLException e) {
+            LOGGER.warn("could not parse given url:" + urlString, e);
+            return getDefaultUrl();
+        }
+    }
+
+    private static URL getDefaultUrl() {
+        try {
+            return new URL("https://www.shareicon.net/data/512x512/2016/09/23/834003_fork_512x512.png");
+        } catch (MalformedURLException e) {
+            LOGGER.error("could not parse DEFAULT ur", e);
+            return null;
+        }
+    }
+
 
 }
