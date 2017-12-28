@@ -1,9 +1,11 @@
 package com.pwang.kings.db.daos;
 
+import com.pwang.kings.objects.model.Category;
 import com.pwang.kings.objects.model.Location;
-import org.skife.jdbi.v2.sqlobject.BindBean;
-import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
-import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.*;
+import org.skife.jdbi.v2.sqlobject.customizers.SingleValueResult;
+
+import java.util.Optional;
 
 /**
  * @author pwang on 12/27/17.
@@ -22,9 +24,16 @@ public interface LocationDao {
     @SqlUpdate(
             "INSERT INTO common.location "
                     + "(location_name, location_type, api_provider_type, api_provider_id) VALUES "
-//                    "(:location.location_name, :location.location_type, :location.api_provider_type, :location.api_provider_id) " +
                     + "(:location.locationName, :location.locationType, :location.apiProviderType, :location.apiProviderId) "
-                    + "ON CONFLICT ON CONSTRAINT api_id DO NOTHING"
+                    + "ON CONFLICT ON CONSTRAINT location_api_id DO NOTHING"
     )
     Long create(@BindBean("location") Location location);
+
+    @SingleValueResult(Location.class)
+    @SqlQuery(
+            "SELECT * FROM common.location WHERE api_provider_type = :api_provider_type AND api_provider_id = :api_provider_id"
+    )
+    Optional<Location> getByApiId(@Bind("api_provider_type") String apiProviderType, @Bind("api_provider_id") String apiProviderId);
+
+
 }

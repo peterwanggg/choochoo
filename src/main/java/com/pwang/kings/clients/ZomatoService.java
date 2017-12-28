@@ -1,6 +1,7 @@
 package com.pwang.kings.clients;
 
 import com.pwang.kings.objects.api.zomato.CitiesResult;
+import com.pwang.kings.objects.api.zomato.CuisinesResult;
 import com.pwang.kings.objects.api.zomato.SearchResult;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -15,13 +16,21 @@ public interface ZomatoService {
 
     @GET("/api/v2.1/search")
     Call<SearchResult> search(
-            @Query("lat") double lat,
-            @Query("lon") double lon);
+            @Query("entity_id") Integer entityId,
+            @Query("entity_type") String entityType,
+            @Query("lat") Double lat,
+            @Query("lon") Double lon);
 
     @GET("/api/v2.1/cities")
     Call<CitiesResult> cities(
-            @Query("lat") double lat,
-            @Query("lon") double lon,
-            @Query("count") int count);
+            @Query("lat") Double lat,
+            @Query("lon") Double lon,
+            @Query("city_ids") String cityIds,
+            @Query("count") Integer count);
+
+    @GET("/api/v2.1/cuisines")
+    Call<CuisinesResult> cuisines(
+            @Query("city_id") Integer cityId
+    );
 
 }

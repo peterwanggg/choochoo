@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,4 +53,5 @@ public class PersonDAOTest {
     public void handlesNullFullName() {
         daoTestRule.inTransaction(() -> personDAO.create(new Person(null, "The null")));
     }
+
 }

@@ -7,29 +7,18 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
 
-import java.util.Optional;
+import java.util.List;
 
 /**
  * @author pwang on 12/27/17.
  */
+@JsonDeserialize(as = com.pwang.kings.objects.api.zomato.ImmutableCuisinesResult.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonDeserialize(as = com.pwang.kings.objects.api.zomato.ImmutableCity.class)
-@JsonSerialize(as = com.pwang.kings.objects.api.zomato.ImmutableCity.class)
+@JsonSerialize(as = com.pwang.kings.objects.api.zomato.ImmutableCuisinesResult.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Value.Immutable
-public interface City extends ZomatoObject {
+public interface CuisinesResult extends ZomatoObject {
 
-    @JsonProperty("id")
-    Integer id();
-
-    @JsonProperty("name")
-    String name();
-
-    @JsonProperty("country_id")
-    String countryId();
-
-    @JsonProperty("country_name")
-    Optional<String> countryName();
-
-
+    @JsonProperty("cuisines")
+    List<Cuisine> cuisines();
 }

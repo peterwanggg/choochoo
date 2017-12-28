@@ -21,7 +21,11 @@ public interface CategoryDao {
 
     @GetGeneratedKeys
     @SqlUpdate(
-            "INSERT INTO common.category (category_name) values (:category.categoryName)"
+            "INSERT INTO common.category "
+                    + "(category_name, category_type, api_provider_type, api_provider_id) VALUES "
+                    + "(:category.categoryName, :category.categoryType, :category.apiProviderType, :category.apiProviderId) "
+                    + "ON CONFLICT ON CONSTRAINT category_key DO NOTHING"
+
     )
     Long create(@BindBean("category") Category category);
 

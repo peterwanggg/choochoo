@@ -6,8 +6,10 @@ import com.pwang.kings.clients.ZomatoService;
 import com.pwang.kings.db.daos.CategoryDao;
 import com.pwang.kings.db.daos.LocationDao;
 import com.pwang.kings.db.util.JacksonMapperFactory;
+import com.pwang.kings.objects.model.CategoryType;
 import com.pwang.kings.resources.ContestantResource;
 import com.pwang.kings.serde.ObjectMappers;
+import com.pwang.kings.tasks.InitializeCategoryLocationTask;
 import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
@@ -32,14 +34,6 @@ public class KingsApplication extends Application<KingsConfiguration> {
     public static void main(String[] args) throws Exception {
         new KingsApplication().run(args);
     }
-
-//    private final HibernateBundle<HelloWorldConfiguration> hibernateBundle = new HibernateBundle<HelloWorldConfiguration>(Person.class) {
-//        @Override
-//        public DataSourceFactory getDataSourceFactory(HelloWorldConfiguration configuration) {
-//            return configuration.getDataSourceFactory();
-//        }
-//    };
-
 
     @Override
     public void initialize(Bootstrap<KingsConfiguration> bootstrap) {
@@ -69,18 +63,25 @@ public class KingsApplication extends Application<KingsConfiguration> {
         final LocationDao locationDao = jdbi.onDemand(LocationDao.class);
 
         // category manager
-        CategoryManagerFactory categoryManagerFactory = new CategoryManagerFactory(zomatoService, locationDao);
-
+        CategoryManagerFactory categoryManagerFactory = new CategoryManagerFactory(
+                zomatoService, locationDao, categoryDao);
 
         // environment setup
+        environment.admin().addTask(new InitializeCategoryLocationTask(
+                locationDao,
+                CategoryType.restaurant,
+                categoryManagerFactory.getCategoryManager(CategoryType.restaurant))
+        );
+
         environment.jersey().register(new JsonProcessingExceptionMapper(true));
         environment.jersey().register(new ContestantResource(
                 categoryDao,
                 categoryManagerFactory));
-//        environment.jersey().register(PlacesSearchResponse.class);
-//        environment.jersey().register(LatLngConverterProvider.class);
-
     }
+//
+//    private initializeCategories() {
+//
+//    }
 
     private ZomatoService getZomatoService(String apiKey) {
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder();

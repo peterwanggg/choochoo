@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
 
+import javax.annotation.Nullable;
+
 /**
  * @author pwang on 12/26/17.
  */
@@ -18,6 +20,7 @@ import org.immutables.value.Value;
 @Value.Immutable
 public interface Category extends KingsObject {
 
+    @Nullable
     @JsonProperty
     Long getCategoryId();
 
@@ -26,5 +29,11 @@ public interface Category extends KingsObject {
 
     @JsonProperty
     CategoryType getCategoryType();
+
+    @JsonProperty
+    String getApiProviderType();
+
+    @JsonProperty
+    String getApiProviderId();
 
 }
