@@ -1,17 +1,21 @@
 package com.pwang.kings;
 
 import com.google.maps.GeoApiContext;
+import com.pwang.kings.auth.KingsAuthenticator;
+import com.pwang.kings.auth.KingsAuthorizer;
 import com.pwang.kings.categories.CategoryManagerFactory;
 import com.pwang.kings.clients.ZomatoService;
-import com.pwang.kings.db.daos.CategoryDao;
-import com.pwang.kings.db.daos.ContestantDao;
-import com.pwang.kings.db.daos.LocationDao;
+import com.pwang.kings.db.daos.*;
 import com.pwang.kings.db.util.JacksonMapperFactory;
 import com.pwang.kings.objects.model.CategoryType;
+import com.pwang.kings.objects.model.KingsUser;
+import com.pwang.kings.resources.BoutResource;
 import com.pwang.kings.resources.ContestantResource;
 import com.pwang.kings.serde.ObjectMappers;
 import com.pwang.kings.tasks.InitializeCategoryLocationTask;
 import io.dropwizard.Application;
+import io.dropwizard.auth.AuthDynamicFeature;
+import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.db.DataSourceFactory;
@@ -67,15 +71,18 @@ public class KingsApplication extends Application<KingsConfiguration> {
                 .build();
         ZomatoService zomatoService = getZomatoService(configuration.getZomatoApiKey());
 
-        // daos
+        // db setup
         final DBIFactory factory = new DBIFactory();
         final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "jdbi");
         jdbi.registerContainerFactory(new OptionalContainerFactory());
         jdbi.registerMapper(new JacksonMapperFactory());
 
+        // daos
         final CategoryDao categoryDao = jdbi.onDemand(CategoryDao.class);
         final LocationDao locationDao = jdbi.onDemand(LocationDao.class);
         final ContestantDao contestantDao = jdbi.onDemand(ContestantDao.class);
+        final BoutDao boutDao = jdbi.onDemand(BoutDao.class);
+        final KingsUserDao kingsUserDao = jdbi.onDemand(KingsUserDao.class);
 
         // category manager
         CategoryManagerFactory categoryManagerFactory = new CategoryManagerFactory(
@@ -87,8 +94,18 @@ public class KingsApplication extends Application<KingsConfiguration> {
                 CategoryType.restaurant,
                 categoryManagerFactory.getCategoryManager(CategoryType.restaurant))
         );
-
         environment.jersey().register(new JsonProcessingExceptionMapper(true));
+        environment.jersey().register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<KingsUser>()
+                .setAuthenticator(new KingsAuthenticator(kingsUserDao))
+                .setAuthorizer(new KingsAuthorizer())
+                .setRealm("SUPER SECRET STUFF")
+                .buildAuthFilter()));
+
+
+        // register resources
+        environment.jersey().register(new BoutResource(
+                boutDao
+        ));
         environment.jersey().register(new ContestantResource(
                 categoryDao,
                 categoryManagerFactory));

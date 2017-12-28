@@ -2,6 +2,7 @@ package com.pwang.kings.db.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pwang.kings.serde.ObjectMappers;
+import org.postgresql.jdbc.PgArray;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
@@ -28,11 +29,17 @@ public class JacksonMapper<T> implements ResultSetMapper<T> {
         for (int i = 1; i <= columnCount; ++i) {
             String columnName = meta.getColumnName(i);
             Object object = r.getObject(i);
+
+            if (object instanceof PgArray) {
+                object = ((PgArray) object).getArray();
+            }
+
             resultsMap.put(columnName, object);
         }
 
 //        mapper.readValue
         return mapper.convertValue(resultsMap, clazz);
     }
+
 
 }

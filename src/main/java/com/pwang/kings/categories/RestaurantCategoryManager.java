@@ -86,7 +86,7 @@ public final class RestaurantCategoryManager implements CategoryManager {
     }
 
     @Override
-    public List<Contestant> getContestants(User user, Location location, Category category) throws IOException {
+    public List<Contestant> getContestants(KingsUser kingsUser, Location location, Category category) throws IOException {
         // TODO: get contestants from DB and only get new ones
 
         Response<SearchResult> response = zomatoService.search(

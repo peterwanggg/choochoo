@@ -16,7 +16,7 @@ public interface LocationDao {
             "INSERT INTO common.location "
                     + "(location_name, location_type, api_provider_type, api_provider_id) VALUES "
                     + "(:location.locationName, :location.locationType, :location.apiProviderType, :location.apiProviderId) "
-                    + "ON CONFLICT ON CONSTRAINT location_api_id DO NOTHING"
+                    + "ON CONFLICT ON CONSTRAINT location_api_key DO NOTHING"
     )
     Long create(@BindBean("location") Location location);
 

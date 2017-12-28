@@ -34,7 +34,7 @@ public interface ObjectMappers {
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             .disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
             .disable(DeserializationFeature.WRAP_EXCEPTIONS)
-//            .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
+            .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
             .setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE)
             .enable(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES);
 }

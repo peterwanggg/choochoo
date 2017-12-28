@@ -3,5 +3,5 @@ zomatoApiKey: efgh
 
 database:
   driverClass: org.postgresql.Driver
-  user: pwang
+  kingsUser: pwang
   url: jdbc:postgresql://localhost/pwang

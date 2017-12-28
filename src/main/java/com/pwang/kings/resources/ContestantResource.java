@@ -6,8 +6,8 @@ import com.pwang.kings.categories.CategoryManagerFactory;
 import com.pwang.kings.db.daos.CategoryDao;
 import com.pwang.kings.objects.model.Category;
 import com.pwang.kings.objects.model.Contestant;
+import com.pwang.kings.objects.model.KingsUser;
 import com.pwang.kings.objects.model.Location;
-import com.pwang.kings.objects.model.User;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.http.HttpStatus;
 
@@ -23,6 +23,7 @@ import java.util.Optional;
 public final class ContestantResource implements ContestantService {
 
     Logger LOGGER = Logger.getLogger(ContestantResource.class);
+
     private final CategoryManagerFactory categoryManagerFactory;
     private final CategoryDao categoryDao;
 
@@ -35,7 +36,7 @@ public final class ContestantResource implements ContestantService {
 
 
     @Override
-    public List<Contestant> getContestants(User user, double lat, double lon, long categoryId) {
+    public List<Contestant> getContestants(KingsUser kingsUser, double lat, double lon, long categoryId) {
         // 1. get category and manager
         Category category = categoryDao.getById(categoryId)
                 .orElseThrow(() ->
@@ -49,7 +50,7 @@ public final class ContestantResource implements ContestantService {
 
             // 3. get contestants
             return categoryManager.getContestants(
-                    user,
+                    kingsUser,
                     location.orElseThrow(() ->
                             new WebApplicationException("unsupported location", HttpStatus.NOT_IMPLEMENTED_501)),
                     category);

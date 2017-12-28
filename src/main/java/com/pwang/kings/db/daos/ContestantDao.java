@@ -16,7 +16,7 @@ public interface ContestantDao {
             "INSERT INTO common.contestant "
                     + "(category_id, contestant_name, image_url, api_provider_type, api_provider_id) VALUES "
                     + "(:contestant.categoryId, :contestant.contestantName, :imageUrl, :contestant.apiProviderType, :contestant.apiProviderId) "
-                    + "ON CONFLICT ON CONSTRAINT contestant_api_id DO NOTHING"
+                    + "ON CONFLICT ON CONSTRAINT contestant_api_key DO NOTHING"
     )
     Long create(@BindBean("contestant") Contestant contestant, @Bind("imageUrl") String imageUrl);
 

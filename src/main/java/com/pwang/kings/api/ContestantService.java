@@ -1,7 +1,7 @@
 package com.pwang.kings.api;
 
 import com.pwang.kings.objects.model.Contestant;
-import com.pwang.kings.objects.model.User;
+import com.pwang.kings.objects.model.KingsUser;
 import io.dropwizard.auth.Auth;
 
 import javax.ws.rs.*;
@@ -19,7 +19,7 @@ public interface ContestantService {
 
     @GET
     List<Contestant> getContestants(
-            @Auth User user,
+            @Auth KingsUser kingsUser,
             @QueryParam("lat") double lat,
             @QueryParam("lon") double lon,
             @QueryParam("category-id") long categoryId) throws IOException;
