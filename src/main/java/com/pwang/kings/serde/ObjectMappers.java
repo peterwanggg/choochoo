@@ -24,8 +24,7 @@ public interface ObjectMappers {
             .setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE)
 //            .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
 //            .enable(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES)
-            .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
-            ;
+            .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
 
     ObjectMapper DB_MAPPER = (new ObjectMapper()).registerModule(new GuavaModule())

@@ -1,7 +1,6 @@
 package com.pwang.kings;
 
 import com.google.maps.GeoApiContext;
-import com.pwang.helloworld.HelloWorldConfiguration;
 import com.pwang.kings.categories.CategoryManagerFactory;
 import com.pwang.kings.clients.ZomatoService;
 import com.pwang.kings.db.daos.CategoryDao;

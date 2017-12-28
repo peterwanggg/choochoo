@@ -20,7 +20,7 @@ public interface ZomatoService {
             @Query("entity_type") String entityType,
             @Query("lat") Double lat,
             @Query("lon") Double lon
-            );
+    );
 
     @GET("/api/v2.1/cities")
     Call<CitiesResult> cities(
