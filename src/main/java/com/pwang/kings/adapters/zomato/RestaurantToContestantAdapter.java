@@ -34,7 +34,7 @@ public final class RestaurantToContestantAdapter implements ZomatoAdapter<Restau
         try {
             return new URL(urlString.get());
         } catch (MalformedURLException e) {
-            LOGGER.warn("could not parse given url:" + urlString, e);
+            LOGGER.warn("could not parse given url:" + urlString);
             return getDefaultUrl();
         }
     }
@@ -43,7 +43,7 @@ public final class RestaurantToContestantAdapter implements ZomatoAdapter<Restau
         try {
             return new URL("https://www.shareicon.net/data/512x512/2016/09/23/834003_fork_512x512.png");
         } catch (MalformedURLException e) {
-            LOGGER.error("could not parse DEFAULT ur", e);
+            LOGGER.error("could not parse DEFAULT url", e);
             return null;
         }
     }

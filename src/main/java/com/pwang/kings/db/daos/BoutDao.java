@@ -13,8 +13,8 @@ public interface BoutDao {
     @GetGeneratedKeys
     @SqlUpdate(
             "INSERT INTO common.bout "
-                    + "(winner_contestant_id, loser_contestant_id, kings_user_id) VALUES "
-                    + "(:bout.WinnerContestantId, :bout.LoserContestantId, :bout.kingsUserId) "
+                    + "(category_id, winner_contestant_id, loser_contestant_id, kings_user_id) VALUES "
+                    + "(:bout.categoryId, :bout.winnerContestantId, :bout.loserContestantId, :bout.kingsUserId) "
     )
     Long create(@BindBean("bout") Bout bout);
 

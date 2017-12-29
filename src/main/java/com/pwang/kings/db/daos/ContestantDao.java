@@ -4,6 +4,7 @@ import com.pwang.kings.objects.model.Contestant;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.SingleValueResult;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -25,5 +26,14 @@ public interface ContestantDao {
             "SELECT * FROM common.contestant WHERE api_provider_type = :api_provider_type AND api_provider_id = :api_provider_id"
     )
     Optional<Contestant> getByApiId(@Bind("api_provider_type") String apiProviderType, @Bind("api_provider_id") String apiProviderId);
+
+
+    @SqlQuery(
+            "SELECT * FROM common.contestant WHERE category_id = :category_id AND contestant_id NOT IN "
+                    + "(SELECT winner_contestant_id FROM common.bout WHERE kings_user_id = :kings_user_id AND category_id = :category_id UNION"
+                    + " SELECT loser_contestant_id FROM common.bout WHERE kings_user_id = :kings_user_id AND category_id = :category_id) limit :limit;"
+    )
+    List<Contestant> getNewContestantsForUser(
+            @Bind("kings_user_id") Long kingsUserId, @Bind("category_id") Long categoryId, @Bind("limit") Integer limit);
 
 }

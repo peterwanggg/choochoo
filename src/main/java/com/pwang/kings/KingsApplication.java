@@ -15,6 +15,7 @@ import com.pwang.kings.serde.ObjectMappers;
 import com.pwang.kings.tasks.InitializeCategoryLocationTask;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
+import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
@@ -95,6 +96,7 @@ public class KingsApplication extends Application<KingsConfiguration> {
                 categoryManagerFactory.getCategoryManager(CategoryType.restaurant))
         );
         environment.jersey().register(new JsonProcessingExceptionMapper(true));
+        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(KingsUser.class));
         environment.jersey().register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<KingsUser>()
                 .setAuthenticator(new KingsAuthenticator(kingsUserDao))
                 .setAuthorizer(new KingsAuthorizer())

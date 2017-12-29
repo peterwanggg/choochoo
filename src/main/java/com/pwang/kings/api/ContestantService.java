@@ -4,6 +4,7 @@ import com.pwang.kings.objects.model.Contestant;
 import com.pwang.kings.objects.model.KingsUser;
 import io.dropwizard.auth.Auth;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
@@ -20,9 +21,9 @@ public interface ContestantService {
     @GET
     List<Contestant> getContestants(
             @Auth KingsUser kingsUser,
-            @QueryParam("lat") double lat,
-            @QueryParam("lon") double lon,
-            @QueryParam("category-id") long categoryId) throws IOException;
+            @NotNull @QueryParam("lat") double lat,
+            @NotNull @QueryParam("lon") double lon,
+            @NotNull @QueryParam("category-id") long categoryId) throws IOException;
 
 
 }

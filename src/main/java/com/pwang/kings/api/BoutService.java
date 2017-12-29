@@ -3,8 +3,11 @@ package com.pwang.kings.api;
 import com.pwang.kings.objects.model.KingsUser;
 import io.dropwizard.auth.Auth;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 
 /**
  * @author pwang on 12/28/17.
@@ -15,8 +18,9 @@ import javax.ws.rs.core.MediaType;
 public interface BoutService {
 
     @POST
-    void submit(
+    Response submit(
             @Auth KingsUser kingsUser,
-            @QueryParam("winner-contestant-id") long winnerContestantId,
-            @QueryParam("loser-contestant-id") long loserContestantId);
+            @NotNull @QueryParam("category-id") Long categoryId,
+            @NotNull @QueryParam("winner-contestant-id") long winnerContestantId,
+            @NotNull @QueryParam("loser-contestant-id") long loserContestantId);
 }

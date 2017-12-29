@@ -12,11 +12,13 @@ import com.pwang.kings.objects.api.zomato.CuisinesResult;
 import com.pwang.kings.objects.api.zomato.EntityType;
 import com.pwang.kings.objects.api.zomato.SearchResult;
 import com.pwang.kings.objects.model.*;
+import org.apache.log4j.Logger;
 import org.eclipse.jetty.http.HttpStatus;
 import retrofit2.Response;
 
 import javax.ws.rs.WebApplicationException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,6 +28,8 @@ import java.util.stream.Collectors;
  */
 public final class RestaurantCategoryManager implements CategoryManager {
 
+    private static Logger LOGGER = Logger.getLogger(RestaurantCategoryManager.class);
+    private static final int CONTESTANTS_MIN_SIZE = 10;
 
     private final CityToLocationAdapter cityToLocationAdapter = new CityToLocationAdapter();
     private final RestaurantToContestantAdapter restaurantToContestantAdapter = new RestaurantToContestantAdapter();
@@ -88,40 +92,58 @@ public final class RestaurantCategoryManager implements CategoryManager {
     @Override
     public List<Contestant> getContestants(KingsUser kingsUser, Location location, Category category) throws IOException {
         // TODO: get contestants from DB and only get new ones
+        // 1. get from DB
+        List<Contestant> contestants = contestantDao.getNewContestantsForUser(kingsUser.getKingsUserId(), category.getCategoryId(), CONTESTANTS_MIN_SIZE);
 
-        Response<SearchResult> response = zomatoService.search(
-                Integer.valueOf(category.getApiProviderId()),
-                EntityType.city.toString(),
-                null,
-                null).execute();
-        if (!response.isSuccessful()) {
-            throw new WebApplicationException("zomato request failed", HttpStatus.INTERNAL_SERVER_ERROR_500);
+        if (contestants.size() < CONTESTANTS_MIN_SIZE) {
+            contestants.addAll(getContestantFromZomato(category, CONTESTANTS_MIN_SIZE - contestants.size()));
         }
-        return response.body()
-                .getRestaurants().stream()
-                .map(restaurantToContestantAdapter::adapt)
-                .map(contestant ->
-                        ImmutableContestant.builder()
-                                .from(contestant)
-                                .categoryId(category.getCategoryId())
-                                .build())
-                .map(contestant -> {
-                    Optional<Contestant> fromDb = contestantDao.getByApiId(
-                            contestant.getApiProviderType(), contestant.getApiProviderId());
-                    Long contestantId;
 
-                    if (fromDb.isPresent()) {
-                        contestantId = fromDb.get().getContestantId();
-                    } else {
-                        contestantId = contestantDao.create(contestant, contestant.getImageUrl().toString());
-                    }
+        return contestants;
+    }
 
-                    return ImmutableContestant.builder()
-                            .from(contestant)
-                            .contestantId(contestantId)
-                            .build();
-                })
-                .collect(Collectors.toList());
+
+    private List<Contestant> getContestantFromZomato(Category category, int numNeeded) throws IOException {
+        int page = 0;
+        List<Contestant> insertedContestants = new ArrayList<>();
+
+        while (insertedContestants.size() < numNeeded) {
+            Response<SearchResult> response = zomatoService.search(
+                    Integer.valueOf(category.getApiProviderId()),
+                    EntityType.city.toString(),
+                    null,
+                    null,
+                    page * ZomatoService.SEARCH_PAGE_SIZE).execute();
+            if (!response.isSuccessful()) {
+                throw new WebApplicationException("zomato request failed", HttpStatus.INTERNAL_SERVER_ERROR_500);
+            }
+            if (response.body().getRestaurants().size() == 0) {
+                LOGGER.info("retrieved all results after page " + page);
+                break;
+            }
+            insertedContestants.addAll(
+                    response.body()
+                            .getRestaurants().stream()
+                            // only new restaurants
+                            .filter(restaurant ->
+                                    !contestantDao.getByApiId(ApiProviderType.zomato.toString(), String.valueOf(restaurant.getRestaurant().getId()))
+                                            .isPresent())
+                            .map(restaurantToContestantAdapter::adapt)
+                            .map(contestant ->
+                                    ImmutableContestant.builder()
+                                            .from(contestant)
+                                            .categoryId(category.getCategoryId())
+                                            .build())
+                            .map(contestant ->
+                                    ImmutableContestant.builder()
+                                            .from(contestant)
+                                            .contestantId(contestantDao.create(contestant, contestant.getImageUrl().toString()))
+                                            .build())
+                            .collect(Collectors.toList()));
+            page++;
+        }
+        LOGGER.info("fetched " + insertedContestants.size() + " new contestants after " + page + " pages");
+        return insertedContestants;
     }
 
     @Override
@@ -143,5 +165,6 @@ public final class RestaurantCategoryManager implements CategoryManager {
                                 .build())
                 .collect(Collectors.toList());
     }
+
 
 }

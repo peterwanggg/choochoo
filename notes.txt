@@ -9,13 +9,13 @@ https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CnR
 curl -H "Content-Type: application/json" -X POST -d '{"fullName":"Other Person","jobTitle":"Other Title"}' "http://localhost:8080/people"
 
 #get contestant
-curl -v -H "Authorization: Basic cGV0ZTo=" "http://localhost:8080/contestants?lat=47.6522155000&lon=-122.3543657000&category-id=24" | python -m json.tool
+curl -v -H "Authorization: Basic cGV0ZTo=" "http://localhost:8080/contestants?lat=47.6522155000&lon=-122.3543657000&category-id=24" | python -m json.tool"
 
 # init category
 curl -H "Content-Type: application/json" -H "Authorization: Basic Y2hpZWYtd2l6YXJkOnNlY3JldA==" -X POST -d  '{"api_provider_id": 279, "api_provider_type":"zomato"}' "http://localhost:8081/tasks/init_restaurant"
 
 # submit bout
-curl -X POST "http://localhost:8080/bout?winner-contestant-id=1&loser-contestant-id=2" | python -m json.tool
+curl -H "Authorization: Basic cGV0ZTo=" -X POST "http://localhost:8080/bout?winner-contestant-id=1&loser-contestant-id=2" | python -m json.tool
 
 ### psql ###
 # start

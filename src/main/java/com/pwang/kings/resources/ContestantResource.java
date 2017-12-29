@@ -51,8 +51,7 @@ public final class ContestantResource implements ContestantService {
             // 3. get contestants
             return categoryManager.getContestants(
                     kingsUser,
-                    location.orElseThrow(() ->
-                            new WebApplicationException("unsupported location", HttpStatus.NOT_IMPLEMENTED_501)),
+                    location.orElseThrow(() -> new WebApplicationException("unsupported location", HttpStatus.NOT_IMPLEMENTED_501)),
                     category);
         } catch (IOException e) {
             LOGGER.error("api exception", e);

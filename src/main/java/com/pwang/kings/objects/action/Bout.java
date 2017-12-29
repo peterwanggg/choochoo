@@ -24,6 +24,9 @@ public interface Bout {
     Long getBoutId();
 
     @JsonProperty
+    Long getCategoryId();
+
+    @JsonProperty
     Long getWinnerContestantId();
 
     @JsonProperty

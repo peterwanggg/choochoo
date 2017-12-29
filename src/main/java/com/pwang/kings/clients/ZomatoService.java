@@ -14,12 +14,16 @@ import retrofit2.http.Query;
 
 public interface ZomatoService {
 
+    // changing count dones't seem to change this
+    int SEARCH_PAGE_SIZE = 20;
+
     @GET("/api/v2.1/search")
     Call<SearchResult> search(
             @Query("entity_id") Integer entityId,
             @Query("entity_type") String entityType,
             @Query("lat") Double lat,
-            @Query("lon") Double lon
+            @Query("lon") Double lon,
+            @Query("start") Integer start
     );
 
     @GET("/api/v2.1/cities")

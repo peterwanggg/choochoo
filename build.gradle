@@ -38,6 +38,7 @@ dependencies {
     compile 'io.dropwizard:dropwizard-testing:1.2.2'
     compile 'io.dropwizard:dropwizard-db:1.2.2'
     compile group: 'io.dropwizard', name: 'dropwizard-jdbi', version: '1.2.2'
+//    compile group: 'org.glassfish.jersey.ext', name: 'jersey-bean-validation', version: '2.26'
 
     // retrofit/okhttp
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
