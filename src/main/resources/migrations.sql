@@ -33,7 +33,7 @@ CREATE TABLE common.contestant (
     CONSTRAINT contestant_api_key UNIQUE (api_provider_type, api_provider_id),
     CONSTRAINT category_contestant_key UNIQUE (category_id, contestant_id)
 );
-
+CREATE INDEX contestant_category_id_idx ON common.contestant(category_id);
 
 CREATE TABLE common.kings_user (
     kings_user_id BIGSERIAL PRIMARY KEY,
@@ -55,7 +55,8 @@ CREATE TABLE common.bout (
     FOREIGN KEY (category_id, loser_contestant_id) REFERENCES common.contestant (category_id, contestant_id) ON UPDATE CASCADE
 
 );
-CREATE INDEX bout_kings_user_id ON common.bout(kings_user_id);
+CREATE INDEX bout_winner_idx ON common.bout(winner_contestant_id, category_id, kings_user_id);
+CREATE INDEX bout_loser_idx ON common.bout(loser_contestant_id, category_id, kings_user_id);
 
 
 
