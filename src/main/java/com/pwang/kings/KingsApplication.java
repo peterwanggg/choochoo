@@ -109,6 +109,7 @@ public class KingsApplication extends Application<KingsConfiguration> {
                 boutDao
         ));
         environment.jersey().register(new ContestantResource(
+                contestantDao,
                 categoryDao,
                 categoryManagerFactory));
     }

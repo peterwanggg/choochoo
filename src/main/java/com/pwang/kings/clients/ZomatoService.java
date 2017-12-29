@@ -21,6 +21,7 @@ public interface ZomatoService {
     Call<SearchResult> search(
             @Query("entity_id") Integer entityId,
             @Query("entity_type") String entityType,
+            @Query("cuisines") String cuisinesArray,
             @Query("lat") Double lat,
             @Query("lon") Double lon,
             @Query("start") Integer start

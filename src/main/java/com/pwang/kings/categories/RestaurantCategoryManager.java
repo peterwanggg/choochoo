@@ -90,27 +90,29 @@ public final class RestaurantCategoryManager implements CategoryManager {
     }
 
     @Override
-    public List<Contestant> getContestants(KingsUser kingsUser, Location location, Category category) throws IOException {
-        // TODO: get contestants from DB and only get new ones
+    public List<Contestant> getContestants(KingsUser kingsUser, Location location, Category category, Contestant challenger) throws IOException {
         // 1. get from DB
-        List<Contestant> contestants = contestantDao.getNewContestantsForUser(kingsUser.getKingsUserId(), category.getCategoryId(), CONTESTANTS_MIN_SIZE);
+        List<Contestant> contestants = contestantDao.getNewContestantsForUser(
+                kingsUser.getKingsUserId(),
+                category.getCategoryId(),
+                challenger.getContestantId(),
+                CONTESTANTS_MIN_SIZE);
 
         if (contestants.size() < CONTESTANTS_MIN_SIZE) {
-            contestants.addAll(getContestantFromZomato(category, CONTESTANTS_MIN_SIZE - contestants.size()));
+            contestants.addAll(getContestantFromZomato(location, category, CONTESTANTS_MIN_SIZE - contestants.size()));
         }
-
         return contestants;
     }
 
-
-    private List<Contestant> getContestantFromZomato(Category category, int numNeeded) throws IOException {
+    private List<Contestant> getContestantFromZomato(Location location, Category category, int numNeeded) throws IOException {
         int page = 0;
         List<Contestant> insertedContestants = new ArrayList<>();
 
         while (insertedContestants.size() < numNeeded) {
             Response<SearchResult> response = zomatoService.search(
-                    Integer.valueOf(category.getApiProviderId()),
+                    Integer.valueOf(location.getApiProviderId()),
                     EntityType.city.toString(),
+                    category.getApiProviderId(),
                     null,
                     null,
                     page * ZomatoService.SEARCH_PAGE_SIZE).execute();
