@@ -11,11 +11,12 @@ import com.pwang.kings.objects.model.KingsUser;
 import com.pwang.kings.objects.model.Location;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.http.HttpStatus;
+import org.eclipse.jetty.servlets.CrossOriginFilter;
 
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 
 /**
@@ -40,10 +41,10 @@ public final class ContestantResource implements ContestantService {
 
 
     @Override
-    public List<Contestant> getContestants(KingsUser kingsUser, Double lat, Double lon, Long challengerContestantId) {
+    public Response getContestantsForChallenger(KingsUser kingsUser, Double lat, Double lon, Long challengerContestantId) {
         // 1. get challenger contestant
         Contestant challenger = contestantDao.getById(challengerContestantId).orElseThrow(() ->
-                new WebApplicationException("invalid challenger-contestant-id: "+ challengerContestantId, HttpStatus.BAD_REQUEST_400));
+                new WebApplicationException("invalid challenger-contestant-id: " + challengerContestantId, HttpStatus.BAD_REQUEST_400));
 
         // 2. get category and manager
         Category category = categoryDao.getById(challenger.getCategoryId())
@@ -56,15 +57,53 @@ public final class ContestantResource implements ContestantService {
             Location location = categoryManager.getLocation(lat, lon)
                     .orElseThrow(() -> new WebApplicationException("unsupported location", HttpStatus.NOT_IMPLEMENTED_501));
 
+//            // 4. get contestants
+//            return categoryManager.getChallengers(
+//                    kingsUser,
+//                    location,
+//                    category,
+//                    challenger);
             // 4. get contestants
-            return categoryManager.getContestants(
-                    kingsUser,
-                    location,
-                    category,
-                    challenger);
+            return Response
+                    .ok(categoryManager.getChallengers(
+                            kingsUser,
+                            location,
+                            category,
+                            challenger))
+                    .header(CrossOriginFilter.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, "*")
+                    .header(CrossOriginFilter.ACCESS_CONTROL_ALLOW_HEADERS_HEADER, "origin, content-type, accept, authorization")
+                    .header(CrossOriginFilter.ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER, "true")
+                    .header(CrossOriginFilter.ACCESS_CONTROL_ALLOW_METHODS_HEADER, "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+
+                    .build();
         } catch (IOException e) {
             LOGGER.error("api exception", e);
             throw new WebApplicationException("could not interact with the dependent API", HttpStatus.INTERNAL_SERVER_ERROR_500);
         }
+    }
+
+    @Override
+    public List<Contestant> getContestantsForCategory(KingsUser kingsUser, Double lat, Double lon, Long categoryId) throws IOException {
+        // 1. get category and manager
+        Category category = categoryDao.getById(categoryId)
+                .orElseThrow(() ->
+                        new WebApplicationException("could not find categoryId " + categoryId, HttpStatus.BAD_REQUEST_400));
+        CategoryManager categoryManager = categoryManagerFactory.getCategoryManager(category.getCategoryType());
+
+        try {
+            // 2. get location
+            Location location = categoryManager.getLocation(lat, lon)
+                    .orElseThrow(() -> new WebApplicationException("unsupported location", HttpStatus.NOT_IMPLEMENTED_501));
+
+            // 3. get contestants
+            return categoryManager.getContestants(
+                    kingsUser,
+                    location,
+                    category);
+        } catch (IOException e) {
+            LOGGER.error("api exception", e);
+            throw new WebApplicationException("could not interact with the dependent API", HttpStatus.INTERNAL_SERVER_ERROR_500);
+        }
+
     }
 }

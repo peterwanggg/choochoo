@@ -29,9 +29,14 @@ import io.dropwizard.setup.Environment;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
+import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.skife.jdbi.v2.DBI;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
+
+import javax.servlet.DispatcherType;
+import javax.servlet.FilterRegistration;
+import java.util.EnumSet;
 
 
 /**
@@ -65,6 +70,18 @@ public class KingsApplication extends Application<KingsConfiguration> {
 
     @Override
     public void run(KingsConfiguration configuration, Environment environment) throws Exception {
+        // TODO: remove potentically dicey cors things
+        if (configuration.isInsecure()) {
+            final FilterRegistration.Dynamic cors =
+                    environment.servlets().addFilter("CORS", CrossOriginFilter.class);
+            // Configure CORS parameters
+            cors.setInitParameter("allowedOrigins", "*");
+            cors.setInitParameter("allowedHeaders", "X-Requested-With,Content-Type,Accept,Origin," +
+                    "authorization"); // TODO: this part is especially dicey
+            cors.setInitParameter("allowedMethods", "OPTIONS,GET,PUT,POST,DELETE,HEAD");
+            // Add URL mapping
+            cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
+        }
 
         // api dependencies
         GeoApiContext googleContext = new GeoApiContext.Builder()
@@ -97,11 +114,13 @@ public class KingsApplication extends Application<KingsConfiguration> {
         );
         environment.jersey().register(new JsonProcessingExceptionMapper(true));
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(KingsUser.class));
+
         environment.jersey().register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<KingsUser>()
                 .setAuthenticator(new KingsAuthenticator(kingsUserDao))
                 .setAuthorizer(new KingsAuthorizer())
                 .setRealm("SUPER SECRET STUFF")
                 .buildAuthFilter()));
+
 
 
         // register resources

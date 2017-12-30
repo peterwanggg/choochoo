@@ -85,4 +85,12 @@ kingsUser
 ### ROAD MAP ###
 1. getContestant
 2. submitClash
-3. getContes
+3. getContestant stats
+
+
+
+
+
+
+
+

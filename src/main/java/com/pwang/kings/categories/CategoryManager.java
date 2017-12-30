@@ -18,7 +18,9 @@ public interface CategoryManager {
 
     List<Location> getLocations(List<String> apiProviderIds) throws IOException;
 
-    List<Contestant> getContestants(KingsUser kingsUser, Location location, Category category, Contestant challenger) throws IOException;
+    List<Contestant> getContestants(KingsUser kingsUser, Location location, Category category) throws IOException;
+
+    List<Contestant> getChallengers(KingsUser kingsUser, Location location, Category category, Contestant challenger) throws IOException;
 
     List<Category> populateCategory(Location location) throws IOException;
 

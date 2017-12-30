@@ -33,7 +33,6 @@ public interface ContestantDao {
     )
     Optional<Contestant> getById(@Bind("contestant_id") Long contestantId);
 
-
     @SqlQuery(
             "SELECT * FROM common.contestant WHERE " +
                     " category_id = :category_id AND " +
@@ -42,10 +41,24 @@ public interface ContestantDao {
                     " (SELECT winner_contestant_id FROM common.bout WHERE loser_contestant_id = :challenger_contestant_id AND kings_user_id = :kings_user_id AND category_id = :category_id UNION " +
                     "  SELECT loser_contestant_id FROM common.bout WHERE winner_contestant_id = :challenger_contestant_id AND kings_user_id = :kings_user_id AND category_id = :category_id) limit :limit;"
     )
-    List<Contestant> getNewContestantsForUser(
+    List<Contestant> getNewChallengersForUser(
             @Bind("kings_user_id") Long kingsUserId,
             @Bind("category_id") Long categoryId,
             @Bind("challenger_contestant_id") Long challengerContestantId,
             @Bind("limit") Integer limit);
+
+    @SqlQuery(
+            "SELECT * FROM common.contestant WHERE " +
+                    " category_id = :category_id AND " +
+                    " contestant_id NOT IN " +
+                    " (SELECT winner_contestant_id FROM common.bout WHERE kings_user_id = :kings_user_id AND category_id = :category_id UNION " +
+                    "  SELECT loser_contestant_id FROM common.bout WHERE kings_user_id = :kings_user_id AND category_id = :category_id) limit :limit;"
+    )
+    List<Contestant> getNewContestantsForUser(
+            @Bind("kings_user_id") Long kingsUserId,
+            @Bind("category_id") Long categoryId,
+            @Bind("limit") Integer limit);
+
+
 
 }

@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 
 public class KingsConfiguration extends Configuration {
 
+    private boolean insecure;
     private String googleApiKey;
     @NotEmpty
     private String zomatoApiKey;
@@ -48,5 +49,15 @@ public class KingsConfiguration extends Configuration {
     @JsonProperty("database")
     public void setDataSourceFactory(DataSourceFactory dataSourceFactory) {
         this.database = dataSourceFactory;
+    }
+
+    @JsonProperty("insecure")
+    public boolean isInsecure() {
+        return insecure;
+    }
+
+    @JsonProperty("insecure")
+    public void setInsecure(boolean insecure) {
+        this.insecure = insecure;
     }
 }

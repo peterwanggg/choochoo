@@ -90,9 +90,24 @@ public final class RestaurantCategoryManager implements CategoryManager {
     }
 
     @Override
-    public List<Contestant> getContestants(KingsUser kingsUser, Location location, Category category, Contestant challenger) throws IOException {
+    public List<Contestant> getContestants(KingsUser kingsUser, Location location, Category category) throws IOException {
         // 1. get from DB
         List<Contestant> contestants = contestantDao.getNewContestantsForUser(
+                kingsUser.getKingsUserId(),
+                category.getCategoryId(),
+                CONTESTANTS_MIN_SIZE);
+
+        if (contestants.size() < CONTESTANTS_MIN_SIZE) {
+            contestants.addAll(getContestantFromZomato(location, category, CONTESTANTS_MIN_SIZE - contestants.size()));
+        }
+        return contestants;
+    }
+
+
+    @Override
+    public List<Contestant> getChallengers(KingsUser kingsUser, Location location, Category category, Contestant challenger) throws IOException {
+        // 1. get from DB
+        List<Contestant> contestants = contestantDao.getNewChallengersForUser(
                 kingsUser.getKingsUserId(),
                 category.getCategoryId(),
                 challenger.getContestantId(),
