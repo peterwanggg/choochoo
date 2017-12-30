@@ -60,5 +60,4 @@ public interface ContestantDao {
             @Bind("limit") Integer limit);
 
 
-
 }

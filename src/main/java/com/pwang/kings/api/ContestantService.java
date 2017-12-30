@@ -4,7 +4,6 @@ import com.pwang.kings.objects.model.Contestant;
 import com.pwang.kings.objects.model.KingsUser;
 import io.dropwizard.auth.Auth;
 
-
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -20,7 +19,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public interface ContestantService {
 
-//    @Path("/challenger")
+    //    @Path("/challenger")
 //    @GET
 //    List<Contestant> getContestantsForChallenger(
 //            @Auth KingsUser kingsUser,

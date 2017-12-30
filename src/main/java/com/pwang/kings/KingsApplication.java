@@ -122,7 +122,6 @@ public class KingsApplication extends Application<KingsConfiguration> {
                 .buildAuthFilter()));
 
 
-
         // register resources
         environment.jersey().register(new BoutResource(
                 boutDao
