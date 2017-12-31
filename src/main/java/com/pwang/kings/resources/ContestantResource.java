@@ -28,6 +28,8 @@ public final class ContestantResource implements ContestantService {
     private final CategoryDao categoryDao;
     private final ContestantDao contestantDao;
 
+    private final int SEARCH_CONTESTANTS_SIZE_LIMIT = 20;
+
     public ContestantResource(
             ContestantDao contestantDao,
             CategoryDao categoryDao,
@@ -94,6 +96,6 @@ public final class ContestantResource implements ContestantService {
 
     @Override
     public List<Contestant> searchByName(KingsUser kingsUser, Long categoryId, String contestantName) {
-        return contestantDao.getByCategoryIdAndName(categoryId, "%" + contestantName + "%");
+        return contestantDao.getByCategoryIdAndName(categoryId, "%" + contestantName + "%", SEARCH_CONTESTANTS_SIZE_LIMIT);
     }
 }

@@ -34,9 +34,12 @@ public interface ContestantDao {
     Optional<Contestant> getById(@Bind("contestant_id") Long contestantId);
 
     @SqlQuery(
-            "SELECT * from common.contestant WHERE category_id = :category_id AND lower(contestant_name) LIKE lower(:contestant_name)"
+            "SELECT * from common.contestant WHERE category_id = :category_id AND lower(contestant_name) LIKE lower(:contestant_name)  limit :limit;"
     )
-    List<Contestant> getByCategoryIdAndName(@Bind("category_id") Long categoryId, @Bind("contestant_name") String contestantName);
+    List<Contestant> getByCategoryIdAndName(
+            @Bind("category_id") Long categoryId,
+            @Bind("contestant_name") String contestantName,
+            @Bind("limit") Integer limit);
 
     @SqlQuery(
             "SELECT * FROM common.contestant WHERE " +

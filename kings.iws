@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0e2ffde-93cd-4bfe-b056-558bd096a698" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/pwang/kings/api/ContestantService.java" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/api/ContestantService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/ContestantDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/ContestantDao.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/ContestantResource.java" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/ContestantResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/migrations.sql" afterPath="$PROJECT_DIR$/src/main/resources/migrations.sql" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -69,11 +67,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ContestantDao.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ContestantDao.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/ContestantDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="36" column="41" lean-forward="false" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+            <state relative-caret-position="153">
+              <caret line="38" column="40" lean-forward="false" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -99,11 +97,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ContestantResource.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ContestantResource.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/ContestantResource.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="446">
-              <caret line="96" column="89" lean-forward="false" selection-start-line="96" selection-start-column="89" selection-end-line="96" selection-end-column="89" />
+              <caret line="98" column="121" lean-forward="false" selection-start-line="98" selection-start-column="121" selection-end-line="98" selection-end-column="121" />
               <folding />
             </state>
           </provider>
@@ -122,7 +120,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>location</find>
       <find>contestant</find>
       <find>contestant_category_</find>
       <find>common.b</find>
@@ -150,8 +147,9 @@
       <find>resource</find>
       <find>category_idcategory_id</find>
       <find>category_id</find>
-      <find>search</find>
       <find>contesan</find>
+      <find>search</find>
+      <find>10</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -226,8 +224,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/RestaurantCategoryManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/api/ContestantService.java" />
         <option value="$PROJECT_DIR$/src/main/resources/migrations.sql" />
-        <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/ContestantResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/ContestantDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/ContestantResource.java" />
       </list>
     </option>
   </component>
@@ -1027,6 +1025,14 @@
               <item name="kings" type="b2602c69:ProjectViewProjectNode" />
               <item name="kings" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="kings" type="b2602c69:ProjectViewProjectNode" />
+              <item name="kings" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -1649,6 +1655,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1173" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32931355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1663,7 +1670,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3888889" sideWeight="0.45740148" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1773163" sideWeight="0.48196116" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1773163" sideWeight="0.48196116" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23216188" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2888889" sideWeight="0.4877529" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16932908" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -1734,13 +1741,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.dropwizard/dropwizard-validation/1.2.2/8544afe048492f36792e3a67c5253c848b8c9ccf/dropwizard-validation-1.2.2-sources.jar!/io/dropwizard/validation/Validated.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="18" lean-forward="false" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.1.0.Final/7d49b53caed9bd81d172807c3e096d24f3c57090/validation-api-1.1.0.Final-sources.jar!/javax/validation/constraints/NotNull.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
@@ -2095,14 +2095,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/ContestantResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="96" column="89" lean-forward="false" selection-start-line="96" selection-start-column="89" selection-end-line="96" selection-end-column="89" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/RestaurantCategoryManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="295">
@@ -2129,8 +2121,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/ContestantDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="36" column="41" lean-forward="false" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+        <state relative-caret-position="153">
+          <caret line="38" column="40" lean-forward="false" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/assets/pure-min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="109" lean-forward="false" selection-start-line="10" selection-start-column="109" selection-end-line="10" selection-end-column="109" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/ContestantResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="446">
+          <caret line="98" column="121" lean-forward="false" selection-start-line="98" selection-start-column="121" selection-end-line="98" selection-end-column="121" />
           <folding />
         </state>
       </provider>
