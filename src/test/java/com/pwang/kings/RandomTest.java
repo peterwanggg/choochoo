@@ -14,10 +14,6 @@ public class RandomTest {
 
     @Test
     public void test() {
-        String a = "sf";
-
-        CategoryType type = CategoryType.valueOf(a);
-
-        System.out.println(type);
+        
     }
 }
