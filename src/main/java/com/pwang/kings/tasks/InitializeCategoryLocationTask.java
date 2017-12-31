@@ -41,16 +41,16 @@ public class InitializeCategoryLocationTask extends PostBodyTask {
     public void execute(ImmutableMultimap<String, String> parameters, String body, PrintWriter output) throws Exception {
         JsonNode locationRequest = ObjectMappers.RETROFIT_MAPPER.readTree(body);
 
-        ApiProviderType apiProviderType = ApiProviderType.valueOf(locationRequest.get("api_provider_type").textValue());
-        String apiProviderId = locationRequest.get("api_provider_id").toString();
+        ApiProviderType locationApiProviderType = ApiProviderType.valueOf(locationRequest.get("api_provider_type").textValue());
+        String locationApiProviderId = locationRequest.get("api_provider_id").toString();
 
         // get location
-        Optional<Location> locationOptional = locationDao.getByApiId(apiProviderType.toString(), apiProviderId);
+        Optional<Location> locationOptional = locationDao.getByApiId(locationApiProviderType.toString(), locationApiProviderId);
         Location location;
         if (locationOptional.isPresent()) {
             location = locationOptional.get();
         } else {
-            location = categoryManager.getLocations(ImmutableList.of(apiProviderId))
+            location = categoryManager.getLocations(ImmutableList.of(locationApiProviderId))
                     .stream().findFirst()
                     .orElseThrow(() -> new WebServiceException("could not find location"));
         }

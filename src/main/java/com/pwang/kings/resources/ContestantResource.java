@@ -11,10 +11,8 @@ import com.pwang.kings.objects.model.KingsUser;
 import com.pwang.kings.objects.model.Location;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.http.HttpStatus;
-import org.eclipse.jetty.servlets.CrossOriginFilter;
 
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.List;
 
@@ -41,7 +39,7 @@ public final class ContestantResource implements ContestantService {
 
 
     @Override
-    public Response getContestantsForChallenger(KingsUser kingsUser, Double lat, Double lon, Long challengerContestantId) {
+    public List<Contestant> getContestantsForChallenger(KingsUser kingsUser, Double lat, Double lon, Long challengerContestantId) {
         // 1. get challenger contestant
         Contestant challenger = contestantDao.getById(challengerContestantId).orElseThrow(() ->
                 new WebApplicationException("invalid challenger-contestant-id: " + challengerContestantId, HttpStatus.BAD_REQUEST_400));
@@ -58,24 +56,24 @@ public final class ContestantResource implements ContestantService {
                     .orElseThrow(() -> new WebApplicationException("unsupported location", HttpStatus.NOT_IMPLEMENTED_501));
 
 //            // 4. get contestants
-//            return categoryManager.getChallengers(
-//                    kingsUser,
-//                    location,
-//                    category,
-//                    challenger);
+            return categoryManager.getChallengers(
+                    kingsUser,
+                    location,
+                    category,
+                    challenger);
             // 4. get contestants
-            return Response
-                    .ok(categoryManager.getChallengers(
-                            kingsUser,
-                            location,
-                            category,
-                            challenger))
-                    .header(CrossOriginFilter.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, "*")
-                    .header(CrossOriginFilter.ACCESS_CONTROL_ALLOW_HEADERS_HEADER, "origin, content-type, accept, authorization")
-                    .header(CrossOriginFilter.ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER, "true")
-                    .header(CrossOriginFilter.ACCESS_CONTROL_ALLOW_METHODS_HEADER, "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-
-                    .build();
+//            return Response
+//                    .ok(categoryManager.getChallengers(
+//                            kingsUser,
+//                            location,
+//                            category,
+//                            challenger))
+//                    .header(CrossOriginFilter.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, "*")
+//                    .header(CrossOriginFilter.ACCESS_CONTROL_ALLOW_HEADERS_HEADER, "origin, content-type, accept, authorization")
+//                    .header(CrossOriginFilter.ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER, "true")
+//                    .header(CrossOriginFilter.ACCESS_CONTROL_ALLOW_METHODS_HEADER, "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+//
+//                    .build();
         } catch (IOException e) {
             LOGGER.error("api exception", e);
             throw new WebApplicationException("could not interact with the dependent API", HttpStatus.INTERNAL_SERVER_ERROR_500);

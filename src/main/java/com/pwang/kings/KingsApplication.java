@@ -10,6 +10,7 @@ import com.pwang.kings.db.util.JacksonMapperFactory;
 import com.pwang.kings.objects.model.CategoryType;
 import com.pwang.kings.objects.model.KingsUser;
 import com.pwang.kings.resources.BoutResource;
+import com.pwang.kings.resources.CategoryResource;
 import com.pwang.kings.resources.ContestantResource;
 import com.pwang.kings.serde.ObjectMappers;
 import com.pwang.kings.tasks.InitializeCategoryLocationTask;
@@ -124,10 +125,12 @@ public class KingsApplication extends Application<KingsConfiguration> {
 
         // register resources
         environment.jersey().register(new BoutResource(
-                boutDao
-        ));
+                boutDao));
         environment.jersey().register(new ContestantResource(
                 contestantDao,
+                categoryDao,
+                categoryManagerFactory));
+        environment.jersey().register(new CategoryResource(
                 categoryDao,
                 categoryManagerFactory));
     }

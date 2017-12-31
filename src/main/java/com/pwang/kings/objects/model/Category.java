@@ -24,6 +24,10 @@ public interface Category extends KingsObject {
     @JsonProperty
     Long getCategoryId();
 
+    @Nullable
+    @JsonProperty
+    Long getLocationId();
+
     @JsonProperty
     String getCategoryName();
 

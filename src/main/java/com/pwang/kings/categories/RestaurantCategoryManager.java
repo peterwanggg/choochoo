@@ -58,11 +58,20 @@ public final class RestaurantCategoryManager implements CategoryManager {
         return response.body()
                 .locationSuggestions().stream().findFirst()
                 .map(cityToLocationAdapter::adapt)
-                .map(location ->
-                        ImmutableLocation.builder()
-                                .from(location)
-                                .locationId(locationDao.create(location))
-                                .build());
+                .map(location -> {
+                            Optional<Location> dbLocation = locationDao.getByApiId(location.getApiProviderType(), location.getApiProviderId());
+                            Long locationId;
+                            if (dbLocation.isPresent()) {
+                                locationId = dbLocation.get().getLocationId();
+                            } else {
+                                locationId = locationDao.create(location);
+                            }
+                            return ImmutableLocation.builder()
+                                    .from(location)
+                                    .locationId(locationId)
+                                    .build();
+                        }
+                );
     }
 
     @Override
@@ -175,6 +184,11 @@ public final class RestaurantCategoryManager implements CategoryManager {
         return response.body()
                 .cuisines().stream()
                 .map(cuisineToCategoryAdapter::adapt)
+                .map(category ->
+                        ImmutableCategory.builder()
+                                .from(category)
+                                .locationId(location.getLocationId())
+                                .build())
                 .map(category ->
                         ImmutableCategory.builder()
                                 .from(category)
