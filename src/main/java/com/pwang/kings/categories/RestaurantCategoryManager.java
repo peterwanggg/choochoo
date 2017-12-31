@@ -18,9 +18,8 @@ import retrofit2.Response;
 
 import javax.ws.rs.WebApplicationException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -40,6 +39,10 @@ public final class RestaurantCategoryManager implements CategoryManager {
     private final CategoryDao categoryDao;
     private final ContestantDao contestantDao;
 
+    // TODO: maybe want to refresh this once in a while
+    // <LocationId, <CategoryName, Category> - need to use CategoryName since the zomato /search API returns cuisine names
+    private final Map<Long, Map<String, Category>> categoryCache;
+
     RestaurantCategoryManager(
             ZomatoService zomatoService,
             LocationDao locationDao, CategoryDao categoryDao, ContestantDao contestantDao) {
@@ -47,6 +50,8 @@ public final class RestaurantCategoryManager implements CategoryManager {
         this.locationDao = locationDao;
         this.categoryDao = categoryDao;
         this.contestantDao = contestantDao;
+
+        this.categoryCache = new HashMap<>();
     }
 
     @Override
@@ -107,11 +112,56 @@ public final class RestaurantCategoryManager implements CategoryManager {
                 CONTESTANTS_MIN_SIZE);
 
         if (contestants.size() < CONTESTANTS_MIN_SIZE) {
-            contestants.addAll(getContestantFromZomato(location, category, CONTESTANTS_MIN_SIZE - contestants.size()));
+            contestants.addAll(getNewContestantFromZomato(location, category, CONTESTANTS_MIN_SIZE - contestants.size()));
         }
         return contestants;
     }
 
+    @Override
+    public List<Contestant> searchContestants(Location location, String contestantName) throws IOException {
+        Response<SearchResult> response = zomatoService.search(
+                Integer.valueOf(location.getApiProviderId()),
+                EntityType.city.toString(),
+                contestantName,
+                null,
+                null,
+                null,
+                null).execute();
+        if (!response.isSuccessful()) {
+            throw new WebApplicationException("zomato request failed", HttpStatus.INTERNAL_SERVER_ERROR_500);
+        }
+
+        Map<String, Category> categoryMap = getCategoriesByLocation(location.getLocationId());
+        return response.body()
+                .getRestaurants().stream()
+                // filter out cuisines we don't have, likely due to null 'cuisines' on the RestaurantValue
+                .map(restaurant -> {
+                    String cuisine = RestaurantToContestantAdapter.getCuisine(restaurant.getRestaurant().getCuisines());
+                    Category category = categoryMap.get(cuisine);
+                    if (category == null) {
+                        return null;
+                    }
+                    Contestant contestant = restaurantToContestantAdapter.adapt(restaurant);
+
+                    // check if it's in db already
+                    Optional<Contestant> contestantMaybe = contestantDao.getByApiId(ApiProviderType.zomato.toString(), String.valueOf(contestant.getApiProviderId()));
+                    if (contestantMaybe.isPresent()) {
+                        return contestantMaybe.get();
+                    }
+
+                    // create if not
+                    Contestant creatableContestant = ImmutableContestant.builder()
+                            .from(contestant)
+                            .categoryId(category.getCategoryId())
+                            .build();
+                    return ImmutableContestant.builder()
+                            .from(creatableContestant)
+                            .contestantId(contestantDao.create(creatableContestant, creatableContestant.getImageUrl().toString()))
+                            .build();
+                })
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public List<Contestant> getChallengers(KingsUser kingsUser, Location location, Category category, Contestant challenger) throws IOException {
@@ -123,12 +173,12 @@ public final class RestaurantCategoryManager implements CategoryManager {
                 CONTESTANTS_MIN_SIZE);
 
         if (contestants.size() < CONTESTANTS_MIN_SIZE) {
-            contestants.addAll(getContestantFromZomato(location, category, CONTESTANTS_MIN_SIZE - contestants.size()));
+            contestants.addAll(getNewContestantFromZomato(location, category, CONTESTANTS_MIN_SIZE - contestants.size()));
         }
         return contestants;
     }
 
-    private List<Contestant> getContestantFromZomato(Location location, Category category, int numNeeded) throws IOException {
+    private List<Contestant> getNewContestantFromZomato(Location location, Category category, int numNeeded) throws IOException {
         int page = 0;
         List<Contestant> insertedContestants = new ArrayList<>();
 
@@ -136,6 +186,7 @@ public final class RestaurantCategoryManager implements CategoryManager {
             Response<SearchResult> response = zomatoService.search(
                     Integer.valueOf(location.getApiProviderId()),
                     EntityType.city.toString(),
+                    null,
                     category.getApiProviderId(),
                     null,
                     null,
@@ -170,6 +221,20 @@ public final class RestaurantCategoryManager implements CategoryManager {
         }
         LOGGER.info("fetched " + insertedContestants.size() + " new contestants after " + page + " pages");
         return insertedContestants;
+    }
+
+    @Override
+    public Map<String, Category> getCategoriesByLocation(Long locationId) {
+        Map<String, Category> categoryMap = categoryCache.get(locationId);
+
+        if (categoryMap == null) {
+            categoryMap = categoryDao.getByLocationCategoryType(locationId, CategoryType.restaurant.toString())
+                    .stream().collect(Collectors.toMap(
+                            Category::getCategoryName,
+                            Function.identity()
+                    ));
+        }
+        return categoryMap;
     }
 
     @Override

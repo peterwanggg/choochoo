@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * @author pwang on 12/31/17.
@@ -20,7 +20,7 @@ import java.util.List;
 public interface CategoryService {
 
     @GET
-    List<Category> getCategories(
+    Collection<Category> getCategories(
             @Auth KingsUser kingsUser,
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,

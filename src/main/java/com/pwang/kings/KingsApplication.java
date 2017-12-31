@@ -122,7 +122,6 @@ public class KingsApplication extends Application<KingsConfiguration> {
                 .setRealm("SUPER SECRET STUFF")
                 .buildAuthFilter()));
 
-
         // register resources
         environment.jersey().register(new BoutResource(
                 boutDao));
@@ -131,7 +130,6 @@ public class KingsApplication extends Application<KingsConfiguration> {
                 categoryDao,
                 categoryManagerFactory));
         environment.jersey().register(new CategoryResource(
-                categoryDao,
                 categoryManagerFactory));
     }
 

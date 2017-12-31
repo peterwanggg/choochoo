@@ -15,6 +15,7 @@ import java.util.Optional;
  */
 public final class RestaurantToContestantAdapter implements ZomatoAdapter<Restaurant, Contestant> {
 
+    private static final String NOT_FOUND_CUISINE_NAME = "n/a";
     private static final Logger LOGGER = Logger.getLogger(RestaurantToContestantAdapter.class);
 
     @Override
@@ -25,6 +26,11 @@ public final class RestaurantToContestantAdapter implements ZomatoAdapter<Restau
                 .apiProviderType(ApiProviderType.zomato.toString())
                 .apiProviderId(apiObject.getRestaurant().getId().toString())
                 .build();
+    }
+
+    public static String getCuisine(Optional<String> cuisines) {
+        return cuisines.map(cuisinesStrArray -> cuisinesStrArray.split(",")[0])
+                .orElse(NOT_FOUND_CUISINE_NAME);
     }
 
     private static URL getUrl(Optional<String> urlString) {

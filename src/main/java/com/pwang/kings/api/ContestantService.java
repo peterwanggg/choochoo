@@ -38,8 +38,10 @@ public interface ContestantService {
     @GET
     List<Contestant> searchByName(
             @Auth KingsUser kingsUser,
-            @NotNull @QueryParam("category-id") Long categoryId,
-            @NotNull @QueryParam("contestant-name") String contestantName);
+            @NotNull @QueryParam("lat") Double lat,
+            @NotNull @QueryParam("lon") Double lon,
+            @NotNull @QueryParam("category-type") String categoryType,
+            @NotNull @QueryParam("contestant-name") String contestantName) throws IOException;
 
 
 }

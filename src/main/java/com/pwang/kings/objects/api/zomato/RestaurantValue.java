@@ -26,4 +26,7 @@ public interface RestaurantValue extends ZomatoObject {
     @JsonProperty("featured_image")
     Optional<String> getFeaturedImage();
 
+    @JsonProperty("cuisines")
+    Optional<String> getCuisines();
+
 }

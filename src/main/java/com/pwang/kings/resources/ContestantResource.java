@@ -5,10 +5,7 @@ import com.pwang.kings.categories.CategoryManager;
 import com.pwang.kings.categories.CategoryManagerFactory;
 import com.pwang.kings.db.daos.CategoryDao;
 import com.pwang.kings.db.daos.ContestantDao;
-import com.pwang.kings.objects.model.Category;
-import com.pwang.kings.objects.model.Contestant;
-import com.pwang.kings.objects.model.KingsUser;
-import com.pwang.kings.objects.model.Location;
+import com.pwang.kings.objects.model.*;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.http.HttpStatus;
 
@@ -91,11 +88,19 @@ public final class ContestantResource implements ContestantService {
             LOGGER.error("api exception", e);
             throw new WebApplicationException("could not interact with the dependent API", HttpStatus.INTERNAL_SERVER_ERROR_500);
         }
-
     }
 
+    // TODO: rate limit
     @Override
-    public List<Contestant> searchByName(KingsUser kingsUser, Long categoryId, String contestantName) {
-        return contestantDao.getByCategoryIdAndName(categoryId, "%" + contestantName + "%", SEARCH_CONTESTANTS_SIZE_LIMIT);
+    public List<Contestant> searchByName(KingsUser kingsUser, Double lat, Double lon, String categoryTypeStr, String contestantName) throws IOException {
+        CategoryType categoryType = CategoryType.valueOf(categoryTypeStr);
+        CategoryManager categoryManager = categoryManagerFactory.getCategoryManager(categoryType);
+
+        Location location = categoryManager.getLocation(lat, lon)
+                .orElseThrow(() -> new WebApplicationException("unsupported location", HttpStatus.NOT_IMPLEMENTED_501));
+
+        return categoryManager.searchContestants(location, contestantName);
+
     }
+
 }

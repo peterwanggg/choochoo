@@ -21,11 +21,11 @@ public interface ZomatoService {
     Call<SearchResult> search(
             @Query("entity_id") Integer entityId,
             @Query("entity_type") String entityType,
+            @Query("q") String searchQuery,
             @Query("cuisines") String cuisinesArray,
             @Query("lat") Double lat,
             @Query("lon") Double lon,
-            @Query("start") Integer start
-    );
+            @Query("start") Integer start);
 
     @GET("/api/v2.1/cities")
     Call<CitiesResult> cities(
@@ -36,7 +36,6 @@ public interface ZomatoService {
 
     @GET("/api/v2.1/cuisines")
     Call<CuisinesResult> cuisines(
-            @Query("city_id") Integer cityId
-    );
+            @Query("city_id") Integer cityId);
 
 }
