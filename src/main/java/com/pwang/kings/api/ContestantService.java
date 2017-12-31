@@ -25,13 +25,6 @@ public interface ContestantService {
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,
             @NotNull @QueryParam("challenger-contestant-id") Long contestantId) throws IOException;
-//    @Path("/challenger")
-//    @GET
-//    Response getContestantsForChallenger(
-//            @Auth KingsUser kingsUser,
-//            @NotNull @QueryParam("lat") Double lat,
-//            @NotNull @QueryParam("lon") Double lon,
-//            @NotNull @QueryParam("challenger-contestant-id") Long contestantId) throws IOException;
 
     @Path("/category")
     @GET
@@ -40,6 +33,13 @@ public interface ContestantService {
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,
             @NotNull @QueryParam("category-id") Long categoryId) throws IOException;
+
+    @Path("/search")
+    @GET
+    List<Contestant> searchByName(
+            @Auth KingsUser kingsUser,
+            @NotNull @QueryParam("category-id") Long categoryId,
+            @NotNull @QueryParam("contestant-name") String contestantName);
 
 
 }

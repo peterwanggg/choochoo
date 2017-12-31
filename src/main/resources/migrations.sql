@@ -34,6 +34,7 @@ CREATE TABLE common.contestant (
     CONSTRAINT category_contestant_key UNIQUE (category_id, contestant_id)
 );
 CREATE INDEX contestant_category_id_idx ON common.contestant(category_id);
+CREATE INDEX contestant_name_idx ON common.contestant(lower(contestant_name));
 
 CREATE TABLE common.kings_user (
     kings_user_id BIGSERIAL PRIMARY KEY,

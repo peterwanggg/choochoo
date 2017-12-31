@@ -55,25 +55,12 @@ public final class ContestantResource implements ContestantService {
             Location location = categoryManager.getLocation(lat, lon)
                     .orElseThrow(() -> new WebApplicationException("unsupported location", HttpStatus.NOT_IMPLEMENTED_501));
 
-//            // 4. get contestants
+            // 4. get contestants
             return categoryManager.getChallengers(
                     kingsUser,
                     location,
                     category,
                     challenger);
-            // 4. get contestants
-//            return Response
-//                    .ok(categoryManager.getChallengers(
-//                            kingsUser,
-//                            location,
-//                            category,
-//                            challenger))
-//                    .header(CrossOriginFilter.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, "*")
-//                    .header(CrossOriginFilter.ACCESS_CONTROL_ALLOW_HEADERS_HEADER, "origin, content-type, accept, authorization")
-//                    .header(CrossOriginFilter.ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER, "true")
-//                    .header(CrossOriginFilter.ACCESS_CONTROL_ALLOW_METHODS_HEADER, "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-//
-//                    .build();
         } catch (IOException e) {
             LOGGER.error("api exception", e);
             throw new WebApplicationException("could not interact with the dependent API", HttpStatus.INTERNAL_SERVER_ERROR_500);
@@ -103,5 +90,10 @@ public final class ContestantResource implements ContestantService {
             throw new WebApplicationException("could not interact with the dependent API", HttpStatus.INTERNAL_SERVER_ERROR_500);
         }
 
+    }
+
+    @Override
+    public List<Contestant> searchByName(KingsUser kingsUser, Long categoryId, String contestantName) {
+        return contestantDao.getByCategoryIdAndName(categoryId, "%" + contestantName + "%");
     }
 }
