@@ -14,6 +14,6 @@ public class RandomTest {
 
     @Test
     public void test() {
-        
+
     }
 }
