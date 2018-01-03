@@ -15,6 +15,7 @@ public class KingsConfiguration extends Configuration {
     private String googleApiKey;
     @NotEmpty
     private String zomatoApiKey;
+    private Integer cityIdOverride;
 
     @Valid
     @NotNull
@@ -59,5 +60,15 @@ public class KingsConfiguration extends Configuration {
     @JsonProperty("insecure")
     public void setInsecure(boolean insecure) {
         this.insecure = insecure;
+    }
+
+    @JsonProperty("cityIdOverride")
+    public Integer getCityIdOverride() {
+        return cityIdOverride;
+    }
+
+    @JsonProperty("cityIdOverride")
+    public void setCityIdOverride(Integer cityIdOverride) {
+        this.cityIdOverride = cityIdOverride;
     }
 }

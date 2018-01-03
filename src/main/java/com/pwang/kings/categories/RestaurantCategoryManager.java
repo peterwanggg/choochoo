@@ -42,23 +42,34 @@ public final class RestaurantCategoryManager implements CategoryManager {
     private final CategoryDao categoryDao;
     private final ContestantDao contestantDao;
 
+    private final Optional<Integer> cityIdOverride;
+
     // TODO: maybe want to refresh this once in a while
     // <LocationId, <CategoryName, Category> - need to use CategoryName since the zomato /search API returns cuisine names
     private final Map<Long, Map<String, Category>> categoryCache;
 
     RestaurantCategoryManager(
             ZomatoService zomatoService,
-            LocationDao locationDao, CategoryDao categoryDao, ContestantDao contestantDao) {
+            LocationDao locationDao,
+            CategoryDao categoryDao,
+            ContestantDao contestantDao,
+            Optional<Integer> cityIdOverride) {
         this.zomatoService = zomatoService;
         this.locationDao = locationDao;
         this.categoryDao = categoryDao;
         this.contestantDao = contestantDao;
+
+        this.cityIdOverride = cityIdOverride;
 
         this.categoryCache = new HashMap<>();
     }
 
     @Override
     public Optional<Location> getLocation(double lat, double lon) throws IOException {
+        if (cityIdOverride.isPresent()) {
+            return locationDao.getById(cityIdOverride.get());
+        }
+
         Response<CitiesResult> response = zomatoService.cities(lat, lon, null, 1).execute();
         if (!response.isSuccessful()) {
             throw new WebApplicationException("zomato request failed", HttpStatus.INTERNAL_SERVER_ERROR_500);
@@ -252,7 +263,11 @@ public final class RestaurantCategoryManager implements CategoryManager {
             categoryMap = categoryDao.getByLocationCategoryType(locationId, CategoryType.restaurant.toString())
                     .stream().collect(Collectors.toMap(
                             Category::getCategoryName,
-                            Function.identity()
+                            Function.identity(),
+                            (v1, v2) -> {
+                                throw new WebApplicationException(String.format("Duplicate key for values %s and %s", v1, v2), HttpStatus.INTERNAL_SERVER_ERROR_500);
+                            },
+                            TreeMap::new
                     ));
         }
         return categoryMap;

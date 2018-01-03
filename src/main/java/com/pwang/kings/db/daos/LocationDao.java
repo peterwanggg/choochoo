@@ -22,6 +22,12 @@ public interface LocationDao {
 
     @SingleValueResult(Location.class)
     @SqlQuery(
+            "SELECT * FROM common.location WHERE location_id = :location_id"
+    )
+    Optional<Location> getById(@Bind("location_id") Integer locationId);
+
+    @SingleValueResult(Location.class)
+    @SqlQuery(
             "SELECT * FROM common.location WHERE api_provider_type = :api_provider_type AND api_provider_id = :api_provider_id"
     )
     Optional<Location> getByApiId(@Bind("api_provider_type") String apiProviderType, @Bind("api_provider_id") String apiProviderId);

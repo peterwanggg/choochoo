@@ -9,6 +9,7 @@ import com.pwang.kings.objects.model.CategoryType;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author pwang on 12/26/17.
@@ -21,14 +22,16 @@ public class CategoryManagerFactory {
             ZomatoService zomatoService,
             LocationDao locationDao,
             CategoryDao categoryDao,
-            ContestantDao contestantDao
+            ContestantDao contestantDao,
+            Optional<Integer> cityIdOverride
     ) {
         categoryManagers = ImmutableMap.of(
                 CategoryType.restaurant, new RestaurantCategoryManager(
                         zomatoService,
                         locationDao,
                         categoryDao,
-                        contestantDao)
+                        contestantDao,
+                        cityIdOverride)
         );
     }
 

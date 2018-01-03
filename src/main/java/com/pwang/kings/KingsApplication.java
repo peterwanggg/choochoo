@@ -38,6 +38,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
 import java.util.EnumSet;
+import java.util.Optional;
 
 
 /**
@@ -105,7 +106,7 @@ public class KingsApplication extends Application<KingsConfiguration> {
 
         // category manager
         CategoryManagerFactory categoryManagerFactory = new CategoryManagerFactory(
-                zomatoService, locationDao, categoryDao, contestantDao);
+                zomatoService, locationDao, categoryDao, contestantDao, Optional.ofNullable(configuration.getCityIdOverride()));
 
         // environment setup
         environment.admin().addTask(new InitializeCategoryLocationTask(
