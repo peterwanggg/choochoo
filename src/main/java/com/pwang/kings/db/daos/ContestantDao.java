@@ -46,13 +46,15 @@ public interface ContestantDao {
                     "  SELECT loser_contestant_id FROM common.bout WHERE " +
                     "    winner_contestant_id = :challenger_contestant_id AND " +
                     "    kings_user_id = :kings_user_id AND " +
-                    "    category_id = :category_id) limit :limit;"
+                    "    category_id = :category_id) " +
+                    "    order by contestant_id asc limit :limit offset :offset"
     )
     List<Contestant> getNewChallengersForUser(
             @Bind("kings_user_id") Long kingsUserId,
             @Bind("category_id") Long categoryId,
             @Bind("challenger_contestant_id") Long challengerContestantId,
-            @Bind("limit") Integer limit);
+            @Bind("limit") Integer limit,
+            @Bind("offset") Integer offset);
 
     // TODO: this is not quite right
     @SqlQuery(
@@ -65,12 +67,14 @@ public interface ContestantDao {
                     "  UNION " +
                     "  SELECT loser_contestant_id FROM common.bout WHERE " +
                     "    kings_user_id = :kings_user_id AND " +
-                    "    category_id = :category_id) limit :limit;"
+                    "    category_id = :category_id) " +
+                    "    order by contestant_id asc limit :limit offset :offset"
     )
     List<Contestant> getNewContestantsForUser(
             @Bind("kings_user_id") Long kingsUserId,
             @Bind("category_id") Long categoryId,
-            @Bind("limit") Integer limit);
+            @Bind("limit") Integer limit,
+            @Bind("offset") Integer offset);
 
 
 }

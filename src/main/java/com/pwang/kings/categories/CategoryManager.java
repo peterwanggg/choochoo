@@ -19,11 +19,20 @@ public interface CategoryManager {
 
     List<Location> getLocations(List<String> apiProviderIds) throws IOException;
 
-    List<Contestant> getContestants(KingsUser kingsUser, Location location, Category category) throws IOException;
+    List<Contestant> getContestants(
+            KingsUser kingsUser,
+            Location location,
+            Category category,
+            Optional<Integer> page) throws IOException;
 
     List<Contestant> searchContestants(Location location, String contestantName) throws IOException;
 
-    List<Contestant> getChallengers(KingsUser kingsUser, Location location, Category category, Contestant challenger) throws IOException;
+    List<Contestant> getChallengers(
+            KingsUser kingsUser,
+            Location location,
+            Category category,
+            Contestant challenger,
+            Optional<Integer> page) throws IOException;
 
     // <CategoryName, Category>
     Map<String, Category> getCategoriesByLocation(Long locationId);

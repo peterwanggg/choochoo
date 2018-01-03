@@ -12,6 +12,7 @@ import org.eclipse.jetty.http.HttpStatus;
 import javax.ws.rs.WebApplicationException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -38,7 +39,13 @@ public final class ContestantResource implements ContestantService {
 
 
     @Override
-    public List<Contestant> getContestantsForChallenger(KingsUser kingsUser, Double lat, Double lon, Long challengerContestantId) {
+    public List<Contestant> getContestantsForChallenger(
+            KingsUser kingsUser,
+            Double lat,
+            Double lon,
+            Long challengerContestantId,
+            Integer page
+    ) {
         // 1. get challenger contestant
         Contestant challenger = contestantDao.getById(challengerContestantId).orElseThrow(() ->
                 new WebApplicationException("invalid challenger-contestant-id: " + challengerContestantId, HttpStatus.BAD_REQUEST_400));
@@ -59,7 +66,8 @@ public final class ContestantResource implements ContestantService {
                     kingsUser,
                     location,
                     category,
-                    challenger);
+                    challenger,
+                    Optional.ofNullable(page));
         } catch (IOException e) {
             LOGGER.error("api exception", e);
             throw new WebApplicationException("could not interact with the dependent API", HttpStatus.INTERNAL_SERVER_ERROR_500);
@@ -67,7 +75,13 @@ public final class ContestantResource implements ContestantService {
     }
 
     @Override
-    public List<Contestant> getContestantsForCategory(KingsUser kingsUser, Double lat, Double lon, Long categoryId) throws IOException {
+    public List<Contestant> getContestantsForCategory(
+            KingsUser kingsUser,
+            Double lat,
+            Double lon,
+            Long categoryId,
+            Integer page
+    ) {
         // 1. get category and manager
         Category category = categoryDao.getById(categoryId)
                 .orElseThrow(() ->
@@ -83,7 +97,8 @@ public final class ContestantResource implements ContestantService {
             return categoryManager.getContestants(
                     kingsUser,
                     location,
-                    category);
+                    category,
+                    Optional.ofNullable(page));
         } catch (IOException e) {
             LOGGER.error("api exception", e);
             throw new WebApplicationException("could not interact with the dependent API", HttpStatus.INTERNAL_SERVER_ERROR_500);
@@ -92,15 +107,19 @@ public final class ContestantResource implements ContestantService {
 
     // TODO: rate limit
     @Override
-    public List<Contestant> searchByName(KingsUser kingsUser, Double lat, Double lon, String categoryTypeStr, String contestantName) throws IOException {
+    public List<Contestant> searchByName(KingsUser kingsUser, Double lat, Double lon, String categoryTypeStr, String contestantName) {
         CategoryType categoryType = CategoryType.valueOf(categoryTypeStr);
         CategoryManager categoryManager = categoryManagerFactory.getCategoryManager(categoryType);
 
-        Location location = categoryManager.getLocation(lat, lon)
-                .orElseThrow(() -> new WebApplicationException("unsupported location", HttpStatus.NOT_IMPLEMENTED_501));
+        try {
+            Location location = categoryManager.getLocation(lat, lon)
+                    .orElseThrow(() -> new WebApplicationException("unsupported location", HttpStatus.NOT_IMPLEMENTED_501));
 
-        return categoryManager.searchContestants(location, contestantName);
-
+            return categoryManager.searchContestants(location, contestantName);
+        } catch (IOException e) {
+            LOGGER.error("api exception", e);
+            throw new WebApplicationException("could not interact with the dependent API", HttpStatus.INTERNAL_SERVER_ERROR_500);
+        }
     }
 
 }

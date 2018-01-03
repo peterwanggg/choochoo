@@ -4,10 +4,10 @@ import com.pwang.kings.objects.model.Contestant;
 import com.pwang.kings.objects.model.KingsUser;
 import io.dropwizard.auth.Auth;
 
+import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -24,7 +24,8 @@ public interface ContestantService {
             @Auth KingsUser kingsUser,
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,
-            @NotNull @QueryParam("challenger-contestant-id") Long contestantId) throws IOException;
+            @NotNull @QueryParam("challenger-contestant-id") Long contestantId,
+            @Nullable @QueryParam("page") Integer page);
 
     @Path("/category")
     @GET
@@ -32,7 +33,8 @@ public interface ContestantService {
             @Auth KingsUser kingsUser,
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,
-            @NotNull @QueryParam("category-id") Long categoryId) throws IOException;
+            @NotNull @QueryParam("category-id") Long categoryId,
+            @Nullable @QueryParam("page") Integer page);
 
     @Path("/search")
     @GET
@@ -41,7 +43,7 @@ public interface ContestantService {
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,
             @NotNull @QueryParam("category-type") String categoryType,
-            @NotNull @QueryParam("contestant-name") String contestantName) throws IOException;
+            @NotNull @QueryParam("contestant-name") String contestantName);
 
 
 }

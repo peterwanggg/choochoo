@@ -1,7 +1,6 @@
 package com.pwang.kings;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pwang.kings.objects.model.CategoryType;
 import com.pwang.kings.serde.ObjectMappers;
 import org.junit.Test;
 

@@ -25,7 +25,9 @@ public interface ZomatoService {
             @Query("cuisines") String cuisinesArray,
             @Query("lat") Double lat,
             @Query("lon") Double lon,
-            @Query("start") Integer start);
+            @Query("start") Integer start,
+            @Query("sort") String sort,
+            @Query("order") String order);
 
     @GET("/api/v2.1/cities")
     Call<CitiesResult> cities(
