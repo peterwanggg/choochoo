@@ -44,7 +44,7 @@ public final class ContestantResource implements ContestantService {
             Double lat,
             Double lon,
             Long challengerContestantId,
-            Integer page
+            Integer offset
     ) {
         // 1. get challenger contestant
         Contestant challenger = contestantDao.getById(challengerContestantId).orElseThrow(() ->
@@ -67,7 +67,7 @@ public final class ContestantResource implements ContestantService {
                     location,
                     category,
                     challenger,
-                    Optional.ofNullable(page));
+                    Optional.ofNullable(offset));
         } catch (IOException e) {
             LOGGER.error("api exception", e);
             throw new WebApplicationException("could not interact with the dependent API", HttpStatus.INTERNAL_SERVER_ERROR_500);
@@ -80,7 +80,7 @@ public final class ContestantResource implements ContestantService {
             Double lat,
             Double lon,
             Long categoryId,
-            Integer page
+            Integer offset
     ) {
         // 1. get category and manager
         Category category = categoryDao.getById(categoryId)
@@ -98,7 +98,7 @@ public final class ContestantResource implements ContestantService {
                     kingsUser,
                     location,
                     category,
-                    Optional.ofNullable(page));
+                    Optional.ofNullable(offset));
         } catch (IOException e) {
             LOGGER.error("api exception", e);
             throw new WebApplicationException("could not interact with the dependent API", HttpStatus.INTERNAL_SERVER_ERROR_500);

@@ -160,13 +160,13 @@ public final class RestaurantCategoryManager implements CategoryManager {
             KingsUser kingsUser,
             Location location,
             Category category,
-            Optional<Integer> page) throws IOException {
+            Optional<Integer> offset) throws IOException {
         // 1. get from DB
         List<Contestant> contestants = contestantDao.getNewContestantsForUser(
                 kingsUser.getKingsUserId(),
                 category.getCategoryId(),
                 CONTESTANTS_PAGE_MIN_SIZE,
-                page.map(p -> (p - 1) * CONTESTANTS_PAGE_MIN_SIZE).orElse(0));
+                offset.orElse(0));
 
         if (contestants.size() < CONTESTANTS_PAGE_MIN_SIZE) {
             contestants.addAll(getNewContestantFromZomato(location, category, CONTESTANTS_PAGE_MIN_SIZE - contestants.size()));
@@ -180,7 +180,7 @@ public final class RestaurantCategoryManager implements CategoryManager {
             Location location,
             Category category,
             Contestant challenger,
-            Optional<Integer> page) throws IOException {
+            Optional<Integer> offset) throws IOException {
 
         // 1. get from DB
         List<Contestant> contestants = contestantDao.getNewChallengersForUser(
@@ -188,7 +188,7 @@ public final class RestaurantCategoryManager implements CategoryManager {
                 category.getCategoryId(),
                 challenger.getContestantId(),
                 CONTESTANTS_PAGE_MIN_SIZE,
-                page.map(p -> (p - 1) * CONTESTANTS_PAGE_MIN_SIZE).orElse(0));
+                offset.orElse(0));
 
         if (contestants.size() < CONTESTANTS_PAGE_MIN_SIZE) {
             contestants.addAll(getNewContestantFromZomato(location, category, CONTESTANTS_PAGE_MIN_SIZE - contestants.size()));

@@ -25,7 +25,7 @@ public interface ContestantService {
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,
             @NotNull @QueryParam("challenger-contestant-id") Long contestantId,
-            @Nullable @QueryParam("page") Integer page);
+            @Nullable @QueryParam("offset") Integer offset);
 
     @Path("/category")
     @GET
@@ -34,7 +34,7 @@ public interface ContestantService {
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,
             @NotNull @QueryParam("category-id") Long categoryId,
-            @Nullable @QueryParam("page") Integer page);
+            @Nullable @QueryParam("offset") Integer offset);
 
     @Path("/search")
     @GET
