@@ -61,14 +61,4 @@ CREATE INDEX bout_loser_idx ON common.bout(loser_contestant_id, category_id, kin
 
 
 
-
-
-
-
-
-
-
-
-
-
 insert into common.kings_user (name) values ('pete');

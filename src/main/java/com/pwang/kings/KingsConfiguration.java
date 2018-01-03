@@ -16,6 +16,8 @@ public class KingsConfiguration extends Configuration {
     @NotEmpty
     private String zomatoApiKey;
     private Integer cityIdOverride;
+    @NotNull
+    private Integer refreshPeriodInSeconds;
 
     @Valid
     @NotNull
@@ -70,5 +72,15 @@ public class KingsConfiguration extends Configuration {
     @JsonProperty("cityIdOverride")
     public void setCityIdOverride(Integer cityIdOverride) {
         this.cityIdOverride = cityIdOverride;
+    }
+
+    @JsonProperty("refreshPeriodInSeconds")
+    public Integer getRefreshPeriodInSeconds() {
+        return refreshPeriodInSeconds;
+    }
+
+    @JsonProperty("refreshPeriodInSeconds")
+    public void setRefreshPeriodInSeconds(Integer refreshPeriodInSeconds) {
+        this.refreshPeriodInSeconds = refreshPeriodInSeconds;
     }
 }

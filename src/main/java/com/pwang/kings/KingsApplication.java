@@ -14,6 +14,8 @@ import com.pwang.kings.resources.CategoryResource;
 import com.pwang.kings.resources.ContestantResource;
 import com.pwang.kings.serde.ObjectMappers;
 import com.pwang.kings.tasks.InitializeCategoryLocationTask;
+import com.pwang.kings.tasks.ManagedPeriodicTask;
+import com.pwang.kings.tasks.MaterializedViewRefreshTask;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.AuthValueFactoryProvider;
@@ -24,6 +26,7 @@ import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.jdbi.OptionalContainerFactory;
 import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
+import io.dropwizard.lifecycle.Managed;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -57,10 +60,11 @@ public class KingsApplication extends Application<KingsConfiguration> {
                         bootstrap.getConfigurationSourceProvider(),
                         new EnvironmentVariableSubstitutor())
         );
+
         bootstrap.addBundle(new MigrationsBundle<KingsConfiguration>() {
             @Override
             public String getMigrationsFileName() {
-                return "migrations.sql";
+                return "migrations/common.sql";
             }
 
             @Override
@@ -132,6 +136,11 @@ public class KingsApplication extends Application<KingsConfiguration> {
                 categoryManagerFactory));
         environment.jersey().register(new CategoryResource(
                 categoryManagerFactory));
+
+        // set up background tasks
+        final MaterializedViewRefreshTask materializedViewRefreshTask = new MaterializedViewRefreshTask(jdbi, configuration.getRefreshPeriodInSeconds());
+        final Managed managedImplementer = new ManagedPeriodicTask(materializedViewRefreshTask);
+        environment.lifecycle().manage(managedImplementer);
     }
 
     private ZomatoService getZomatoService(String apiKey) {

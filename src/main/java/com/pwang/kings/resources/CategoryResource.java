@@ -1,6 +1,5 @@
 package com.pwang.kings.resources;
 
-import com.google.common.collect.Lists;
 import com.pwang.kings.api.CategoryService;
 import com.pwang.kings.categories.CategoryManager;
 import com.pwang.kings.categories.CategoryManagerFactory;

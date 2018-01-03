@@ -1,12 +1,12 @@
 package com.pwang.kings.db.daos;
 
 import com.pwang.kings.objects.action.Bout;
-import org.skife.jdbi.v2.sqlobject.BindBean;
-import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
-import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.*;
+
+import java.util.List;
 
 /**
- * @author pwang on 12/28/17.
+ * @author pwang on 12/:contestant_id/17.
  */
 public interface BoutDao {
 
@@ -18,11 +18,10 @@ public interface BoutDao {
     )
     Long create(@BindBean("bout") Bout bout);
 
-//    @SingleValueResult(Bout.class)
-//    @SqlQuery(
-//            "SELECT * FROM common.bout WHERE api_provider_type = :api_provider_type AND api_provider_id = :api_provider_id"
-//    )
-//    Optional<Bout> getByApiId(@Bind("api_provider_type") String apiProviderType, @Bind("api_provider_id") String apiProviderId);
+    @SqlQuery(
+            "SELECT * FROM common.bout WHERE winner_contestant_id = :contestant_id or loser_contestant_id = :contestant_id;"
+    )
+    List<Bout> getContestantBouts(@Bind("contestant_id") Long contestantId);
 
 
 }
