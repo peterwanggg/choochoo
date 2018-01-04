@@ -48,17 +48,10 @@ public final class RestaurantCategoryManager implements CategoryManager {
 
     private final Optional<Integer> cityIdOverride;
 
-    // TODO: maybe want to refresh this once in a while
-    // <LocationId, <CategoryName, Category> - need to use CategoryName since the zomato /search API returns cuisine names
-    private final Map<Long, Map<String, Category>> categoryCache;
 
-    LoadingCache<Long, Boolean> exhaustedCategories = CacheBuilder.newBuilder()
-            .expireAfterWrite(1, TimeUnit.DAYS)
-            .build(new CacheLoader<Long, Boolean>() {
-                public Boolean load(Long key) {
-                    return false;
-                }
-            });
+    // <LocationId, <CategoryName, Category> - need to use CategoryName since the zomato /search API returns cuisine names
+    private final LoadingCache<Long, Map<String, Category>> categoryCache;
+    private final LoadingCache<Long, Boolean> exhaustedCategories;
 
     RestaurantCategoryManager(
             ZomatoService zomatoService,
@@ -73,7 +66,31 @@ public final class RestaurantCategoryManager implements CategoryManager {
 
         this.cityIdOverride = cityIdOverride;
 
-        this.categoryCache = new HashMap<>();
+        this.categoryCache = CacheBuilder.newBuilder()
+                .maximumSize(10)
+                .build(new CacheLoader<Long, Map<String, Category>>() {
+                    @Override
+                    public Map<String, Category> load(Long key) throws Exception {
+                        return categoryDao.getByLocationCategoryType(key, CategoryType.restaurant.toString())
+                                .stream().collect(Collectors.toMap(
+                                        Category::getCategoryName,
+                                        Function.identity(),
+                                        (v1, v2) -> {
+                                            throw new WebApplicationException(String.format("Duplicate key for values %s and %s", v1, v2), HttpStatus.INTERNAL_SERVER_ERROR_500);
+                                        },
+                                        TreeMap::new
+                                ));
+                    }
+                });
+
+        this.exhaustedCategories = CacheBuilder.newBuilder()
+                .expireAfterWrite(1, TimeUnit.DAYS)
+                .build(new CacheLoader<Long, Boolean>() {
+                    @Override
+                    public Boolean load(Long key) {
+                        return false;
+                    }
+                });
     }
 
     @Override
@@ -278,7 +295,7 @@ public final class RestaurantCategoryManager implements CategoryManager {
 
     @Override
     public Map<String, Category> getCategoriesByLocation(Long locationId) {
-        Map<String, Category> categoryMap = categoryCache.get(locationId);
+        Map<String, Category> categoryMap = categoryCache.getUnchecked(locationId);
 
         if (categoryMap == null) {
             categoryMap = categoryDao.getByLocationCategoryType(locationId, CategoryType.restaurant.toString())
