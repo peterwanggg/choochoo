@@ -5,7 +5,10 @@ import com.pwang.kings.categories.CategoryManager;
 import com.pwang.kings.categories.CategoryManagerFactory;
 import com.pwang.kings.db.daos.CategoryDao;
 import com.pwang.kings.db.daos.ContestantDao;
+import com.pwang.kings.db.daos.ContestantStatsDao;
+import com.pwang.kings.objects.api.kings.ContestantEntry;
 import com.pwang.kings.objects.model.*;
+import com.pwang.kings.stats.ContestantStatsUtil;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.http.HttpStatus;
 
@@ -25,21 +28,24 @@ public final class ContestantResource implements ContestantService {
     private final CategoryManagerFactory categoryManagerFactory;
     private final CategoryDao categoryDao;
     private final ContestantDao contestantDao;
+    private final ContestantStatsDao contestantStatsDao;
 
     private final int SEARCH_CONTESTANTS_SIZE_LIMIT = 20;
 
     public ContestantResource(
             ContestantDao contestantDao,
             CategoryDao categoryDao,
-            CategoryManagerFactory categoryManagerFactory) {
+            CategoryManagerFactory categoryManagerFactory,
+            ContestantStatsDao contestantStatsDao) {
         this.contestantDao = contestantDao;
         this.categoryDao = categoryDao;
         this.categoryManagerFactory = categoryManagerFactory;
+        this.contestantStatsDao = contestantStatsDao;
     }
 
 
     @Override
-    public List<Contestant> getContestantsForChallenger(
+    public List<ContestantEntry> getContestantsForChallenger(
             KingsUser kingsUser,
             Double lat,
             Double lon,
@@ -61,13 +67,15 @@ public final class ContestantResource implements ContestantService {
             Location location = categoryManager.getLocation(lat, lon)
                     .orElseThrow(() -> new WebApplicationException("unsupported location", HttpStatus.NOT_IMPLEMENTED_501));
 
-            // 4. get contestants
-            return categoryManager.getChallengers(
-                    kingsUser,
-                    location,
-                    category,
-                    challenger,
-                    Optional.ofNullable(offset));
+            // 4. get contestants and status
+            return ContestantStatsUtil.fetchAndJoinContestantStats(
+                    categoryManager.getChallengers(
+                            kingsUser,
+                            location,
+                            category,
+                            challenger,
+                            Optional.ofNullable(offset)),
+                    contestantStatsDao);
         } catch (IOException e) {
             LOGGER.error("api exception", e);
             throw new WebApplicationException("could not interact with the dependent API", HttpStatus.INTERNAL_SERVER_ERROR_500);
@@ -75,7 +83,7 @@ public final class ContestantResource implements ContestantService {
     }
 
     @Override
-    public List<Contestant> getContestantsForCategory(
+    public List<ContestantEntry> getContestantsForCategory(
             KingsUser kingsUser,
             Double lat,
             Double lon,
@@ -94,11 +102,13 @@ public final class ContestantResource implements ContestantService {
                     .orElseThrow(() -> new WebApplicationException("unsupported location", HttpStatus.NOT_IMPLEMENTED_501));
 
             // 3. get contestants
-            return categoryManager.getContestants(
-                    kingsUser,
-                    location,
-                    category,
-                    Optional.ofNullable(offset));
+            return ContestantStatsUtil.fetchAndJoinContestantStats(
+                    categoryManager.getContestants(
+                            kingsUser,
+                            location,
+                            category,
+                            Optional.ofNullable(offset)),
+                    contestantStatsDao);
         } catch (IOException e) {
             LOGGER.error("api exception", e);
             throw new WebApplicationException("could not interact with the dependent API", HttpStatus.INTERNAL_SERVER_ERROR_500);
@@ -107,7 +117,7 @@ public final class ContestantResource implements ContestantService {
 
     // TODO: rate limit
     @Override
-    public List<Contestant> searchByName(KingsUser kingsUser, Double lat, Double lon, String categoryTypeStr, String contestantName) {
+    public List<ContestantEntry> searchByName(KingsUser kingsUser, Double lat, Double lon, String categoryTypeStr, String contestantName) {
         CategoryType categoryType = CategoryType.valueOf(categoryTypeStr);
         CategoryManager categoryManager = categoryManagerFactory.getCategoryManager(categoryType);
 
@@ -115,7 +125,9 @@ public final class ContestantResource implements ContestantService {
             Location location = categoryManager.getLocation(lat, lon)
                     .orElseThrow(() -> new WebApplicationException("unsupported location", HttpStatus.NOT_IMPLEMENTED_501));
 
-            return categoryManager.searchContestants(location, contestantName);
+            return ContestantStatsUtil.fetchAndJoinContestantStats(
+                    categoryManager.searchContestants(location, contestantName),
+                    contestantStatsDao);
         } catch (IOException e) {
             LOGGER.error("api exception", e);
             throw new WebApplicationException("could not interact with the dependent API", HttpStatus.INTERNAL_SERVER_ERROR_500);

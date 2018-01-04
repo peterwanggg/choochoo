@@ -1,5 +1,6 @@
 package com.pwang.kings.api;
 
+import com.pwang.kings.objects.api.kings.ContestantEntry;
 import com.pwang.kings.objects.model.Contestant;
 import com.pwang.kings.objects.model.KingsUser;
 import io.dropwizard.auth.Auth;
@@ -20,7 +21,7 @@ public interface ContestantService {
 
     @Path("/challenger")
     @GET
-    List<Contestant> getContestantsForChallenger(
+    List<ContestantEntry> getContestantsForChallenger(
             @Auth KingsUser kingsUser,
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,
@@ -29,7 +30,7 @@ public interface ContestantService {
 
     @Path("/category")
     @GET
-    List<Contestant> getContestantsForCategory(
+    List<ContestantEntry> getContestantsForCategory(
             @Auth KingsUser kingsUser,
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,
@@ -38,12 +39,11 @@ public interface ContestantService {
 
     @Path("/search")
     @GET
-    List<Contestant> searchByName(
+    List<ContestantEntry> searchByName(
             @Auth KingsUser kingsUser,
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,
             @NotNull @QueryParam("category-type") String categoryType,
             @NotNull @QueryParam("contestant-name") String contestantName);
-
 
 }
