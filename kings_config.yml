@@ -7,6 +7,10 @@ cityIdOverride: 1
 
 refreshPeriodInSeconds: 30
 
+logging:
+  loggers:
+    com.pwang.kings: DEBUG
+
 database:
   driverClass: org.postgresql.Driver
   user: pwang

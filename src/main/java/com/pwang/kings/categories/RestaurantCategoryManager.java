@@ -1,5 +1,8 @@
 package com.pwang.kings.categories;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.pwang.kings.adapters.zomato.CityToLocationAdapter;
 import com.pwang.kings.adapters.zomato.CuisineToCategoryAdapter;
 import com.pwang.kings.adapters.zomato.RestaurantToContestantAdapter;
@@ -20,6 +23,7 @@ import retrofit2.Response;
 import javax.ws.rs.WebApplicationException;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -47,6 +51,14 @@ public final class RestaurantCategoryManager implements CategoryManager {
     // TODO: maybe want to refresh this once in a while
     // <LocationId, <CategoryName, Category> - need to use CategoryName since the zomato /search API returns cuisine names
     private final Map<Long, Map<String, Category>> categoryCache;
+
+    LoadingCache<Long, Boolean> exhaustedCategories = CacheBuilder.newBuilder()
+            .expireAfterWrite(1, TimeUnit.DAYS)
+            .build(new CacheLoader<Long, Boolean>() {
+                public Boolean load(Long key) {
+                    return false;
+                }
+            });
 
     RestaurantCategoryManager(
             ZomatoService zomatoService,
@@ -211,6 +223,11 @@ public final class RestaurantCategoryManager implements CategoryManager {
     private List<Contestant> getNewContestantFromZomato(Location location, Category category, int numNeeded) throws IOException {
         int page = 0;
         List<Contestant> insertedContestants = new ArrayList<>();
+        if (exhaustedCategories.getUnchecked(category.getCategoryId())) {
+            LOGGER.info("category " + category.getCategoryName() + " is already exhausted");
+            LOGGER.debug("category " + category.getCategoryName() + " is already exhausted");
+            return insertedContestants;
+        }
 
         while (insertedContestants.size() < numNeeded) {
             Response<SearchResult> response = zomatoService.search(
@@ -250,6 +267,10 @@ public final class RestaurantCategoryManager implements CategoryManager {
                                             .build())
                             .collect(Collectors.toList()));
             page++;
+        }
+        if (insertedContestants.isEmpty()) {
+            LOGGER.info("just exhausted category " + category.getCategoryName());
+            exhaustedCategories.put(category.getCategoryId(), true);
         }
         LOGGER.info("fetched " + insertedContestants.size() + " new contestants after " + page + " pages");
         return insertedContestants;
