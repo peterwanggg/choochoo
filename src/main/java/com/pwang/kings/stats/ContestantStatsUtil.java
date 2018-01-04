@@ -7,6 +7,7 @@ import com.pwang.kings.objects.model.Contestant;
 import com.pwang.kings.objects.stats.ContestantStats;
 import com.pwang.kings.objects.stats.ImmutableContestantStats;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -21,13 +22,15 @@ public final class ContestantStatsUtil {
             ImmutableContestantStats.builder().loseCount(0).winCount(0);
 
     public static List<ContestantEntry> fetchAndJoinContestantStats(List<Contestant> contestants, ContestantStatsDao contestantStatsDao) {
-        Map<Long, ContestantStats> statsMap = contestantStatsDao.getByIds(
-                contestants.stream().map(Contestant::getContestantId).collect(Collectors.toList()))
-                .stream()
-                .collect(Collectors.toMap(
-                        ContestantStats::getContestantId,
-                        Function.identity()
-                ));
+        Map<Long, ContestantStats> statsMap = contestants.isEmpty() ?
+                new HashMap<>() :
+                contestantStatsDao.getByIds(
+                        contestants.stream().map(Contestant::getContestantId).collect(Collectors.toList()))
+                        .stream()
+                        .collect(Collectors.toMap(
+                                ContestantStats::getContestantId,
+                                Function.identity()
+                        ));
 
         return contestants.stream()
                 .map(contestant -> ImmutableContestantEntry.builder()
