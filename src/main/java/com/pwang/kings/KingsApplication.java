@@ -12,6 +12,7 @@ import com.pwang.kings.objects.model.KingsUser;
 import com.pwang.kings.resources.BoutResource;
 import com.pwang.kings.resources.CategoryResource;
 import com.pwang.kings.resources.ContestantResource;
+import com.pwang.kings.resources.StatsResource;
 import com.pwang.kings.serde.ObjectMappers;
 import com.pwang.kings.tasks.InitializeCategoryLocationTask;
 import com.pwang.kings.tasks.ManagedPeriodicTask;
@@ -107,6 +108,7 @@ public class KingsApplication extends Application<KingsConfiguration> {
         final ContestantDao contestantDao = jdbi.onDemand(ContestantDao.class);
         final BoutDao boutDao = jdbi.onDemand(BoutDao.class);
         final KingsUserDao kingsUserDao = jdbi.onDemand(KingsUserDao.class);
+        final ContestantStatsDao contestantStatsDao = jdbi.onDemand(ContestantStatsDao.class);
 
         // category manager
         CategoryManagerFactory categoryManagerFactory = new CategoryManagerFactory(
@@ -136,6 +138,9 @@ public class KingsApplication extends Application<KingsConfiguration> {
                 categoryManagerFactory));
         environment.jersey().register(new CategoryResource(
                 categoryManagerFactory));
+        environment.jersey().register(new StatsResource(
+                contestantStatsDao
+        ));
 
         // set up background tasks
         final MaterializedViewRefreshTask materializedViewRefreshTask = new MaterializedViewRefreshTask(jdbi, configuration.getRefreshPeriodInSeconds());

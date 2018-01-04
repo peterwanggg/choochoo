@@ -5,7 +5,7 @@ zomatoApiKey: ${ZOMATO_API_KEY}
 
 cityIdOverride: 1
 
-refreshPeriodInSeconds: 10
+refreshPeriodInSeconds: 30
 
 database:
   driverClass: org.postgresql.Driver
