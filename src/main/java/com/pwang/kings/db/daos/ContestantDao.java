@@ -3,6 +3,8 @@ package com.pwang.kings.db.daos;
 import com.pwang.kings.objects.model.Contestant;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.SingleValueResult;
+import org.skife.jdbi.v2.sqlobject.stringtemplate.UseStringTemplate3StatementLocator;
+import org.skife.jdbi.v2.unstable.BindIn;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +12,7 @@ import java.util.Optional;
 /**
  * @author pwang on 12/27/17.
  */
+@UseStringTemplate3StatementLocator
 public interface ContestantDao {
 
     @GetGeneratedKeys
@@ -32,6 +35,11 @@ public interface ContestantDao {
             "SELECT * FROM common.contestant WHERE contestant_id = :contestant_id"
     )
     Optional<Contestant> getById(@Bind("contestant_id") Long contestantId);
+
+    @SqlQuery(
+            "SELECT * FROM common.contestant WHERE contestant_id IN (<contestant_ids>)"
+    )
+    List<Contestant> getByIds(@BindIn("contestant_ids") List<Long> contestantIds);
 
     // don't give opponents chalenger_contestant_id has faced before
     @SqlQuery(

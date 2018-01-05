@@ -34,9 +34,12 @@ public interface CategoryTypeManager {
             Contestant challenger,
             Optional<Integer> offset) throws IOException;
 
-    // <CategoryName, Category>
-    Map<String, Category> getCategoriesByLocation(Long locationId);
+    // <CategoryId, Category>
+    Map<Long, Category> getCategoriesByLocation(Long locationId);
+
+    List<Category> getTopCategoriesByLocation(Long locationId);
 
     List<Category> populateLocationCategories(Location location) throws IOException;
+
 
 }

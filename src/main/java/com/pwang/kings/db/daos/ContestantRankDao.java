@@ -18,7 +18,7 @@ public interface ContestantRankDao {
 
     @SqlUpdate(
             "INSERT INTO stats.contestant_rank (contestant_id, category_id, rank, rank_type) " +
-                    " VALUES (:contestant_rank.contestantId, :contestant_rank.categoryId,q :contestant_rank.rank, :rank_type) "
+                    " VALUES (:contestant_rank.contestantId, :contestant_rank.categoryId, :contestant_rank.rank, :rank_type) "
                     + " ON CONFLICT (contestant_id) DO UPDATE SET rank = EXCLUDED.rank"
     )
     void createRank(@BindBean("contestant_rank") ContestantRank rank, @Bind("rank_type") String rankType);
@@ -27,5 +27,10 @@ public interface ContestantRankDao {
             "SELECT * FROM stats.contestant_rank WHERE contestant_id IN (<contestant_ids>)"
     )
     List<ContestantRank> getByIds(@BindIn("contestant_ids") List<Long> contestantIds);
+
+    @SqlQuery(
+            "SELECT * FROM stats.contestant_rank WHERE category_id = :category_id order by rank asc limit :limit"
+    )
+    List<ContestantRank> getByCategoryOrderByRank(@Bind("category_id") Long categoryId, @Bind("limit") Integer limit);
 
 }

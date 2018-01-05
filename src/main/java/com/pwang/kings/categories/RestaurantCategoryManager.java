@@ -3,6 +3,7 @@ package com.pwang.kings.categories;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.pwang.kings.KingsConstants;
 import com.pwang.kings.adapters.zomato.CityToLocationAdapter;
 import com.pwang.kings.adapters.zomato.CuisineToCategoryAdapter;
 import com.pwang.kings.adapters.zomato.RestaurantToContestantAdapter;
@@ -33,7 +34,6 @@ import java.util.stream.Collectors;
 public final class RestaurantCategoryManager implements CategoryTypeManager {
 
     private static Logger LOGGER = Logger.getLogger(RestaurantCategoryManager.class);
-    private static final int CONTESTANTS_PAGE_MIN_SIZE = 15;
     private static final String DEFAULT_SORT = ZomatoConstants.Sort.rating.toString();
     private static final String DEFAULT_ORDER = ZomatoConstants.Order.desc.toString();
 
@@ -48,9 +48,9 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
 
     private final Optional<Integer> cityIdOverride;
 
-
-    // <LocationId, <CategoryName, Category> - need to use CategoryName since the zomato /search API returns cuisine names
-    private final LoadingCache<Long, Map<String, Category>> categoryCache;
+    // <LocationId, <CategoryName, Category>
+    private final LoadingCache<Long, Map<Long, Category>> categoryCache;
+    private final LoadingCache<Long, List<Long>> topCategoryIds;
     private final LoadingCache<Long, Boolean> exhaustedCategories;
 
     RestaurantCategoryManager(
@@ -68,18 +68,29 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
 
         this.categoryCache = CacheBuilder.newBuilder()
                 .maximumSize(10)
-                .build(new CacheLoader<Long, Map<String, Category>>() {
+                .expireAfterWrite(1, TimeUnit.DAYS)
+                .build(new CacheLoader<Long, Map<Long, Category>>() {
                     @Override
-                    public Map<String, Category> load(Long key) throws Exception {
+                    public Map<Long, Category> load(Long key) throws Exception {
                         return categoryDao.getByLocationCategoryType(key, CategoryType.restaurant.toString())
                                 .stream().collect(Collectors.toMap(
-                                        Category::getCategoryName,
+                                        Category::getCategoryId,
                                         Function.identity(),
                                         (v1, v2) -> {
                                             throw new WebApplicationException(String.format("Duplicate key for values %s and %s", v1, v2), HttpStatus.INTERNAL_SERVER_ERROR_500);
                                         },
                                         TreeMap::new
                                 ));
+                    }
+                });
+
+        this.topCategoryIds = CacheBuilder.newBuilder()
+                .expireAfterWrite(1, TimeUnit.HOURS)
+                .build(new CacheLoader<Long, List<Long>>() {
+                    @Override
+                    public List<Long> load(Long key) {
+                        return categoryDao.getTopByBoutCountLocationCategoryType(
+                                key, CategoryType.restaurant.toString());
                     }
                 });
 
@@ -163,7 +174,9 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
             throw new WebApplicationException("zomato request failed", HttpStatus.INTERNAL_SERVER_ERROR_500);
         }
 
-        Map<String, Category> categoryMap = getCategoriesByLocation(location.getLocationId());
+        Map<String, Category> categoryMap = categoryCache.getUnchecked(location.getLocationId())
+                .values().stream().collect(Collectors.toMap(Category::getCategoryName, Function.identity()));
+
         return response.body()
                 .getRestaurants().stream()
                 // filter out cuisines we don't have, likely due to null 'cuisines' on the RestaurantValue
@@ -205,11 +218,11 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
         List<Contestant> contestants = contestantDao.getNewContestantsForUser(
                 kingsUser.getKingsUserId(),
                 category.getCategoryId(),
-                CONTESTANTS_PAGE_MIN_SIZE,
+                KingsConstants.CONTESTANTS_PAGE_MIN_SIZE,
                 offset.orElse(0));
 
-        if (contestants.size() < CONTESTANTS_PAGE_MIN_SIZE) {
-            contestants.addAll(getNewContestantFromZomato(location, category, CONTESTANTS_PAGE_MIN_SIZE - contestants.size()));
+        if (contestants.size() < KingsConstants.CONTESTANTS_PAGE_MIN_SIZE) {
+            contestants.addAll(getNewContestantFromZomato(location, category, KingsConstants.CONTESTANTS_PAGE_MIN_SIZE - contestants.size()));
         }
         return contestants;
     }
@@ -227,11 +240,11 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
                 kingsUser.getKingsUserId(),
                 category.getCategoryId(),
                 challenger.getContestantId(),
-                CONTESTANTS_PAGE_MIN_SIZE,
+                KingsConstants.CONTESTANTS_PAGE_MIN_SIZE,
                 offset.orElse(0));
 
-        if (contestants.size() < CONTESTANTS_PAGE_MIN_SIZE) {
-            contestants.addAll(getNewContestantFromZomato(location, category, CONTESTANTS_PAGE_MIN_SIZE - contestants.size()));
+        if (contestants.size() < KingsConstants.CONTESTANTS_PAGE_MIN_SIZE) {
+            contestants.addAll(getNewContestantFromZomato(location, category, KingsConstants.CONTESTANTS_PAGE_MIN_SIZE - contestants.size()));
         }
         return contestants;
     }
@@ -292,21 +305,20 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
     }
 
     @Override
-    public Map<String, Category> getCategoriesByLocation(Long locationId) {
-        Map<String, Category> categoryMap = categoryCache.getUnchecked(locationId);
+    public Map<Long, Category> getCategoriesByLocation(Long locationId) {
+        return categoryCache.getUnchecked(locationId);
+    }
 
-        if (categoryMap == null) {
-            categoryMap = categoryDao.getByLocationCategoryType(locationId, CategoryType.restaurant.toString())
-                    .stream().collect(Collectors.toMap(
-                            Category::getCategoryName,
-                            Function.identity(),
-                            (v1, v2) -> {
-                                throw new WebApplicationException(String.format("Duplicate key for values %s and %s", v1, v2), HttpStatus.INTERNAL_SERVER_ERROR_500);
-                            },
-                            TreeMap::new
-                    ));
-        }
-        return categoryMap;
+    @Override
+    public List<Category> getTopCategoriesByLocation(Long locationId) {
+        Map<Long, Category> categories = categoryCache.getUnchecked(locationId);
+
+        List<Long> topCatIds = topCategoryIds.getUnchecked(locationId);
+
+        return topCategoryIds.getUnchecked(locationId).stream()
+                .map(categoryId -> categories.get(categoryId))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
     @Override

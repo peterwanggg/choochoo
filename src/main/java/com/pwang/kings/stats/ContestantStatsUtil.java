@@ -50,25 +50,25 @@ public final class ContestantStatsUtil {
                 ));
 
         return contestants.stream()
-                .map(contestant -> {
-                    ContestantStatsApi apiStats;
-                    ContestantStats dbStats = statsMap.get(contestant.getContestantId());
-                    if (dbStats == null) {
-                        apiStats = ImmutableContestantStatsApi.builder().winCount(0).loseCount(0).build();
-                    } else {
-                        ImmutableContestantStatsApi.Builder builder = ImmutableContestantStatsApi.builder().winCount(dbStats.getWinCount()).loseCount(dbStats.getLoseCount());
-                        ContestantRank dbRank = rankMap.get(contestant.getContestantId());
-                        if (dbRank != null) {
-                            builder.putRanks(dbRank.getRankType(), dbRank.getRank());
-//                            builder.putRanks(ImmutableContestantRankApi.builder()
-//                                    .rank(dbRank.getRank()).rankType(dbRank.getRankType()).build());
-                        }
-                        apiStats = builder.build();
-                    }
-                    return ImmutableContestantEntry.builder()
-                            .contestant(contestant).contestantStats(apiStats).build();
-                })
+                .map(contestant -> ImmutableContestantEntry.builder()
+                        .contestant(contestant)
+                        .contestantStats(fromDb(
+                                statsMap.get(contestant.getContestantId()),
+                                rankMap.get(contestant.getContestantId())))
+                        .build())
                 .collect(Collectors.toList());
     }
+
+    public static ContestantStatsApi fromDb(ContestantStats dbStats, ContestantRank dbRank) {
+        if (dbStats == null) {
+            return ImmutableContestantStatsApi.builder().winCount(0).loseCount(0).build();
+        }
+        ImmutableContestantStatsApi.Builder builder = ImmutableContestantStatsApi.builder().winCount(dbStats.getWinCount()).loseCount(dbStats.getLoseCount());
+        if (dbRank != null) {
+            builder.putRanks(dbRank.getRankType(), dbRank.getRank());
+        }
+        return builder.build();
+    }
+
 
 }

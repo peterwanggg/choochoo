@@ -25,6 +25,20 @@ public interface CategoryDao {
     )
     List<Category> getByLocationCategoryType(@Bind("location_id") Long locationId, @Bind("category_type") String categoryType);
 
+    @SqlQuery(
+                    "SELECT " +
+                    "     cat.category_id, " +
+                    "     sum(win_count) + sum(lose_count) AS bouts\n" +
+                    "FROM stats.contestant c,\n" +
+                    "     common.category cat\n" +
+                    "WHERE c.category_id = cat.category_id\n" +
+                    "  AND location_id = :location_id\n" +
+                    "  AND category_type = :category_type\n" +
+                    "GROUP BY cat.category_id\n" +
+                    "ORDER BY bouts DESC"
+    )
+    List<Long> getTopByBoutCountLocationCategoryType(@Bind("location_id") Long locationId, @Bind("category_type") String categoryType);
+
     @GetGeneratedKeys
     @SqlUpdate(
             "INSERT INTO common.category "
