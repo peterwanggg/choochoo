@@ -1,6 +1,8 @@
 package com.pwang.kings.api;
 
+import com.pwang.kings.objects.api.kings.ChallengerResponse;
 import com.pwang.kings.objects.api.kings.ContestantEntry;
+import com.pwang.kings.objects.model.Contestant;
 import com.pwang.kings.objects.model.KingsUser;
 import io.dropwizard.auth.Auth;
 
@@ -20,7 +22,7 @@ public interface ContestantService {
 
     @Path("/challenger")
     @GET
-    List<ContestantEntry> getContestantsForChallenger(
+    ChallengerResponse getContestantsForChallenger(
             @Auth KingsUser kingsUser,
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,
@@ -38,7 +40,7 @@ public interface ContestantService {
 
     @Path("/search")
     @GET
-    List<ContestantEntry> searchByName(
+    List<Contestant> searchByName(
             @Auth KingsUser kingsUser,
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,
