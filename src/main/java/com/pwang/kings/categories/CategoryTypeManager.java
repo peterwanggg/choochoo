@@ -13,7 +13,7 @@ import java.util.Optional;
 /**
  * @author pwang on 12/26/17.
  */
-public interface CategoryManager {
+public interface CategoryTypeManager {
 
     Optional<Location> getLocation(double lat, double lon) throws IOException;
 
@@ -37,6 +37,6 @@ public interface CategoryManager {
     // <CategoryName, Category>
     Map<String, Category> getCategoriesByLocation(Long locationId);
 
-    List<Category> populateCategory(Location location) throws IOException;
+    List<Category> populateLocationCategories(Location location) throws IOException;
 
 }

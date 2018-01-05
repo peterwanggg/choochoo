@@ -4,6 +4,7 @@ import com.pwang.kings.objects.model.Location;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.SingleValueResult;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -33,4 +34,8 @@ public interface LocationDao {
     Optional<Location> getByApiId(@Bind("api_provider_type") String apiProviderType, @Bind("api_provider_id") String apiProviderId);
 
 
+    @SqlQuery(
+            "SELECT * FROM common.location"
+    )
+    List<Location> getAllLocations();
 }

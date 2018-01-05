@@ -8,14 +8,14 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
 
 /**
- * @author pwang on 12/26/17.
+ * @author pwang on 1/4/18.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonDeserialize(as = com.pwang.kings.objects.stats.ImmutableContestantStats.class)
-@JsonSerialize(as = com.pwang.kings.objects.stats.ImmutableContestantStats.class)
+@JsonDeserialize(as = com.pwang.kings.objects.stats.ImmutableContestantRank.class)
+@JsonSerialize(as = com.pwang.kings.objects.stats.ImmutableContestantRank.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Value.Immutable
-public interface ContestantStats {
+public interface ContestantRank {
 
     @JsonProperty
     Long getContestantId();
@@ -24,9 +24,9 @@ public interface ContestantStats {
     Long getCategoryId();
 
     @JsonProperty
-    Integer getWinCount();
+    Integer getRank();
 
     @JsonProperty
-    Integer getLoseCount();
+    RankType getRankType();
 
 }

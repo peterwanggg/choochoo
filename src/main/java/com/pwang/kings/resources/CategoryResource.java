@@ -1,8 +1,8 @@
 package com.pwang.kings.resources;
 
 import com.pwang.kings.api.CategoryService;
-import com.pwang.kings.categories.CategoryManager;
-import com.pwang.kings.categories.CategoryManagerFactory;
+import com.pwang.kings.categories.CategoryTypeManager;
+import com.pwang.kings.categories.CategoryTypeManagerFactory;
 import com.pwang.kings.objects.model.Category;
 import com.pwang.kings.objects.model.CategoryType;
 import com.pwang.kings.objects.model.KingsUser;
@@ -21,18 +21,18 @@ public final class CategoryResource implements CategoryService {
 
     Logger LOGGER = Logger.getLogger(ContestantResource.class);
 
-    private final CategoryManagerFactory categoryManagerFactory;
+    private final CategoryTypeManagerFactory categoryTypeManagerFactory;
 
     public CategoryResource(
-            CategoryManagerFactory categoryManagerFactory) {
+            CategoryTypeManagerFactory categoryTypeManagerFactory) {
 
-        this.categoryManagerFactory = categoryManagerFactory;
+        this.categoryTypeManagerFactory = categoryTypeManagerFactory;
     }
 
     @Override
     public Collection<Category> getCategories(KingsUser kingsUser, Double lat, Double lon, String categoryTypeStr) throws IOException {
         CategoryType categoryType = CategoryType.valueOf(categoryTypeStr);
-        CategoryManager categoryManager = categoryManagerFactory.getCategoryManager(categoryType);
+        CategoryTypeManager categoryManager = categoryTypeManagerFactory.getCategoryManager(categoryType);
 
         Location location = categoryManager.getLocation(lat, lon)
                 .orElseThrow(() -> new WebApplicationException("unsupported location", HttpStatus.NOT_IMPLEMENTED_501));

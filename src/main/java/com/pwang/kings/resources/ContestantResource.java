@@ -1,10 +1,11 @@
 package com.pwang.kings.resources;
 
 import com.pwang.kings.api.ContestantService;
-import com.pwang.kings.categories.CategoryManager;
-import com.pwang.kings.categories.CategoryManagerFactory;
+import com.pwang.kings.categories.CategoryTypeManager;
+import com.pwang.kings.categories.CategoryTypeManagerFactory;
 import com.pwang.kings.db.daos.CategoryDao;
 import com.pwang.kings.db.daos.ContestantDao;
+import com.pwang.kings.db.daos.ContestantRankDao;
 import com.pwang.kings.db.daos.ContestantStatsDao;
 import com.pwang.kings.objects.api.kings.ContestantEntry;
 import com.pwang.kings.objects.model.*;
@@ -25,22 +26,25 @@ public final class ContestantResource implements ContestantService {
 
     Logger LOGGER = Logger.getLogger(ContestantResource.class);
 
-    private final CategoryManagerFactory categoryManagerFactory;
+    private final CategoryTypeManagerFactory categoryTypeManagerFactory;
     private final CategoryDao categoryDao;
     private final ContestantDao contestantDao;
     private final ContestantStatsDao contestantStatsDao;
+    private final ContestantRankDao contestantRankDao;
 
     private final int SEARCH_CONTESTANTS_SIZE_LIMIT = 20;
 
     public ContestantResource(
             ContestantDao contestantDao,
             CategoryDao categoryDao,
-            CategoryManagerFactory categoryManagerFactory,
-            ContestantStatsDao contestantStatsDao) {
+            CategoryTypeManagerFactory categoryTypeManagerFactory,
+            ContestantStatsDao contestantStatsDao,
+            ContestantRankDao contestantRankDao) {
         this.contestantDao = contestantDao;
         this.categoryDao = categoryDao;
-        this.categoryManagerFactory = categoryManagerFactory;
+        this.categoryTypeManagerFactory = categoryTypeManagerFactory;
         this.contestantStatsDao = contestantStatsDao;
+        this.contestantRankDao = contestantRankDao;
     }
 
 
@@ -60,7 +64,7 @@ public final class ContestantResource implements ContestantService {
         Category category = categoryDao.getById(challenger.getCategoryId())
                 .orElseThrow(() ->
                         new WebApplicationException("could not find categoryId " + challenger.getCategoryId(), HttpStatus.BAD_REQUEST_400));
-        CategoryManager categoryManager = categoryManagerFactory.getCategoryManager(category.getCategoryType());
+        CategoryTypeManager categoryManager = categoryTypeManagerFactory.getCategoryManager(category.getCategoryType());
 
         try {
             // 3. get location
@@ -75,7 +79,8 @@ public final class ContestantResource implements ContestantService {
                             category,
                             challenger,
                             Optional.ofNullable(offset)),
-                    contestantStatsDao);
+                    contestantStatsDao,
+                    contestantRankDao);
         } catch (IOException e) {
             LOGGER.error("api exception", e);
             throw new WebApplicationException("could not interact with the dependent API", HttpStatus.INTERNAL_SERVER_ERROR_500);
@@ -94,7 +99,7 @@ public final class ContestantResource implements ContestantService {
         Category category = categoryDao.getById(categoryId)
                 .orElseThrow(() ->
                         new WebApplicationException("could not find categoryId " + categoryId, HttpStatus.BAD_REQUEST_400));
-        CategoryManager categoryManager = categoryManagerFactory.getCategoryManager(category.getCategoryType());
+        CategoryTypeManager categoryManager = categoryTypeManagerFactory.getCategoryManager(category.getCategoryType());
 
         try {
             // 2. get location
@@ -108,7 +113,8 @@ public final class ContestantResource implements ContestantService {
                             location,
                             category,
                             Optional.ofNullable(offset)),
-                    contestantStatsDao);
+                    contestantStatsDao,
+                    contestantRankDao);
         } catch (IOException e) {
             LOGGER.error("api exception", e);
             throw new WebApplicationException("could not interact with the dependent API", HttpStatus.INTERNAL_SERVER_ERROR_500);
@@ -119,7 +125,7 @@ public final class ContestantResource implements ContestantService {
     @Override
     public List<ContestantEntry> searchByName(KingsUser kingsUser, Double lat, Double lon, String categoryTypeStr, String contestantName) {
         CategoryType categoryType = CategoryType.valueOf(categoryTypeStr);
-        CategoryManager categoryManager = categoryManagerFactory.getCategoryManager(categoryType);
+        CategoryTypeManager categoryManager = categoryTypeManagerFactory.getCategoryManager(categoryType);
 
         try {
             Location location = categoryManager.getLocation(lat, lon)
@@ -127,7 +133,8 @@ public final class ContestantResource implements ContestantService {
 
             return ContestantStatsUtil.fetchAndJoinContestantStats(
                     categoryManager.searchContestants(location, contestantName),
-                    contestantStatsDao);
+                    contestantStatsDao,
+                    contestantRankDao);
         } catch (IOException e) {
             LOGGER.error("api exception", e);
             throw new WebApplicationException("could not interact with the dependent API", HttpStatus.INTERNAL_SERVER_ERROR_500);

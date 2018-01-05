@@ -3,7 +3,7 @@ package com.pwang.kings;
 import com.google.maps.GeoApiContext;
 import com.pwang.kings.auth.KingsAuthenticator;
 import com.pwang.kings.auth.KingsAuthorizer;
-import com.pwang.kings.categories.CategoryManagerFactory;
+import com.pwang.kings.categories.CategoryTypeManagerFactory;
 import com.pwang.kings.clients.ZomatoService;
 import com.pwang.kings.db.daos.*;
 import com.pwang.kings.db.util.JacksonMapperFactory;
@@ -14,6 +14,8 @@ import com.pwang.kings.resources.CategoryResource;
 import com.pwang.kings.resources.ContestantResource;
 import com.pwang.kings.resources.StatsResource;
 import com.pwang.kings.serde.ObjectMappers;
+import com.pwang.kings.stats.WinPercentRanker;
+import com.pwang.kings.tasks.ContestantRankerTask;
 import com.pwang.kings.tasks.InitializeCategoryLocationTask;
 import com.pwang.kings.tasks.ManagedPeriodicTask;
 import com.pwang.kings.tasks.MaterializedViewRefreshTask;
@@ -109,16 +111,17 @@ public class KingsApplication extends Application<KingsConfiguration> {
         final BoutDao boutDao = jdbi.onDemand(BoutDao.class);
         final KingsUserDao kingsUserDao = jdbi.onDemand(KingsUserDao.class);
         final ContestantStatsDao contestantStatsDao = jdbi.onDemand(ContestantStatsDao.class);
+        final ContestantRankDao contestantRankDao = jdbi.onDemand(ContestantRankDao.class);
 
         // category manager
-        CategoryManagerFactory categoryManagerFactory = new CategoryManagerFactory(
+        CategoryTypeManagerFactory categoryTypeManagerFactory = new CategoryTypeManagerFactory(
                 zomatoService, locationDao, categoryDao, contestantDao, Optional.ofNullable(configuration.getCityIdOverride()));
 
         // environment setup
         environment.admin().addTask(new InitializeCategoryLocationTask(
                 locationDao,
                 CategoryType.restaurant,
-                categoryManagerFactory.getCategoryManager(CategoryType.restaurant))
+                categoryTypeManagerFactory.getCategoryManager(CategoryType.restaurant))
         );
         environment.jersey().register(new JsonProcessingExceptionMapper(true));
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(KingsUser.class));
@@ -135,18 +138,28 @@ public class KingsApplication extends Application<KingsConfiguration> {
         environment.jersey().register(new ContestantResource(
                 contestantDao,
                 categoryDao,
-                categoryManagerFactory,
-                contestantStatsDao));
+                categoryTypeManagerFactory,
+                contestantStatsDao, contestantRankDao));
         environment.jersey().register(new CategoryResource(
-                categoryManagerFactory));
+                categoryTypeManagerFactory));
         environment.jersey().register(new StatsResource(
                 contestantStatsDao
         ));
 
         // set up background tasks
         final MaterializedViewRefreshTask materializedViewRefreshTask = new MaterializedViewRefreshTask(jdbi, configuration.getRefreshPeriodInSeconds());
-        final Managed managedImplementer = new ManagedPeriodicTask(materializedViewRefreshTask);
-        environment.lifecycle().manage(managedImplementer);
+        final Managed refreshImplementer = new ManagedPeriodicTask(materializedViewRefreshTask);
+        environment.lifecycle().manage(refreshImplementer);
+
+        final ContestantRankerTask contestantRankerTask = new ContestantRankerTask(
+                categoryTypeManagerFactory,
+                contestantStatsDao,
+                contestantRankDao,
+                locationDao,
+                new WinPercentRanker(1),
+                configuration.getRefreshPeriodInSeconds());
+        final Managed rankImplementer = new ManagedPeriodicTask(contestantRankerTask);
+        environment.lifecycle().manage(rankImplementer);
     }
 
     private ZomatoService getZomatoService(String apiKey) {

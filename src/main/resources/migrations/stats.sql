@@ -40,12 +40,13 @@ ON
 CREATE UNIQUE INDEX contestant_stats_idx ON stats.contestant (contestant_id);
 
 
-
-CREATE TABLE stats.contestant_rank
+CREATE TABLE stats.contestant_rank (
     contestant_id BIGSERIAL NOT NULL REFERENCES common.contestant (contestant_id),
     category_id BIGSERIAL NOT NULL REFERENCES common.category (category_id),
-    rank BIGSERIAL
+    rank INT NOT NULL,
+    rank_type text NOT NULL
 );
+CREATE UNIQUE INDEX contestant_rank_idx ON stats.contestant_rank (contestant_id);
 
 
 

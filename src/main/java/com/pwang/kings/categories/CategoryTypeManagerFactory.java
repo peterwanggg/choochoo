@@ -14,18 +14,18 @@ import java.util.Optional;
 /**
  * @author pwang on 12/26/17.
  */
-public class CategoryManagerFactory {
+public class CategoryTypeManagerFactory {
 
-    private final Map<CategoryType, CategoryManager> categoryManagers;
+    private final Map<CategoryType, CategoryTypeManager> categoryTypeManagers;
 
-    public CategoryManagerFactory(
+    public CategoryTypeManagerFactory(
             ZomatoService zomatoService,
             LocationDao locationDao,
             CategoryDao categoryDao,
             ContestantDao contestantDao,
             Optional<Integer> cityIdOverride
     ) {
-        categoryManagers = ImmutableMap.of(
+        categoryTypeManagers = ImmutableMap.of(
                 CategoryType.restaurant, new RestaurantCategoryManager(
                         zomatoService,
                         locationDao,
@@ -35,11 +35,11 @@ public class CategoryManagerFactory {
         );
     }
 
-    public CategoryManager getCategoryManager(CategoryType categoryType) {
-        return categoryManagers.get(categoryType);
+    public CategoryTypeManager getCategoryManager(CategoryType categoryType) {
+        return categoryTypeManagers.get(categoryType);
     }
 
-    public Collection<CategoryManager> getAllCategoryManagers() {
-        return categoryManagers.values();
+    public Collection<CategoryTypeManager> getAllCategoryManagers() {
+        return categoryTypeManagers.values();
     }
 }

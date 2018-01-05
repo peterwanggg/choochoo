@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 /**
  * @author pwang on 12/26/17.
  */
-public final class RestaurantCategoryManager implements CategoryManager {
+public final class RestaurantCategoryManager implements CategoryTypeManager {
 
     private static Logger LOGGER = Logger.getLogger(RestaurantCategoryManager.class);
     private static final int CONTESTANTS_PAGE_MIN_SIZE = 15;
@@ -236,12 +236,10 @@ public final class RestaurantCategoryManager implements CategoryManager {
         return contestants;
     }
 
-
     private List<Contestant> getNewContestantFromZomato(Location location, Category category, int numNeeded) throws IOException {
         int page = 0;
         List<Contestant> insertedContestants = new ArrayList<>();
         if (exhaustedCategories.getUnchecked(category.getCategoryId())) {
-            LOGGER.info("category " + category.getCategoryName() + " is already exhausted");
             LOGGER.debug("category " + category.getCategoryName() + " is already exhausted");
             return insertedContestants;
         }
@@ -312,7 +310,7 @@ public final class RestaurantCategoryManager implements CategoryManager {
     }
 
     @Override
-    public List<Category> populateCategory(Location location) throws IOException {
+    public List<Category> populateLocationCategories(Location location) throws IOException {
         Response<CuisinesResult> response = zomatoService
                 .cuisines(Integer.valueOf(location.getApiProviderId()))
                 .execute();

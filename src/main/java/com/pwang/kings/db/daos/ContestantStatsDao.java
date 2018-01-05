@@ -22,6 +22,10 @@ public interface ContestantStatsDao {
     )
     Optional<ContestantStats> getById(@Bind("contestant_id") Long contestantId);
 
+    @SqlQuery(
+            "SELECT * FROM stats.contestant WHERE category_id = :category_id"
+    )
+    List<ContestantStats> getByCategoryId(@Bind("category_id") Long categoryId);
 
     @SqlQuery(
             "SELECT * FROM stats.contestant WHERE contestant_id IN (<contestant_ids>)"

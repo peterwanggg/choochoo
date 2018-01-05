@@ -1,7 +1,6 @@
 package com.pwang.kings.api;
 
 import com.pwang.kings.objects.api.kings.ContestantEntry;
-import com.pwang.kings.objects.model.Contestant;
 import com.pwang.kings.objects.model.KingsUser;
 import io.dropwizard.auth.Auth;
 

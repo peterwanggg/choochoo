@@ -3,7 +3,7 @@ package com.pwang.kings.tasks;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMultimap;
-import com.pwang.kings.categories.CategoryManager;
+import com.pwang.kings.categories.CategoryTypeManager;
 import com.pwang.kings.db.daos.LocationDao;
 import com.pwang.kings.objects.model.ApiProviderType;
 import com.pwang.kings.objects.model.CategoryType;
@@ -24,12 +24,12 @@ public class InitializeCategoryLocationTask extends PostBodyTask {
     Logger LOGGER = Logger.getLogger(InitializeCategoryLocationTask.class);
 
     private final LocationDao locationDao;
-    private final CategoryManager categoryManager;
+    private final CategoryTypeManager categoryManager;
 
     public InitializeCategoryLocationTask(
             LocationDao locationDao,
             CategoryType categoryType,
-            CategoryManager categoryManager) {
+            CategoryTypeManager categoryManager) {
 
         super("init_" + categoryType.toString());
         this.locationDao = locationDao;
@@ -55,7 +55,7 @@ public class InitializeCategoryLocationTask extends PostBodyTask {
                     .orElseThrow(() -> new WebServiceException("could not find location"));
         }
 
-        categoryManager.populateCategory(location)
+        categoryManager.populateLocationCategories(location)
                 .forEach(category -> LOGGER.info("Created category: " + category));
 
     }

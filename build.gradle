@@ -39,7 +39,6 @@ dependencies {
     compile 'io.dropwizard:dropwizard-db:1.2.2'
     compile group: 'io.dropwizard', name: 'dropwizard-jdbi', version: '1.2.2'
 
-
     // retrofit/okhttp
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.9.1'
@@ -52,8 +51,6 @@ dependencies {
     compile group: 'com.h2database', name: 'h2', version: '1.4.196'
     compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
     compile group: 'org.antlr', name: 'stringtemplate', version: '3.2.1'
-
-
 
     // test
     testCompile 'junit:junit:4.12'
