@@ -71,7 +71,7 @@ run {
 //    args = ['server', 'kings_config.yml']
     args = ['server', 'kings_config_prod.yml']
 }
-run.dependsOn migrate
+//run.dependsOn migrate
 
 task stage(dependsOn: ['build', 'clean'])
 build.mustRunAfter clean
