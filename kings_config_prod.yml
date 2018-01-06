@@ -1,0 +1,18 @@
+insecure: true
+
+googleApiKey: ${GOOGLE_API_KEY}
+zomatoApiKey: ${ZOMATO_API_KEY}
+
+cityIdOverride: 1
+
+refreshPeriodInSeconds: 30
+
+logging:
+  loggers:
+    com.pwang.kings: INFO
+
+database:
+  driverClass: org.postgresql.Driver
+  url: ${JDBC_DATABASE_URL}
+  user: ${JDBC_DATABASE_USERNAME}
+  password: ${JDBC_DATABASE_PASSWORD}
