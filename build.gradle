@@ -66,11 +66,22 @@ dependencies {
 mainClassName = 'com.pwang.kings.KingsApplication'
 jar {
     manifest {
-        attributes 'Main-Class': mainClassName
+
+        attributes(
+                'Implementation-Title': 'Gradle Quickstart',
+                'Implementation-Version': version,
+                'Main-Class': 'com.pwang.kings.KingsApplication'
+        )
     }
 }
 
-
+task runTask (type: JavaExec, dependsOn: classes){
+    if(project.hasProperty('myargs')){
+        args(myargs.split(','))
+    }
+    main = mainClassName
+    classpath = sourceSets.main.runtimeClasspath
+}
 
 run {
 //    args = ['server', 'kings_config.yml']
