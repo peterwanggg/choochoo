@@ -34,6 +34,6 @@ public interface CategoryService {
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,
             @Nullable @QueryParam("limit") Integer limit,
-            @Nullable @QueryParam("contestants") Integer contestantsPerCategory);
+            @Nullable @QueryParam("contestants-limit") Integer contestantsPerCategory);
 
 }

@@ -9,7 +9,7 @@ refreshPeriodInSeconds: 30
 
 logging:
   loggers:
-    com.pwang.kings: DEBUG
+    com.pwang.kings: INFO
 
 database:
   driverClass: org.postgresql.Driver
