@@ -61,20 +61,20 @@ dependencies {
     // annotations
     processor 'org.immutables:value:2.5.5'
 }
-
-migrate {
-    args = ['db', 'migrate', '--schema=common', 'kings_config_prod.yml']
-}
+//
+//task migrate {
+//    args = ['db', 'migrate', '--schema=common', 'kings_config_prod.yml']
+//}
 
 mainClassName = 'com.pwang.kings.KingsApplication'
 run {
+//    args = ['server', 'kings_config.yml']
     args = ['server', 'kings_config_prod.yml']
-//    args = ['db', 'migrate', 'example.yml']
 }
+run.dependsOn migrate
 
-task stage(dependsOn: ['migrate', 'build', 'clean'])
+task stage(dependsOn: ['build', 'clean'])
 build.mustRunAfter clean
-migrate.mustRunAfter build
 
 if (System.env.CI == 'true') {
     println 'is CI build'
