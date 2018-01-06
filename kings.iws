@@ -175,8 +175,8 @@
           <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/build.gradle">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="779">
-                  <caret line="74" column="0" lean-forward="true" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+                <state relative-caret-position="386">
+                  <caret line="65" column="50" lean-forward="false" selection-start-line="65" selection-start-column="50" selection-end-line="65" selection-end-column="50" />
                   <folding />
                 </state>
               </provider>
@@ -197,7 +197,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ON CONFLICT</find>
       <find>rank_type</find>
       <find>contestant_id</find>
       <find>.</find>
@@ -227,6 +226,7 @@
       <find>user</find>
       <find>build</find>
       <find>task</find>
+      <find>main</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -2064,8 +2064,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="779">
-          <caret line="74" column="0" lean-forward="true" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+        <state relative-caret-position="386">
+          <caret line="65" column="50" lean-forward="false" selection-start-line="65" selection-start-column="50" selection-end-line="65" selection-end-column="50" />
           <folding />
         </state>
       </provider>
