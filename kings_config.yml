@@ -3,7 +3,7 @@ insecure: true
 googleApiKey: ${GOOGLE_API_KEY}
 zomatoApiKey: ${ZOMATO_API_KEY}
 
-cityIdOverride: 1
+#cityIdOverride: 1
 
 refreshPeriodInSeconds: 30
 

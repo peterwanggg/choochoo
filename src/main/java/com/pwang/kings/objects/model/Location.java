@@ -30,4 +30,8 @@ public interface Location extends KingsObject {
     @JsonProperty
     String getLocationType();
 
+    @Nullable
+    @JsonProperty
+    Long getParentLocationId();
+
 }

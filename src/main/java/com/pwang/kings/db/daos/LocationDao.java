@@ -21,6 +21,15 @@ public interface LocationDao {
     )
     Long create(@BindBean("location") Location location);
 
+    @GetGeneratedKeys
+    @SqlUpdate(
+            "INSERT INTO common.location "
+                    + "(location_name, location_type, parent_location_id, api_provider_type, api_provider_id) VALUES "
+                    + "(:location.locationName, :location.locationType, :parent_location_id, :location.apiProviderType, :location.apiProviderId) "
+                    + "ON CONFLICT ON CONSTRAINT location_api_key DO NOTHING"
+    )
+    Long create(@BindBean("location") Location location, @Bind("parent_location_id") Long parentLocationId);
+
     @SingleValueResult(Location.class)
     @SqlQuery(
             "SELECT * FROM common.location WHERE location_id = :location_id"

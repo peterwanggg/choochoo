@@ -6,17 +6,17 @@ import com.google.common.cache.LoadingCache;
 import com.pwang.kings.KingsConstants;
 import com.pwang.kings.adapters.zomato.CityToLocationAdapter;
 import com.pwang.kings.adapters.zomato.CuisineToCategoryAdapter;
+import com.pwang.kings.adapters.zomato.LocationToLocationAdapter;
 import com.pwang.kings.adapters.zomato.RestaurantToContestantAdapter;
 import com.pwang.kings.clients.ZomatoConstants;
 import com.pwang.kings.clients.ZomatoService;
 import com.pwang.kings.db.daos.CategoryDao;
 import com.pwang.kings.db.daos.ContestantDao;
 import com.pwang.kings.db.daos.LocationDao;
-import com.pwang.kings.objects.api.zomato.CitiesResult;
-import com.pwang.kings.objects.api.zomato.CuisinesResult;
-import com.pwang.kings.objects.api.zomato.EntityType;
-import com.pwang.kings.objects.api.zomato.SearchResult;
+import com.pwang.kings.objects.api.zomato.*;
 import com.pwang.kings.objects.model.*;
+import com.pwang.kings.objects.model.ImmutableLocation;
+import com.pwang.kings.objects.model.Location;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.http.HttpStatus;
 import retrofit2.Response;
@@ -38,6 +38,7 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
     private static final String DEFAULT_ORDER = ZomatoConstants.Order.desc.toString();
 
     private final CityToLocationAdapter cityToLocationAdapter = new CityToLocationAdapter();
+    private final LocationToLocationAdapter locationToLocationAdapter = new LocationToLocationAdapter();
     private final RestaurantToContestantAdapter restaurantToContestantAdapter = new RestaurantToContestantAdapter();
     private final CuisineToCategoryAdapter cuisineToCategoryAdapter = new CuisineToCategoryAdapter();
 
@@ -110,36 +111,45 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
             return locationDao.getById(cityIdOverride.get());
         }
 
-        Response<CitiesResult> response = zomatoService.cities(lat, lon, null, 1).execute();
+        Response<GeocodeResult> response = zomatoService.geocode(lat, lon).execute();
         if (!response.isSuccessful()) {
             throw new WebApplicationException("zomato request failed", HttpStatus.INTERNAL_SERVER_ERROR_500);
         }
-        return response.body()
-                .locationSuggestions().stream().findFirst()
-                .map(cityToLocationAdapter::adapt)
-                .map(location -> {
-                            Optional<Location> dbLocation = locationDao.getByApiId(location.getApiProviderType(), location.getApiProviderId());
-                            Long locationId;
-                            if (dbLocation.isPresent()) {
-                                locationId = dbLocation.get().getLocationId();
-                            } else {
-                                locationId = locationDao.create(location);
-                            }
-                            return ImmutableLocation.builder()
-                                    .from(location)
-                                    .locationId(locationId)
-                                    .build();
-                        }
-                );
+        com.pwang.kings.objects.api.zomato.Location apiLocation = response.body().location();
+        if (apiLocation == null) {
+            return Optional.empty();
+        }
+
+        // try to get parent locationid
+        LocationType locationType = LocationType.valueOf(apiLocation.entityType());
+        Long parentLocationId = null;
+        // parent is always city
+        if (apiLocation.cityId().isPresent() && locationType != LocationType.city) {
+            parentLocationId = locationDao.getByApiId(
+                    ApiProviderType.zomato.toString(),
+                    ZomatoConstants.toApiProviderId(LocationType.city, apiLocation.cityId().get()))
+                    .map(Location::getLocationId)
+                    .orElseThrow(() -> new WebApplicationException("unsupported location", HttpStatus.NOT_IMPLEMENTED_501));
+        }
+
+        Location location = ImmutableLocation.builder()
+                .from(locationToLocationAdapter.adapt(apiLocation))
+                .parentLocationId(parentLocationId)
+                .build();
+
+        return Optional.of(ImmutableLocation.builder()
+                .from(location)
+                .locationId(locationDao.create(location, location.getParentLocationId()))
+                .build());
+
     }
 
     @Override
-    public List<Location> getLocations(List<String> apiProviderIds) throws IOException {
+    public List<Location> getCities(List<String> cityIds) throws IOException {
         Response<CitiesResult> response = zomatoService.cities(
                 null,
                 null,
-                apiProviderIds.stream().map(Integer::new)
-                        .map(Object::toString)
+                cityIds.stream()
                         .collect(Collectors.joining(",")),
                 null).execute();
         if (!response.isSuccessful()) {
@@ -324,7 +334,7 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
     @Override
     public List<Category> populateLocationCategories(Location location) throws IOException {
         Response<CuisinesResult> response = zomatoService
-                .cuisines(Integer.valueOf(location.getApiProviderId()))
+                .cuisines(Integer.valueOf(ZomatoConstants.locationApiProviderIdToId(location.getApiProviderId())))
                 .execute();
         if (!response.isSuccessful()) {
             throw new WebApplicationException("zomato request failed", HttpStatus.INTERNAL_SERVER_ERROR_500);

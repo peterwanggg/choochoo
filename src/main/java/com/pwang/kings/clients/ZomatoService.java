@@ -2,6 +2,7 @@ package com.pwang.kings.clients;
 
 import com.pwang.kings.objects.api.zomato.CitiesResult;
 import com.pwang.kings.objects.api.zomato.CuisinesResult;
+import com.pwang.kings.objects.api.zomato.GeocodeResult;
 import com.pwang.kings.objects.api.zomato.SearchResult;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -39,5 +40,10 @@ public interface ZomatoService {
     @GET("/api/v2.1/cuisines")
     Call<CuisinesResult> cuisines(
             @Query("city_id") Integer cityId);
+
+    @GET("/api/v2.1/geocode")
+    Call<GeocodeResult> geocode(
+            @Query("lat") Double lat,
+            @Query("lon") Double lon);
 
 }

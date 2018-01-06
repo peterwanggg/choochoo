@@ -9,10 +9,7 @@ import com.pwang.kings.db.daos.*;
 import com.pwang.kings.db.util.JacksonMapperFactory;
 import com.pwang.kings.objects.model.CategoryType;
 import com.pwang.kings.objects.model.KingsUser;
-import com.pwang.kings.resources.BoutResource;
-import com.pwang.kings.resources.CategoryResource;
-import com.pwang.kings.resources.ContestantResource;
-import com.pwang.kings.resources.StatsResource;
+import com.pwang.kings.resources.*;
 import com.pwang.kings.serde.ObjectMappers;
 import com.pwang.kings.stats.WinPercentRanker;
 import com.pwang.kings.tasks.ContestantRankerTask;
@@ -139,11 +136,18 @@ public class KingsApplication extends Application<KingsConfiguration> {
                 contestantDao,
                 categoryDao,
                 categoryTypeManagerFactory,
-                contestantStatsDao, contestantRankDao));
+                contestantStatsDao,
+                contestantRankDao));
         environment.jersey().register(new CategoryResource(
-                categoryTypeManagerFactory, contestantDao, contestantRankDao, contestantStatsDao));
+                categoryTypeManagerFactory,
+                contestantDao,
+                contestantRankDao,
+                contestantStatsDao));
         environment.jersey().register(new StatsResource(
                 contestantStatsDao
+        ));
+        environment.jersey().register(new LocationResource(
+                categoryTypeManagerFactory
         ));
 
         // set up background tasks

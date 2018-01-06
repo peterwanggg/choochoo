@@ -7,6 +7,7 @@ CREATE TABLE common.location (
     location_id BIGSERIAL PRIMARY KEY,
     location_name text NOT NULL,
     location_type text NOT NULL,
+    parent_location_id BIGINT REFERENCES common.location (location_id),
     api_provider_type text NOT NULL,
     api_provider_id text NOT NULL,
     CONSTRAINT location_api_key UNIQUE (api_provider_type, api_provider_id)
