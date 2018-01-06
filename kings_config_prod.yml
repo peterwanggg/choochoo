@@ -16,3 +16,8 @@ database:
   url: ${JDBC_DATABASE_URL}
   user: ${JDBC_DATABASE_USERNAME}
   password: ${JDBC_DATABASE_PASSWORD}
+
+server:
+  applicationConnectors:
+  - type: http
+    port: ${PORT}
