@@ -82,15 +82,16 @@ task runTask (type: JavaExec, dependsOn: classes){
     main = mainClassName
     classpath = sourceSets.main.runtimeClasspath
 }
+//
+//run {
+////    args = ['server', 'kings_config.yml']
+//    args = ['server', 'kings_config_prod.yml']
+//}
 
-run {
-//    args = ['server', 'kings_config.yml']
-    args = ['server', 'kings_config_prod.yml']
-}
 
-
-task stage(dependsOn: ['build', 'clean'])
+task stage(dependsOn: ['build', 'clean', 'installDist'])
 build.mustRunAfter clean
+//build.dependsOn 'kings-web:webjar'
 
 if (System.env.CI == 'true') {
     println 'is CI build'
