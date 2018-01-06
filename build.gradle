@@ -68,6 +68,8 @@ run {
 //    args = ['db', 'migrate', 'example.yml']
 }
 
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
 
 if (System.env.CI == 'true') {
     println 'is CI build'
