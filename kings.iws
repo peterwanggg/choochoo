@@ -2,25 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0e2ffde-93cd-4bfe-b056-558bd096a698" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/adapters/zomato/LocationToLocationAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/api/LocationService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/objects/api/zomato/GeocodeResult.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/objects/api/zomato/Location.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/LocationResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kings.iws" afterPath="$PROJECT_DIR$/kings.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kings_config.yml" afterPath="$PROJECT_DIR$/kings_config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/pwang/kings/KingsApplication.java" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/KingsApplication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/pwang/kings/adapters/zomato/CityToLocationAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/adapters/zomato/CityToLocationAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/pwang/kings/KingsConfiguration.java" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/KingsConfiguration.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/CategoryTypeManager.java" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/CategoryTypeManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/CategoryTypeManagerFactory.java" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/CategoryTypeManagerFactory.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/RestaurantCategoryManager.java" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/RestaurantCategoryManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/pwang/kings/clients/ZomatoConstants.java" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/clients/ZomatoConstants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/pwang/kings/clients/ZomatoService.java" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/clients/ZomatoService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/LocationDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/LocationDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/pwang/kings/objects/model/Location.java" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/objects/model/Location.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/pwang/kings/objects/model/LocationType.java" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/objects/model/LocationType.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/pwang/kings/tasks/InitializeCategoryLocationTask.java" afterPath="$PROJECT_DIR$/src/main/java/com/pwang/kings/tasks/InitializeCategoryLocationTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/migrations/common.sql" afterPath="$PROJECT_DIR$/src/main/resources/migrations/common.sql" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -76,21 +63,21 @@
     <splitter split-orientation="horizontal" split-proportion="0.5250266">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="LocationToLocationAdapter.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/adapters/zomato/LocationToLocationAdapter.java">
+          <file leaf-file-name="CategoryResource.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/CategoryResource.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="240">
-                  <caret line="16" column="20" lean-forward="false" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+                <state relative-caret-position="220">
+                  <caret line="79" column="40" lean-forward="true" selection-start-line="79" selection-start-column="40" selection-end-line="79" selection-end-column="40" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ZomatoService.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/clients/ZomatoService.java">
+          <file leaf-file-name="stats.sql" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/resources/migrations/stats.sql">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="279">
-                  <caret line="33" column="23" lean-forward="false" selection-start-line="33" selection-start-column="23" selection-end-line="33" selection-end-column="23" />
+                <state relative-caret-position="525">
+                  <caret line="35" column="27" lean-forward="true" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
                   <folding />
                 </state>
               </provider>
@@ -99,18 +86,8 @@
           <file leaf-file-name="CategoryTypeManager.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/CategoryTypeManager.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="203">
-                  <caret line="19" column="26" lean-forward="false" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="LocationDao.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/LocationDao.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="415">
-                  <caret line="35" column="5" lean-forward="true" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+                <state relative-caret-position="615">
+                  <caret line="41" column="19" lean-forward="false" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
                   <folding />
                 </state>
               </provider>
@@ -119,8 +96,8 @@
           <file leaf-file-name="InitializeCategoryLocationTask.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/tasks/InitializeCategoryLocationTask.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="444">
-                  <caret line="67" column="36" lean-forward="false" selection-start-line="67" selection-start-column="36" selection-end-line="67" selection-end-column="36" />
+                <state relative-caret-position="804">
+                  <caret line="59" column="44" lean-forward="false" selection-start-line="59" selection-start-column="44" selection-end-line="59" selection-end-column="44" />
                   <folding />
                 </state>
               </provider>
@@ -129,38 +106,8 @@
           <file leaf-file-name="Location.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/objects/model/Location.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="480">
-                  <caret line="32" column="13" lean-forward="true" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="KingsApplication.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/KingsApplication.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="416">
-                  <caret line="184" column="25" lean-forward="true" selection-start-line="184" selection-start-column="25" selection-end-line="184" selection-end-column="25" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="City.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/objects/api/zomato/City.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="120">
-                  <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="CategoryResource.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/CategoryResource.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
-                  <caret line="59" column="67" lean-forward="false" selection-start-line="59" selection-start-column="67" selection-end-line="59" selection-end-column="67" />
+                <state relative-caret-position="386">
+                  <caret line="36" column="1" lean-forward="true" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
                   <folding />
                 </state>
               </provider>
@@ -173,9 +120,16 @@
           <file leaf-file-name="RestaurantCategoryManager.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/RestaurantCategoryManager.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="281">
-                  <caret line="125" column="32" lean-forward="false" selection-start-line="125" selection-start-column="32" selection-end-line="125" selection-end-column="32" />
-                  <folding />
+                <state relative-caret-position="15">
+                  <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#3146#4514#0" expanded="true" />
+                    <element signature="e#4513#4514#0" expanded="true" />
+                    <element signature="e#4650#4968#0" expanded="true" />
+                    <element signature="e#4967#4968#0" expanded="true" />
+                    <element signature="e#5108#5302#0" expanded="true" />
+                    <element signature="e#5301#5302#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -183,38 +137,28 @@
           <file leaf-file-name="ZomatoConstants.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/clients/ZomatoConstants.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="330">
-                  <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+                <state relative-caret-position="345">
+                  <caret line="23" column="19" lean-forward="false" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="CityToLocationAdapter.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/adapters/zomato/CityToLocationAdapter.java">
+          <file leaf-file-name="ZomatoService.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/clients/ZomatoService.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="225">
-                  <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+                <state relative-caret-position="600">
+                  <caret line="40" column="25" lean-forward="false" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="LocationResource.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/LocationResource.java">
+          <file leaf-file-name="CategoryDao.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/CategoryDao.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="370">
-                  <caret line="33" column="41" lean-forward="false" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="LocationType.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/objects/model/LocationType.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="90">
-                  <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+                <state relative-caret-position="375">
+                  <caret line="25" column="4" lean-forward="false" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="19" />
                   <folding />
                 </state>
               </provider>
@@ -235,12 +179,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>EMPTY</find>
-      <find>limit</find>
-      <find>limitlimit</find>
-      <find>categoryCache</find>
-      <find>stat</find>
-      <find>SEARCH_CONTESTANTS_SIZE_LIMIT</find>
       <find>= 20</find>
       <find>UseStringTemplate3StatementLocator</find>
       <find>ImmutableContestantEntry</find>
@@ -265,6 +203,12 @@
       <find>cityToLocationAdapter</find>
       <find>zomato</find>
       <find>501</find>
+      <find>locationId</find>
+      <find>locationid</find>
+      <find>category</find>
+      <find>categoryc</find>
+      <find>getc</find>
+      <find>populateLocationCategories</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -293,8 +237,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/CategoryManagerFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/CategoryTypeManagerFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/ContestantStatsDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/stats/ContestantRanker.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/pwang/kings/stats/WinPercentRankerTest.java" />
@@ -316,7 +258,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/ContestantDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/ContestantRankDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/CategoryResource.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/CategoryDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/objects/api/kings/ChallengerResponse.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/api/ContestantService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/ContestantResource.java" />
@@ -339,10 +280,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/adapters/zomato/CityToLocationAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/adapters/zomato/LocationToLocationAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/objects/model/LocationType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/clients/ZomatoConstants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/LocationDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/CategoryTypeManagerFactory.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/KingsConfiguration.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/CategoryDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/CategoryTypeManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/tasks/InitializeCategoryLocationTask.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/LocationDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/clients/ZomatoConstants.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/RestaurantCategoryManager.java" />
       </list>
     </option>
@@ -1762,24 +1706,24 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32931355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33055556" sideWeight="0.4659212" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993513" sideWeight="0.4659212" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29139686" sideWeight="0.5037274" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2910102" sideWeight="0.43823215" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="false" weight="0.32960597" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3892493" sideWeight="0.5425985" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3892493" sideWeight="0.5425985" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962963" sideWeight="0.4914803" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3888889" sideWeight="0.45740148" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18051118" sideWeight="0.48196116" order="6" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2888889" sideWeight="0.4877529" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28822985" sideWeight="0.4877529" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16932908" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973376" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4986098" sideWeight="0.6522897" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4986098" sideWeight="0.5617678" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17465389" sideWeight="0.51803887" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1806,79 +1750,20 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/pwang/kings/objects/api/kings/ContestantStatsApi.java</url>
-          <line>14</line>
-          <properties />
-          <option name="timeStamp" value="96" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/RestaurantCategoryManager.java</url>
-          <line>299</line>
+          <line>104</line>
           <properties />
-          <option name="timeStamp" value="97" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/RestaurantCategoryManager.java</url>
-          <line>327</line>
-          <properties />
-          <option name="timeStamp" value="100" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/CategoryResource.java</url>
-          <line>82</line>
-          <properties />
-          <option name="timeStamp" value="103" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/RestaurantCategoryManager.java</url>
-          <line>124</line>
-          <properties />
-          <option name="timeStamp" value="104" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/LocationResource.java</url>
-          <line>33</line>
-          <properties />
-          <option name="timeStamp" value="106" />
+          <option name="timeStamp" value="115" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="107" />
+      <option name="time" value="116" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/generated_src/com/pwang/kings/objects/api/kings/ImmutableContestantStatsApi.java" />
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/pwang/kings/objects/api/kings/ContestantStatsApiTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/tasks/ContestantRankerTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="47" column="48" lean-forward="false" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/KingsConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/objects/api/kings/ContestantEntry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="3" lean-forward="false" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_151.jdk/Contents/Home/src.zip!/java/util/stream/IntStream.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
@@ -1970,13 +1855,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/KingsConfiguration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="47" column="23" lean-forward="true" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.dropwizard/dropwizard-db/1.2.2/c393e63992098d73c1f80d8bfcd69e25d521017a/dropwizard-db-1.2.2-sources.jar!/io/dropwizard/db/DataSourceFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
@@ -2049,14 +1927,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/ContestantResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="120" column="0" lean-forward="true" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/objects/api/zomato/CitiesResult.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -2076,31 +1946,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/objects/api/zomato/City.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/CategoryResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="59" column="67" lean-forward="false" selection-start-line="59" selection-start-column="67" selection-end-line="59" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/KingsApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="184" column="25" lean-forward="true" selection-start-line="184" selection-start-column="25" selection-end-line="184" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/migrations/common.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="38" lean-forward="true" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2109,14 +1955,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="16" column="40" lean-forward="true" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/CategoryDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="25" column="33" lean-forward="false" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -2161,38 +1999,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/adapters/zomato/LocationToLocationAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="20" lean-forward="false" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/clients/ZomatoService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="33" column="23" lean-forward="false" selection-start-line="33" selection-start-column="23" selection-end-line="33" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/CategoryTypeManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="19" column="26" lean-forward="false" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/objects/model/Location.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="13" lean-forward="true" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/generated_src/com/pwang/kings/objects/model/ImmutableLocation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
@@ -2201,35 +2007,162 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/LocationDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/adapters/zomato/LocationToLocationAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="35" column="5" lean-forward="true" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+        <state relative-caret-position="240">
+          <caret line="16" column="20" lean-forward="false" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/tasks/InitializeCategoryLocationTask.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/ContestantResource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="67" column="36" lean-forward="false" selection-start-line="67" selection-start-column="36" selection-end-line="67" selection-end-column="36" />
+        <state relative-caret-position="107">
+          <caret line="55" column="20" lean-forward="false" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_151.jdk/Contents/Home/src.zip!/java/lang/Integer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="51" column="19" lean-forward="false" selection-start-line="51" selection-start-column="19" selection-end-line="51" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/migrations/common.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="38" lean-forward="true" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/LocationDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="750">
+          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/CategoryTypeManagerFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="20" column="29" lean-forward="true" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/KingsApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="114" column="111" lean-forward="false" selection-start-line="114" selection-start-column="111" selection-end-line="114" selection-end-column="111" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/KingsConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="17" column="16" lean-forward="false" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/23.1-jre/7eb5129b799d1e8b72ab8ed5adee3390c188e01d/guava-23.1-jre-sources.jar!/com/google/common/cache/LoadingCache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-55">
+          <caret line="92" column="4" lean-forward="false" selection-start-line="92" selection-start-column="4" selection-end-line="92" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_151.jdk/Contents/Home/jre/lib/rt.jar!/sun/nio/ch/ServerSocketChannelImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="364" column="23" lean-forward="false" selection-start-line="364" selection-start-column="23" selection-end-line="364" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/objects/model/Location.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="36" column="1" lean-forward="true" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/resources/CategoryResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="79" column="40" lean-forward="true" selection-start-line="79" selection-start-column="40" selection-end-line="79" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/db/daos/CategoryDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="4" lean-forward="false" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/clients/ZomatoService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="40" column="25" lean-forward="false" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/clients/ZomatoConstants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state relative-caret-position="345">
+          <caret line="23" column="19" lean-forward="false" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/migrations/stats.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" column="27" lean-forward="true" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/CategoryTypeManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="19" lean-forward="false" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/tasks/InitializeCategoryLocationTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="804">
+          <caret line="59" column="44" lean-forward="false" selection-start-line="59" selection-start-column="44" selection-end-line="59" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/pwang/kings/categories/RestaurantCategoryManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="125" column="32" lean-forward="false" selection-start-line="125" selection-start-column="32" selection-end-line="125" selection-end-column="32" />
-          <folding />
+        <state relative-caret-position="15">
+          <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+          <folding>
+            <element signature="e#3146#4514#0" expanded="true" />
+            <element signature="e#4513#4514#0" expanded="true" />
+            <element signature="e#4650#4968#0" expanded="true" />
+            <element signature="e#4967#4968#0" expanded="true" />
+            <element signature="e#5108#5302#0" expanded="true" />
+            <element signature="e#5301#5302#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

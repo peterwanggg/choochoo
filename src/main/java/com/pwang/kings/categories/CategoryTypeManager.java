@@ -17,7 +17,7 @@ public interface CategoryTypeManager {
 
     Optional<Location> getLocation(double lat, double lon) throws IOException;
 
-    List<Location> getCities(List<String> apiProviderIds) throws IOException;
+    List<Location> getCitiesAndCreate(List<String> apiProviderIds) throws IOException;
 
     List<Contestant> getContestants(
             KingsUser kingsUser,

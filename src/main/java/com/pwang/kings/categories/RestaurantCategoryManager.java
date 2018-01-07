@@ -47,11 +47,13 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
     private final CategoryDao categoryDao;
     private final ContestantDao contestantDao;
 
-    private final Optional<Integer> cityIdOverride;
+    private final Optional<Long> cityIdOverride;
 
-    // <LocationId, <CategoryName, Category>
+    // <LocationId, <CategoryId, Category>
     private final LoadingCache<Long, Map<Long, Category>> categoryCache;
+    // <LocationId, CategoryId>
     private final LoadingCache<Long, List<Long>> topCategoryIds;
+    // <CategoryId, isExhausted>
     private final LoadingCache<Long, Boolean> exhaustedCategories;
 
     RestaurantCategoryManager(
@@ -59,7 +61,7 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
             LocationDao locationDao,
             CategoryDao categoryDao,
             ContestantDao contestantDao,
-            Optional<Integer> cityIdOverride) {
+            Optional<Long> cityIdOverride) {
         this.zomatoService = zomatoService;
         this.locationDao = locationDao;
         this.categoryDao = categoryDao;
@@ -73,7 +75,17 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
                 .build(new CacheLoader<Long, Map<Long, Category>>() {
                     @Override
                     public Map<Long, Category> load(Long key) throws Exception {
-                        return categoryDao.getByLocationCategoryType(key, CategoryType.restaurant.toString())
+                        List<Category> categories = categoryDao.getByLocationCategoryType(key, CategoryType.restaurant.toString());
+                        if (categories.isEmpty()) {
+                            Optional<Location> location = locationDao.getById(key);
+                            if (location.isPresent()) {
+                                categories = populateLocationCategories(location.get());
+                            } else {
+                                categories = new ArrayList<>();
+                            }
+                        }
+
+                        return categories
                                 .stream().collect(Collectors.toMap(
                                         Category::getCategoryId,
                                         Function.identity(),
@@ -120,8 +132,15 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
             return Optional.empty();
         }
 
-        // try to get parent locationid
+        // try to get from db
         LocationType locationType = LocationType.valueOf(apiLocation.entityType());
+        Optional<Location> dbLocation = locationDao.getByApiId(ApiProviderType.zomato.toString(),
+                ZomatoConstants.toApiProviderId(locationType, apiLocation.entityId()));
+        if (dbLocation.isPresent()) {
+            return dbLocation;
+        }
+
+        // try to get parent locationid
         Long parentLocationId = null;
         // parent is always city
         if (apiLocation.cityId().isPresent() && locationType != LocationType.city) {
@@ -145,7 +164,7 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
     }
 
     @Override
-    public List<Location> getCities(List<String> cityIds) throws IOException {
+    public List<Location> getCitiesAndCreate(List<String> cityIds) throws IOException {
         Response<CitiesResult> response = zomatoService.cities(
                 null,
                 null,
@@ -321,11 +340,10 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
 
     @Override
     public List<Category> getTopCategoriesByLocation(Long locationId) {
+
         Map<Long, Category> categories = categoryCache.getUnchecked(locationId);
-
-        List<Long> topCatIds = topCategoryIds.getUnchecked(locationId);
-
-        return topCategoryIds.getUnchecked(locationId).stream()
+        return topCategoryIds.getUnchecked(locationId)
+                .stream()
                 .map(categoryId -> categories.get(categoryId))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
@@ -333,8 +351,14 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
 
     @Override
     public List<Category> populateLocationCategories(Location location) throws IOException {
+        Optional<Location> parentLocation = Optional.empty();
+        if (location.getParentLocationId() != null) {
+            parentLocation = locationDao.getById(location.getParentLocationId());
+        }
+        String apiLocationId = parentLocation.map(Location::getApiProviderId).orElse(location.getApiProviderId());
+
         Response<CuisinesResult> response = zomatoService
-                .cuisines(Integer.valueOf(ZomatoConstants.locationApiProviderIdToId(location.getApiProviderId())))
+                .cuisines(Integer.valueOf(ZomatoConstants.locationApiProviderIdToId(apiLocationId)))
                 .execute();
         if (!response.isSuccessful()) {
             throw new WebApplicationException("zomato request failed", HttpStatus.INTERNAL_SERVER_ERROR_500);

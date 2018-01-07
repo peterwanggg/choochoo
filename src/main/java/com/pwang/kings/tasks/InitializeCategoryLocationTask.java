@@ -57,16 +57,12 @@ public class InitializeCategoryLocationTask extends PostBodyTask {
                 locationApiProviderType.toString(),
                 ZomatoConstants.toApiProviderId(LocationType.city, Integer.valueOf(locationApiProviderId)));
         Location location;
-        if (locationOptional.isPresent()) {
-            location = locationOptional.get();
-        } else {
-            location = categoryManager.getCities(ImmutableList.of(locationApiProviderId))
+        if (!locationOptional.isPresent()) {
+            // will create city if not there
+            location = categoryManager.getCitiesAndCreate(ImmutableList.of(locationApiProviderId))
                     .stream().findFirst()
                     .orElseThrow(() -> new WebServiceException("could not find location"));
         }
-
-        categoryManager.populateLocationCategories(location)
-                .forEach(category -> LOGGER.info("Created category: " + category));
 
     }
 }

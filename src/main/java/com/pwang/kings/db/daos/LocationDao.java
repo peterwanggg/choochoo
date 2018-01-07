@@ -34,7 +34,7 @@ public interface LocationDao {
     @SqlQuery(
             "SELECT * FROM common.location WHERE location_id = :location_id"
     )
-    Optional<Location> getById(@Bind("location_id") Integer locationId);
+    Optional<Location> getById(@Bind("location_id") Long locationId);
 
     @SingleValueResult(Location.class)
     @SqlQuery(

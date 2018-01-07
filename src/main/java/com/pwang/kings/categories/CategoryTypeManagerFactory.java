@@ -23,7 +23,7 @@ public class CategoryTypeManagerFactory {
             LocationDao locationDao,
             CategoryDao categoryDao,
             ContestantDao contestantDao,
-            Optional<Integer> cityIdOverride
+            Optional<Long> cityIdOverride
     ) {
         categoryTypeManagers = ImmutableMap.of(
                 CategoryType.restaurant, new RestaurantCategoryManager(

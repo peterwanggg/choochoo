@@ -15,7 +15,7 @@ public class KingsConfiguration extends Configuration {
     private String googleApiKey;
     @NotEmpty
     private String zomatoApiKey;
-    private Integer cityIdOverride;
+    private Long cityIdOverride;
     @NotNull
     private Integer refreshPeriodInSeconds;
 
@@ -65,12 +65,12 @@ public class KingsConfiguration extends Configuration {
     }
 
     @JsonProperty("cityIdOverride")
-    public Integer getCityIdOverride() {
+    public Long getCityIdOverride() {
         return cityIdOverride;
     }
 
     @JsonProperty("cityIdOverride")
-    public void setCityIdOverride(Integer cityIdOverride) {
+    public void setCityIdOverride(Long cityIdOverride) {
         this.cityIdOverride = cityIdOverride;
     }
 
