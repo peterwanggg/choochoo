@@ -21,8 +21,13 @@ public interface ZomatoConstants {
         return locationType.toString() + ":" + id;
     }
 
-    static Integer locationApiProviderIdToId(String apiProviderId) {
-        String[] parts = apiProviderId.split(":");
+    static LocationType locationApiProviderIdToLocationType(String locationApiProviderId) {
+        String[] parts = locationApiProviderId.split(":");
+        return LocationType.valueOf(parts[0]);
+    }
+
+    static Integer locationApiProviderIdToId(String locationApiProviderId) {
+        String[] parts = locationApiProviderId.split(":");
         if (parts.length == 1) {
             return Integer.valueOf(parts[0]);
         }

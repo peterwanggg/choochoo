@@ -190,8 +190,8 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
     @Override
     public List<Contestant> searchContestants(Location location, String contestantName) throws IOException {
         Response<SearchResult> response = zomatoService.search(
-                Integer.valueOf(location.getApiProviderId()),
-                EntityType.city.toString(),
+                ZomatoConstants.locationApiProviderIdToId(location.getApiProviderId()),
+                ZomatoConstants.locationApiProviderIdToLocationType(location.getApiProviderId()).toString(),
                 contestantName,
                 null,
                 null,
@@ -288,8 +288,8 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
 
         while (insertedContestants.size() < numNeeded) {
             Response<SearchResult> response = zomatoService.search(
-                    Integer.valueOf(location.getApiProviderId()),
-                    EntityType.city.toString(),
+                    ZomatoConstants.locationApiProviderIdToId(location.getApiProviderId()),
+                    ZomatoConstants.locationApiProviderIdToLocationType(location.getApiProviderId()).toString(),
                     null,
                     category.getApiProviderId(),
                     null,

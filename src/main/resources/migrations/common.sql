@@ -31,7 +31,7 @@ CREATE TABLE common.contestant (
     image_url text NOT NULL,
     api_provider_type text NOT NULL,
     api_provider_id text NOT NULL,
-    CONSTRAINT contestant_api_key UNIQUE (api_provider_type, api_provider_id),
+    CONSTRAINT contestant_api_key UNIQUE (category_id, api_provider_type, api_provider_id),
     CONSTRAINT category_contestant_key UNIQUE (category_id, contestant_id)
 );
 CREATE INDEX contestant_category_id_idx ON common.contestant(category_id);
