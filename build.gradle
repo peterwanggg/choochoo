@@ -75,8 +75,8 @@ jar {
     }
 }
 
-task runTask (type: JavaExec, dependsOn: classes){
-    if(project.hasProperty('myargs')){
+task runTask(type: JavaExec, dependsOn: classes) {
+    if (project.hasProperty('myargs')) {
         args(myargs.split(','))
     }
     main = mainClassName

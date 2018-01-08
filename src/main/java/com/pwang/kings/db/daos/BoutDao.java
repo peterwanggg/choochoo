@@ -19,9 +19,9 @@ public interface BoutDao {
     Long create(@BindBean("bout") Bout bout);
 
     @SqlQuery(
-            "SELECT * FROM common.bout WHERE winner_contestant_id = :contestant_id or loser_contestant_id = :contestant_id;"
+            "SELECT * FROM common.bout WHERE category_id = :category_id AND kings_user_id = :user_id"
     )
-    List<Bout> getContestantBouts(@Bind("contestant_id") Long contestantId);
+    List<Bout> getBoutsByUserCategory(@Bind("category_id") Long categoryId, @Bind("user_id") Long userId);
 
 
 }

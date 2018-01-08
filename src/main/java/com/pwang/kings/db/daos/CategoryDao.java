@@ -26,7 +26,7 @@ public interface CategoryDao {
     List<Category> getByLocationCategoryType(@Bind("location_id") Long locationId, @Bind("category_type") String categoryType);
 
     @SqlQuery(
-                    "SELECT " +
+            "SELECT " +
                     "     cat.category_id, " +
                     "     sum(win_count) + sum(lose_count) AS bouts\n" +
                     "FROM stats.contestant c,\n" +

@@ -13,10 +13,11 @@ import com.pwang.kings.clients.ZomatoService;
 import com.pwang.kings.db.daos.CategoryDao;
 import com.pwang.kings.db.daos.ContestantDao;
 import com.pwang.kings.db.daos.LocationDao;
-import com.pwang.kings.objects.api.zomato.*;
+import com.pwang.kings.objects.api.zomato.CitiesResult;
+import com.pwang.kings.objects.api.zomato.CuisinesResult;
+import com.pwang.kings.objects.api.zomato.GeocodeResult;
+import com.pwang.kings.objects.api.zomato.SearchResult;
 import com.pwang.kings.objects.model.*;
-import com.pwang.kings.objects.model.ImmutableLocation;
-import com.pwang.kings.objects.model.Location;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.http.HttpStatus;
 import retrofit2.Response;
@@ -98,10 +99,11 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
                 });
 
         this.topCategoryIds = CacheBuilder.newBuilder()
-                .expireAfterWrite(1, TimeUnit.HOURS)
+                .expireAfterWrite(1, TimeUnit.MINUTES)
                 .build(new CacheLoader<Long, List<Long>>() {
                     @Override
                     public List<Long> load(Long key) {
+                        LOGGER.debug("refreshing top categories for location " + key);
                         return categoryDao.getTopByBoutCountLocationCategoryType(
                                 key, CategoryType.restaurant.toString());
                     }
@@ -340,7 +342,6 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
 
     @Override
     public List<Category> getTopCategoriesByLocation(Long locationId) {
-
         Map<Long, Category> categories = categoryCache.getUnchecked(locationId);
         return topCategoryIds.getUnchecked(locationId)
                 .stream()

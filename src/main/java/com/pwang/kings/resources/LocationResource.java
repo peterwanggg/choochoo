@@ -21,7 +21,7 @@ public final class LocationResource implements LocationService {
 
     private final CategoryTypeManagerFactory categoryTypeManagerFactory;
 
-    public LocationResource(CategoryTypeManagerFactory categoryTypeManagerFactory){
+    public LocationResource(CategoryTypeManagerFactory categoryTypeManagerFactory) {
         this.categoryTypeManagerFactory = categoryTypeManagerFactory;
     }
 

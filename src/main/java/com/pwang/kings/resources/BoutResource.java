@@ -4,6 +4,8 @@ import com.pwang.kings.api.BoutService;
 import com.pwang.kings.db.daos.BoutDao;
 import com.pwang.kings.objects.action.Bout;
 import com.pwang.kings.objects.action.ImmutableBout;
+import com.pwang.kings.objects.api.kings.BoutHistoryResponse;
+import com.pwang.kings.objects.api.kings.ImmutableBoutHistoryResponse;
 import com.pwang.kings.objects.model.KingsUser;
 import org.apache.log4j.Logger;
 import org.skife.jdbi.v2.exceptions.UnableToExecuteStatementException;
@@ -27,7 +29,6 @@ public final class BoutResource implements BoutService {
 
     @Override
     public Response submit(KingsUser kingsUser, Long categoryId, long winnerContestantId, long loserContestantId) {
-
         Bout bout = ImmutableBout.builder()
                 .categoryId(categoryId)
                 .winnerContestantId(winnerContestantId)
@@ -43,5 +44,12 @@ public final class BoutResource implements BoutService {
         }
 
         return Response.ok().build();
+    }
+
+    @Override
+    public BoutHistoryResponse getBoutHistory(KingsUser kingsUser, Long categoryId) {
+        return ImmutableBoutHistoryResponse.builder()
+                .addAllBouts(boutDao.getBoutsByUserCategory(categoryId, kingsUser.getKingsUserId()))
+                .build();
     }
 }

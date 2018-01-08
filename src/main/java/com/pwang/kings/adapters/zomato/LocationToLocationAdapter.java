@@ -10,7 +10,7 @@ import com.pwang.kings.objects.model.LocationType;
 /**
  * @author pwang on 1/6/18.
  */
-public class LocationToLocationAdapter implements ZomatoAdapter<com.pwang.kings.objects.api.zomato.Location, Location>{
+public class LocationToLocationAdapter implements ZomatoAdapter<com.pwang.kings.objects.api.zomato.Location, Location> {
 
 
     @Override
