@@ -2,6 +2,7 @@ package com.pwang.kings.api;
 
 import com.pwang.kings.objects.api.kings.ChallengerResponse;
 import com.pwang.kings.objects.api.kings.ContestantEntry;
+import com.pwang.kings.objects.api.kings.ContestantsResponse;
 import com.pwang.kings.objects.model.Contestant;
 import com.pwang.kings.objects.model.KingsUser;
 import io.dropwizard.auth.Auth;
@@ -31,7 +32,7 @@ public interface ContestantService {
 
     @Path("/category")
     @GET
-    List<ContestantEntry> getContestantsForCategory(
+    ContestantsResponse getContestantsForCategory(
             @Auth KingsUser kingsUser,
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,

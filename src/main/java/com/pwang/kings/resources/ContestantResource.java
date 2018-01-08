@@ -4,13 +4,11 @@ import com.google.common.collect.ImmutableList;
 import com.pwang.kings.api.ContestantService;
 import com.pwang.kings.categories.CategoryTypeManager;
 import com.pwang.kings.categories.CategoryTypeManagerFactory;
-import com.pwang.kings.db.daos.CategoryDao;
-import com.pwang.kings.db.daos.ContestantDao;
-import com.pwang.kings.db.daos.ContestantRankDao;
-import com.pwang.kings.db.daos.ContestantStatsDao;
+import com.pwang.kings.db.daos.*;
 import com.pwang.kings.objects.api.kings.ChallengerResponse;
-import com.pwang.kings.objects.api.kings.ContestantEntry;
+import com.pwang.kings.objects.api.kings.ContestantsResponse;
 import com.pwang.kings.objects.api.kings.ImmutableChallengerResponse;
+import com.pwang.kings.objects.api.kings.ImmutableContestantsResponse;
 import com.pwang.kings.objects.model.*;
 import com.pwang.kings.stats.ContestantStatsUtil;
 import org.apache.log4j.Logger;
@@ -34,6 +32,7 @@ public final class ContestantResource implements ContestantService {
     private final ContestantDao contestantDao;
     private final ContestantStatsDao contestantStatsDao;
     private final ContestantRankDao contestantRankDao;
+    private final BoutDao boutDao;
 
     private final int SEARCH_CONTESTANTS_SIZE_LIMIT = 20;
 
@@ -42,12 +41,14 @@ public final class ContestantResource implements ContestantService {
             CategoryDao categoryDao,
             CategoryTypeManagerFactory categoryTypeManagerFactory,
             ContestantStatsDao contestantStatsDao,
-            ContestantRankDao contestantRankDao) {
+            ContestantRankDao contestantRankDao,
+            BoutDao boutDao) {
         this.contestantDao = contestantDao;
         this.categoryDao = categoryDao;
         this.categoryTypeManagerFactory = categoryTypeManagerFactory;
         this.contestantStatsDao = contestantStatsDao;
         this.contestantRankDao = contestantRankDao;
+        this.boutDao = boutDao;
     }
 
 
@@ -77,7 +78,8 @@ public final class ContestantResource implements ContestantService {
             // 4. get contestants and status
             return ImmutableChallengerResponse.builder()
                     .addAllContestants(
-                            ContestantStatsUtil.fetchAndJoinContestantStats(
+                            ContestantStatsUtil.fetchAndJoinContestantStatsAndBouts(
+                                    kingsUser.getKingsUserId(),
                                     categoryManager.getChallengers(
                                             kingsUser,
                                             location,
@@ -85,12 +87,15 @@ public final class ContestantResource implements ContestantService {
                                             challenger,
                                             Optional.ofNullable(offset)),
                                     contestantStatsDao,
-                                    contestantRankDao))
+                                    contestantRankDao,
+                                    boutDao))
                     .challenger(
-                            ContestantStatsUtil.fetchAndJoinContestantStats(
+                            ContestantStatsUtil.fetchAndJoinContestantStatsAndBouts(
+                                    kingsUser.getKingsUserId(),
                                     ImmutableList.of(challenger),
                                     contestantStatsDao,
-                                    contestantRankDao).stream().findFirst()
+                                    contestantRankDao,
+                                    boutDao).stream().findFirst()
                                     .orElseThrow(() ->
                                             new WebApplicationException("invalid challenger-contestant-id: " + challengerContestantId, HttpStatus.BAD_REQUEST_400)))
                     .build();
@@ -101,7 +106,7 @@ public final class ContestantResource implements ContestantService {
     }
 
     @Override
-    public List<ContestantEntry> getContestantsForCategory(
+    public ContestantsResponse getContestantsForCategory(
             KingsUser kingsUser,
             Double lat,
             Double lon,
@@ -120,14 +125,19 @@ public final class ContestantResource implements ContestantService {
                     .orElseThrow(() -> new WebApplicationException("unsupported location", HttpStatus.NOT_IMPLEMENTED_501));
 
             // 3. get contestants
-            return ContestantStatsUtil.fetchAndJoinContestantStats(
-                    categoryManager.getContestants(
-                            kingsUser,
-                            location,
-                            category,
-                            Optional.ofNullable(offset)),
-                    contestantStatsDao,
-                    contestantRankDao);
+            return ImmutableContestantsResponse.builder()
+                    .contestants(
+                            ContestantStatsUtil.fetchAndJoinContestantStatsAndBouts(
+                                    kingsUser.getKingsUserId(),
+                                    categoryManager.getContestants(
+                                            kingsUser,
+                                            location,
+                                            category,
+                                            Optional.ofNullable(offset)),
+                                    contestantStatsDao,
+                                    contestantRankDao,
+                                    boutDao))
+                    .build();
         } catch (IOException e) {
             LOGGER.error("api exception", e);
             throw new WebApplicationException("could not interact with the dependent API", HttpStatus.INTERNAL_SERVER_ERROR_500);
@@ -143,7 +153,6 @@ public final class ContestantResource implements ContestantService {
         try {
             Location location = categoryManager.getLocation(lat, lon)
                     .orElseThrow(() -> new WebApplicationException("unsupported location", HttpStatus.NOT_IMPLEMENTED_501));
-
 
             return categoryManager.searchContestants(location, contestantName);
         } catch (IOException e) {

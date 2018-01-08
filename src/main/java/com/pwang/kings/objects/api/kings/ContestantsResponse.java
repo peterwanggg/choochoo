@@ -11,11 +11,12 @@ import java.util.List;
 /**
  * @author pwang on 1/7/18.
  */
-@JsonDeserialize(as = com.pwang.kings.objects.api.kings.ImmutableBoutHistoryResponse.class)
-@JsonSerialize(as = com.pwang.kings.objects.api.kings.ImmutableBoutHistoryResponse.class)
+@JsonDeserialize(as = com.pwang.kings.objects.api.kings.ImmutableContestantsResponse.class)
+@JsonSerialize(as = com.pwang.kings.objects.api.kings.ImmutableContestantsResponse.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Value.Immutable
-public interface BoutHistoryResponse {
+public interface ContestantsResponse {
 
-    List<Bout> bouts();
+    List<ContestantEntry> contestants();
+
 }

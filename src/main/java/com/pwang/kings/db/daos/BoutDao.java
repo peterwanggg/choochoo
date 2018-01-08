@@ -2,12 +2,15 @@ package com.pwang.kings.db.daos;
 
 import com.pwang.kings.objects.action.Bout;
 import org.skife.jdbi.v2.sqlobject.*;
+import org.skife.jdbi.v2.sqlobject.stringtemplate.UseStringTemplate3StatementLocator;
+import org.skife.jdbi.v2.unstable.BindIn;
 
 import java.util.List;
 
 /**
  * @author pwang on 12/:contestant_id/17.
  */
+@UseStringTemplate3StatementLocator
 public interface BoutDao {
 
     @GetGeneratedKeys
@@ -19,9 +22,10 @@ public interface BoutDao {
     Long create(@BindBean("bout") Bout bout);
 
     @SqlQuery(
-            "SELECT * FROM common.bout WHERE category_id = :category_id AND kings_user_id = :user_id"
+            "SELECT * FROM common.bout WHERE kings_user_id = :user_id " +
+                    "AND ( winner_contestant_id IN (<contestant_ids>) OR loser_contestant_id IN (<contestant_ids>) )"
     )
-    List<Bout> getBoutsByUserCategory(@Bind("category_id") Long categoryId, @Bind("user_id") Long userId);
+    List<Bout> getBoutsByUserAndContestantIds(@Bind("user_id") Long userId, @BindIn("contestant_ids") List<Long> contestantIds);
 
 
 }
