@@ -58,7 +58,7 @@ public final class ContestantResource implements ContestantService {
             Double lat,
             Double lon,
             Long challengerContestantId,
-            Integer offset
+            Integer page
     ) {
         // 1. get challenger contestant
         Contestant challenger = contestantDao.getById(challengerContestantId).orElseThrow(() ->
@@ -85,7 +85,7 @@ public final class ContestantResource implements ContestantService {
                                             location,
                                             category,
                                             challenger,
-                                            Optional.ofNullable(offset)),
+                                            Optional.ofNullable(page)),
                                     contestantStatsDao,
                                     contestantRankDao,
                                     boutDao))
@@ -111,7 +111,7 @@ public final class ContestantResource implements ContestantService {
             Double lat,
             Double lon,
             Long categoryId,
-            Integer offset
+            Integer page
     ) {
         // 1. get category and manager
         Category category = categoryDao.getById(categoryId)
@@ -133,7 +133,7 @@ public final class ContestantResource implements ContestantService {
                                             kingsUser,
                                             location,
                                             category,
-                                            Optional.ofNullable(offset)),
+                                            Optional.ofNullable(page)),
                                     contestantStatsDao,
                                     contestantRankDao,
                                     boutDao))

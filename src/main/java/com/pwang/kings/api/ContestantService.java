@@ -1,7 +1,6 @@
 package com.pwang.kings.api;
 
 import com.pwang.kings.objects.api.kings.ChallengerResponse;
-import com.pwang.kings.objects.api.kings.ContestantEntry;
 import com.pwang.kings.objects.api.kings.ContestantsResponse;
 import com.pwang.kings.objects.model.Contestant;
 import com.pwang.kings.objects.model.KingsUser;
@@ -28,7 +27,7 @@ public interface ContestantService {
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,
             @NotNull @QueryParam("challenger-contestant-id") Long contestantId,
-            @Nullable @QueryParam("offset") Integer offset);
+            @Nullable @QueryParam("page") Integer page);
 
     @Path("/category")
     @GET
@@ -37,7 +36,7 @@ public interface ContestantService {
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,
             @NotNull @QueryParam("category-id") Long categoryId,
-            @Nullable @QueryParam("offset") Integer offset);
+            @Nullable @QueryParam("page") Integer page);
 
     @Path("/search")
     @GET

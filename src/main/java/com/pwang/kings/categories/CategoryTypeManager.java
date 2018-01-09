@@ -23,7 +23,7 @@ public interface CategoryTypeManager {
             KingsUser kingsUser,
             Location location,
             Category category,
-            Optional<Integer> offset) throws IOException;
+            Optional<Integer> page) throws IOException;
 
     List<Contestant> searchContestants(Location location, String contestantName) throws IOException;
 
@@ -32,7 +32,7 @@ public interface CategoryTypeManager {
             Location location,
             Category category,
             Contestant challenger,
-            Optional<Integer> offset) throws IOException;
+            Optional<Integer> page) throws IOException;
 
     // <CategoryId, Category>
     Map<Long, Category> getCategoriesByLocation(Long locationId);

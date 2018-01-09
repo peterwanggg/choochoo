@@ -1,5 +1,6 @@
 package com.pwang.kings.db.daos;
 
+import com.pwang.kings.db.util.SqlLogger;
 import com.pwang.kings.objects.model.Contestant;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.SingleValueResult;
@@ -12,6 +13,7 @@ import java.util.Optional;
 /**
  * @author pwang on 12/27/17.
  */
+@SqlLogger
 @UseStringTemplate3StatementLocator
 public interface ContestantDao {
 
@@ -80,7 +82,8 @@ public interface ContestantDao {
 //    )
     @SqlQuery(
             "SELECT * FROM common.contestant WHERE " +
-                    " category_id = :category_id"
+                    " category_id = :category_id " +
+                    " order by contestant_id asc limit :limit offset :offset"
     )
     List<Contestant> getNewContestantsForUser(
             @Bind("kings_user_id") Long kingsUserId,
