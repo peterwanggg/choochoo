@@ -54,6 +54,16 @@ public interface LocationDao {
     )
     Optional<Location> getByContestantId(@Bind("contestantId") Long contestantId);
 
+    @SingleValueResult(Location.class)
+    @SqlQuery(
+            "SELECT l.*\n" +
+                    "FROM common.category ca,\n" +
+                    "     common.location l\n" +
+                    "WHERE ca.category_id = :categoryId\n" +
+                    "  AND ca.location_id = l.location_id"
+    )
+    Optional<Location> getByCategoryId(@Bind("categoryId") Long categoryId);
+
 
     @SqlQuery(
             "SELECT * FROM common.location"

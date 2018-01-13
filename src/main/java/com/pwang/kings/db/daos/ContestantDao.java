@@ -85,8 +85,7 @@ public interface ContestantDao {
                     " category_id = :category_id " +
                     " order by contestant_id asc limit :limit offset :offset"
     )
-    List<Contestant> getNewContestantsForUser(
-            @Bind("kings_user_id") Long kingsUserId,
+    List<Contestant> getContestants(
             @Bind("category_id") Long categoryId,
             @Bind("limit") Integer limit,
             @Bind("offset") Integer offset);

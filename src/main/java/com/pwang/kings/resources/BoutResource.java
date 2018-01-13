@@ -11,13 +11,16 @@ import com.pwang.kings.objects.action.Bout;
 import com.pwang.kings.objects.action.ImmutableBout;
 import com.pwang.kings.objects.api.kings.*;
 import com.pwang.kings.objects.model.Category;
+import com.pwang.kings.objects.model.CategoryType;
 import com.pwang.kings.objects.model.Contestant;
 import com.pwang.kings.objects.model.KingsUser;
 import com.pwang.kings.stats.ContestantStatsUtil;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.http.HttpStatus;
 
 import javax.ws.rs.WebApplicationException;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -36,7 +39,6 @@ public final class BoutResource implements BoutService {
     private final ContestantRankDao contestantRankDao;
     private final ContestantDao contestantDao;
 
-
     public BoutResource(
             CategoryTypeManagerFactory categoryTypeManagerFactory,
             BoutDao boutDao,
@@ -50,7 +52,7 @@ public final class BoutResource implements BoutService {
         this.boutDao = boutDao;
         this.categoryDao = categoryDao;
 
-        this.contestantMatcher = new PersonalizedContestantMatcher(boutDao, contestantDao, locationDao);
+        this.contestantMatcher = new PersonalizedContestantMatcher(boutDao, contestantDao, contestantRankDao, locationDao);
         this.contestantStatsDao = contestantStatsDao;
         this.contestantRankDao = contestantRankDao;
         this.contestantDao = contestantDao;
@@ -102,10 +104,34 @@ public final class BoutResource implements BoutService {
     }
 
     @Override
-    public GetBoutResponse getNextBout(KingsUser kingsUser, Long categoryId) {
-        return ImmutableGetBoutResponse.builder()
-                .bout(contestantMatcher.findNextBout(
-                        kingsUser.getKingsUserId(), categoryId))
+    public GetMatchResponse getNextBout(KingsUser kingsUser, String categoryType, Long categoryId) {
+
+        CategoryTypeManager categoryTypeManager = categoryTypeManagerFactory.getCategoryManager(
+                CategoryType.valueOf(categoryType));
+
+        Optional<Pair<Contestant, Contestant>> contestantPair = contestantMatcher.findNextBout(
+                kingsUser.getKingsUserId(), categoryId, categoryTypeManager);
+
+        if (contestantPair.isPresent()) {
+            List<ContestantEntry> contestantList = ContestantStatsUtil.fetchAndJoinContestantStats(
+                    ImmutableList.of(contestantPair.get().getLeft(), contestantPair.get().getRight()),
+                    contestantStatsDao,
+                    contestantRankDao);
+            if (contestantList.size() != 2) {
+                throw new WebApplicationException("inconsistent db", HttpStatus.INTERNAL_SERVER_ERROR_500);
+            }
+
+            return ImmutableGetMatchResponse.builder()
+                    .match(
+                            ImmutableContestantEntryPair.builder()
+                                    .left(contestantList.get(0))
+                                    .right(contestantList.get(1))
+                                    .build())
+                    .build();
+        }
+
+        return ImmutableGetMatchResponse.builder()
+                .match(Optional.empty())
                 .build();
     }
 

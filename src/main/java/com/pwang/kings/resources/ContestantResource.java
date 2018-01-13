@@ -102,17 +102,15 @@ public final class ContestantResource implements ContestantService {
 
     @Override
     public ContestantsResponse getContestantsForCategory(
-            KingsUser kingsUser,
             Double lat,
             Double lon,
+            String categoryType,
             Long categoryId,
             Integer page
     ) {
         // 1. get category and manager
-        Category category = categoryDao.getById(categoryId)
-                .orElseThrow(() ->
-                        new WebApplicationException("could not find categoryId " + categoryId, HttpStatus.BAD_REQUEST_400));
-        CategoryTypeManager categoryManager = categoryTypeManagerFactory.getCategoryManager(category.getCategoryType());
+        CategoryTypeManager categoryManager = categoryTypeManagerFactory.getCategoryManager(
+                CategoryType.valueOf(categoryType));
 
         try {
             // 2. get location
@@ -124,9 +122,8 @@ public final class ContestantResource implements ContestantService {
                     .contestants(
                             ContestantStatsUtil.fetchAndJoinContestantStats(
                                     categoryManager.getContestants(
-                                            kingsUser,
                                             location,
-                                            category,
+                                            categoryId,
                                             Optional.ofNullable(page)),
                                     contestantStatsDao,
                                     contestantRankDao))

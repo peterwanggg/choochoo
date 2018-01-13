@@ -20,9 +20,8 @@ public interface CategoryTypeManager {
     List<Location> getCitiesAndCreate(List<String> apiProviderIds) throws IOException;
 
     List<Contestant> getContestants(
-            KingsUser kingsUser,
             Location location,
-            Category category,
+            Long categoryId,
             Optional<Integer> page) throws IOException;
 
     List<Contestant> searchContestants(Location location, String contestantName) throws IOException;

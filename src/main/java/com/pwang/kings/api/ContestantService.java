@@ -29,22 +29,22 @@ public interface ContestantService {
             @NotNull @QueryParam("challenger-contestant-id") Long contestantId,
             @Nullable @QueryParam("page") Integer page);
 
-    @Path("/category")
+    @Path("/category/{category-type}")
     @GET
     ContestantsResponse getContestantsForCategory(
-            @Auth KingsUser kingsUser,
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,
+            @NotNull @PathParam("category-type") String categoryType,
             @NotNull @QueryParam("category-id") Long categoryId,
             @Nullable @QueryParam("page") Integer page);
 
-    @Path("/search")
+    @Path("/search/{category-type}")
     @GET
     List<Contestant> searchByName(
             @Auth KingsUser kingsUser,
             @NotNull @QueryParam("lat") Double lat,
             @NotNull @QueryParam("lon") Double lon,
-            @NotNull @QueryParam("category-type") String categoryType,
+            @NotNull @PathParam("category-type") String categoryType,
             @NotNull @QueryParam("contestant-name") String contestantName);
 
 }

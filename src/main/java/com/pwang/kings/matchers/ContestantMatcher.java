@@ -1,8 +1,8 @@
 package com.pwang.kings.matchers;
 
 import com.pwang.kings.categories.CategoryTypeManager;
-import com.pwang.kings.objects.action.Bout;
 import com.pwang.kings.objects.model.Contestant;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Optional;
 
@@ -16,5 +16,5 @@ public interface ContestantMatcher {
             Contestant contestant,
             CategoryTypeManager categoryTypeManager);
 
-    Bout findNextBout(Long kingsUserId, Long categoryId);
+    Optional<Pair<Contestant, Contestant>> findNextBout(Long kingsUserId, Long categoryId, CategoryTypeManager categoryTypeManager);
 }

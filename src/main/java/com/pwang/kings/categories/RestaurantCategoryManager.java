@@ -241,19 +241,20 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
 
     @Override
     public List<Contestant> getContestants(
-            KingsUser kingsUser,
             Location location,
-            Category category,
+            Long categoryId,
             Optional<Integer> page) throws IOException {
         // 1. get from DB
-        List<Contestant> contestants = contestantDao.getNewContestantsForUser(
-                kingsUser.getKingsUserId(),
-                category.getCategoryId(),
+        List<Contestant> contestants = contestantDao.getContestants(
+                categoryId,
                 KingsConstants.CONTESTANTS_PAGE_MIN_SIZE,
                 page.map(p -> (p - 1) * KingsConstants.CONTESTANTS_PAGE_MIN_SIZE).orElse(0));
 
         if (contestants.size() < KingsConstants.CONTESTANTS_PAGE_MIN_SIZE) {
-            contestants.addAll(getNewContestantsFromApi(location, category, KingsConstants.CONTESTANTS_PAGE_MIN_SIZE - contestants.size()));
+            contestants.addAll(getNewContestantsFromApi(
+                    location,
+                    getCategoriesByLocation(location.getLocationId()).get(categoryId),
+                    KingsConstants.CONTESTANTS_PAGE_MIN_SIZE - contestants.size()));
         }
         return contestants;
     }

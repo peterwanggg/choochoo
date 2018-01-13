@@ -1,6 +1,6 @@
 package com.pwang.kings.api;
 
-import com.pwang.kings.objects.api.kings.GetBoutResponse;
+import com.pwang.kings.objects.api.kings.GetMatchResponse;
 import com.pwang.kings.objects.api.kings.SubmitBoutResponse;
 import com.pwang.kings.objects.model.KingsUser;
 import io.dropwizard.auth.Auth;
@@ -26,10 +26,11 @@ public interface BoutService {
             @NotNull @QueryParam("loser-contestant-id") long loserContestantId,
             @NotNull @QueryParam("next-contestant-id") long nextContestantId);
 
-    @Path("/category/{category-id}")
+    @Path("/category/{category-type}/{category-id}")
     @GET
-    GetBoutResponse getNextBout(
+    GetMatchResponse getNextBout(
             @Auth KingsUser kingsUser,
+            @NotNull @PathParam("category-type") String categoryType,
             @NotNull @PathParam("category-id") Long categoryId);
 
 }

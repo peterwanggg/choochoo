@@ -1,17 +1,18 @@
 package com.pwang.kings.db.daos;
 
+import com.pwang.kings.db.util.SqlLogger;
 import com.pwang.kings.objects.action.Bout;
+import com.pwang.kings.objects.db.LongPair;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.SingleValueResult;
 import org.skife.jdbi.v2.sqlobject.stringtemplate.UseStringTemplate3StatementLocator;
-import org.skife.jdbi.v2.unstable.BindIn;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
  * @author pwang on 12/:contestant_id/17.
  */
+@SqlLogger
 @UseStringTemplate3StatementLocator
 public interface BoutDao {
 
@@ -22,12 +23,6 @@ public interface BoutDao {
                     + "(:bout.categoryId, :bout.winnerContestantId, :bout.loserContestantId, :bout.kingsUserId) "
     )
     Long create(@BindBean("bout") Bout bout);
-
-    @SqlQuery(
-            "SELECT * FROM common.bout WHERE kings_user_id = :user_id " +
-                    "AND ( winner_contestant_id IN (<contestant_ids>) OR loser_contestant_id IN (<contestant_ids>) )"
-    )
-    List<Bout> getBoutsByUserAndContestantIds(@Bind("user_id") Long userId, @BindIn("contestant_ids") List<Long> contestantIds);
 
     @SingleValueResult(Long.class)
     @SqlQuery(
@@ -78,6 +73,40 @@ public interface BoutDao {
     Optional<Long> getBestContestantFromContestant(
             @Bind("kingsUserId") Long userId,
             @Bind("nextContestantId") Long nextContestantId,
+            @Bind("categoryId") Long nextCategoryId);
+
+    @SingleValueResult(LongPair.class)
+    @SqlQuery(
+            "SELECT a_id as left, b_id as right\n" +
+                    "FROM\n" +
+                    "  (SELECT winner_contestant_id AS a_id,\n" +
+                    "          count(*) AS a_wins\n" +
+                    "   FROM common.bout\n" +
+                    "   WHERE kings_user_id = :kingsUserId\n" +
+                    "     AND category_id = :categoryId\n" +
+                    "   GROUP BY 1\n" +
+                    "   ORDER BY 2 DESC) AS a,\n" +
+                    "\n" +
+                    "  (SELECT winner_contestant_id AS b_id,\n" +
+                    "          count(*) AS b_wins\n" +
+                    "   FROM common.bout\n" +
+                    "   WHERE kings_user_id = :kingsUserId\n" +
+                    "     AND category_id = :categoryId\n" +
+                    "   GROUP BY 1\n" +
+                    "   ORDER BY 2 DESC) AS b\n" +
+                    "WHERE a_id != b_id\n" +
+                    "  AND NOT EXISTS\n" +
+                    "    (SELECT *\n" +
+                    "     FROM common.bout\n" +
+                    "     WHERE kings_user_id = :kingsUserId\n" +
+                    "       AND category_id = :categoryId\n" +
+                    "       AND ((winner_contestant_id = a_id\n" +
+                    "             AND loser_contestant_id = b_id)\n" +
+                    "            OR (loser_contestant_id = a_id\n" +
+                    "                AND winner_contestant_id = b_id))) LIMIT 1"
+    )
+    Optional<LongPair> getBestNewMatch(
+            @Bind("kingsUserId") Long userId,
             @Bind("categoryId") Long nextCategoryId);
 
 
