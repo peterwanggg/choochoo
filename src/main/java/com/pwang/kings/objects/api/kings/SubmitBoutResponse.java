@@ -5,17 +5,16 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
 
-import java.util.List;
+import java.util.Optional;
 
 /**
- * @author pwang on 1/7/18.
+ * @author pwang on 1/11/18.
  */
-@JsonDeserialize(as = com.pwang.kings.objects.api.kings.ImmutableContestantsResponse.class)
-@JsonSerialize(as = com.pwang.kings.objects.api.kings.ImmutableContestantsResponse.class)
+@JsonDeserialize(as = com.pwang.kings.objects.api.kings.ImmutableSubmitBoutResponse.class)
+@JsonSerialize(as = com.pwang.kings.objects.api.kings.ImmutableSubmitBoutResponse.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Value.Immutable
-public interface ContestantsResponse {
+public interface SubmitBoutResponse {
 
-    List<ContestantEntry> contestants();
-
+    Optional<ContestantEntry> nextContestant();
 }

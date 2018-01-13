@@ -29,67 +29,11 @@ pg_ctl -D /Users/pwang/Documents/postgres -l logfile start
 
 
 
-### API ###
-GET Contestant[] getContestants(User, Category, Location) #optional<Revote>
-
-GET ContestantStats[] getContestantStats(Category, LatLng)
-
-POST void submitClash(User, Contestant winner, Contestant loser)
-
-### API OBJECTS ###
-Location
-- name
-
-Category
-- name
-
-ContestantStats
-
-Contestant
-
-
-
-### DB TABLES ###
-clashrecord
-- clashrecordId PK
-- winner contestantId
-- loser contestantId
-- category categoryId
-- location locationId
-- userId userId
-
-location
-- locationId
-- type enum     # {CITY, }
-- name
-
-category
-- categoryId PK
-- name string
-
-contestant
-- contestantId PK
-- categoryIds categoryId[]
-- locationId locationId
-- name string
-
-kingsUser
-- userId PK
-
-
-
-
-
-
-
-### ROAD MAP ###
-1. getContestant
-2. submitClash
-3. getContestant stats
-
-
-
-
+A > B
+A > C
+A < D
+D < C
+C < A
 
 
 

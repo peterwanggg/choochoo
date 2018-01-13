@@ -34,6 +34,8 @@ public interface CategoryTypeManager {
             Contestant challenger,
             Optional<Integer> page) throws IOException;
 
+    List<Contestant> getNewContestantsFromApi(Location location, Category category, int numNeeded) throws IOException;
+
     // <CategoryId, Category>
     Map<Long, Category> getCategoriesByLocation(Long locationId);
 

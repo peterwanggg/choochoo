@@ -131,14 +131,13 @@ public class KingsApplication extends Application<KingsConfiguration> {
 
         // register resources
         environment.jersey().register(new BoutResource(
-                boutDao));
+                categoryTypeManagerFactory, boutDao, categoryDao, contestantStatsDao, contestantRankDao, contestantDao, locationDao));
         environment.jersey().register(new ContestantResource(
                 contestantDao,
                 categoryDao,
                 categoryTypeManagerFactory,
                 contestantStatsDao,
-                contestantRankDao,
-                boutDao));
+                contestantRankDao));
         environment.jersey().register(new CategoryResource(
                 categoryTypeManagerFactory,
                 contestantDao,
@@ -166,6 +165,7 @@ public class KingsApplication extends Application<KingsConfiguration> {
         final Managed rankImplementer = new ManagedPeriodicTask(contestantRankerTask);
         environment.lifecycle().manage(rankImplementer);
     }
+
 
     private ZomatoService getZomatoService(String apiKey) {
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder();

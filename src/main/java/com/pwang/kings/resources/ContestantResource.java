@@ -4,7 +4,10 @@ import com.google.common.collect.ImmutableList;
 import com.pwang.kings.api.ContestantService;
 import com.pwang.kings.categories.CategoryTypeManager;
 import com.pwang.kings.categories.CategoryTypeManagerFactory;
-import com.pwang.kings.db.daos.*;
+import com.pwang.kings.db.daos.CategoryDao;
+import com.pwang.kings.db.daos.ContestantDao;
+import com.pwang.kings.db.daos.ContestantRankDao;
+import com.pwang.kings.db.daos.ContestantStatsDao;
 import com.pwang.kings.objects.api.kings.ChallengerResponse;
 import com.pwang.kings.objects.api.kings.ContestantsResponse;
 import com.pwang.kings.objects.api.kings.ImmutableChallengerResponse;
@@ -32,7 +35,6 @@ public final class ContestantResource implements ContestantService {
     private final ContestantDao contestantDao;
     private final ContestantStatsDao contestantStatsDao;
     private final ContestantRankDao contestantRankDao;
-    private final BoutDao boutDao;
 
     private final int SEARCH_CONTESTANTS_SIZE_LIMIT = 20;
 
@@ -41,16 +43,13 @@ public final class ContestantResource implements ContestantService {
             CategoryDao categoryDao,
             CategoryTypeManagerFactory categoryTypeManagerFactory,
             ContestantStatsDao contestantStatsDao,
-            ContestantRankDao contestantRankDao,
-            BoutDao boutDao) {
+            ContestantRankDao contestantRankDao) {
         this.contestantDao = contestantDao;
         this.categoryDao = categoryDao;
         this.categoryTypeManagerFactory = categoryTypeManagerFactory;
         this.contestantStatsDao = contestantStatsDao;
         this.contestantRankDao = contestantRankDao;
-        this.boutDao = boutDao;
     }
-
 
     @Override
     public ChallengerResponse getContestantsForChallenger(
@@ -78,8 +77,7 @@ public final class ContestantResource implements ContestantService {
             // 4. get contestants and status
             return ImmutableChallengerResponse.builder()
                     .addAllContestants(
-                            ContestantStatsUtil.fetchAndJoinContestantStatsAndBouts(
-                                    kingsUser.getKingsUserId(),
+                            ContestantStatsUtil.fetchAndJoinContestantStats(
                                     categoryManager.getChallengers(
                                             kingsUser,
                                             location,
@@ -87,15 +85,12 @@ public final class ContestantResource implements ContestantService {
                                             challenger,
                                             Optional.ofNullable(page)),
                                     contestantStatsDao,
-                                    contestantRankDao,
-                                    boutDao))
+                                    contestantRankDao))
                     .challenger(
-                            ContestantStatsUtil.fetchAndJoinContestantStatsAndBouts(
-                                    kingsUser.getKingsUserId(),
+                            ContestantStatsUtil.fetchAndJoinContestantStats(
                                     ImmutableList.of(challenger),
                                     contestantStatsDao,
-                                    contestantRankDao,
-                                    boutDao).stream().findFirst()
+                                    contestantRankDao).stream().findFirst()
                                     .orElseThrow(() ->
                                             new WebApplicationException("invalid challenger-contestant-id: " + challengerContestantId, HttpStatus.BAD_REQUEST_400)))
                     .build();
@@ -127,16 +122,14 @@ public final class ContestantResource implements ContestantService {
             // 3. get contestants
             return ImmutableContestantsResponse.builder()
                     .contestants(
-                            ContestantStatsUtil.fetchAndJoinContestantStatsAndBouts(
-                                    kingsUser.getKingsUserId(),
+                            ContestantStatsUtil.fetchAndJoinContestantStats(
                                     categoryManager.getContestants(
                                             kingsUser,
                                             location,
                                             category,
                                             Optional.ofNullable(page)),
                                     contestantStatsDao,
-                                    contestantRankDao,
-                                    boutDao))
+                                    contestantRankDao))
                     .build();
         } catch (IOException e) {
             LOGGER.error("api exception", e);

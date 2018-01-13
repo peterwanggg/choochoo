@@ -1,12 +1,13 @@
 package com.pwang.kings.api;
 
+import com.pwang.kings.objects.api.kings.GetBoutResponse;
+import com.pwang.kings.objects.api.kings.SubmitBoutResponse;
 import com.pwang.kings.objects.model.KingsUser;
 import io.dropwizard.auth.Auth;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 
 /**
@@ -18,11 +19,17 @@ import javax.ws.rs.core.Response;
 public interface BoutService {
 
     @POST
-    Response submit(
+    SubmitBoutResponse submit(
             @Auth KingsUser kingsUser,
             @NotNull @QueryParam("category-id") Long categoryId,
             @NotNull @QueryParam("winner-contestant-id") long winnerContestantId,
-            @NotNull @QueryParam("loser-contestant-id") long loserContestantId);
+            @NotNull @QueryParam("loser-contestant-id") long loserContestantId,
+            @NotNull @QueryParam("next-contestant-id") long nextContestantId);
 
+    @Path("/category/{category-id}")
+    @GET
+    GetBoutResponse getNextBout(
+            @Auth KingsUser kingsUser,
+            @NotNull @PathParam("category-id") Long categoryId);
 
 }

@@ -253,7 +253,7 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
                 page.map(p -> (p - 1) * KingsConstants.CONTESTANTS_PAGE_MIN_SIZE).orElse(0));
 
         if (contestants.size() < KingsConstants.CONTESTANTS_PAGE_MIN_SIZE) {
-            contestants.addAll(getNewContestantFromZomato(location, category, KingsConstants.CONTESTANTS_PAGE_MIN_SIZE - contestants.size()));
+            contestants.addAll(getNewContestantsFromApi(location, category, KingsConstants.CONTESTANTS_PAGE_MIN_SIZE - contestants.size()));
         }
         return contestants;
     }
@@ -275,12 +275,13 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
                 page.map(p -> (p - 1) * KingsConstants.CONTESTANTS_PAGE_MIN_SIZE).orElse(0));
 
         if (contestants.size() < KingsConstants.CONTESTANTS_PAGE_MIN_SIZE) {
-            contestants.addAll(getNewContestantFromZomato(location, category, KingsConstants.CONTESTANTS_PAGE_MIN_SIZE - contestants.size()));
+            contestants.addAll(getNewContestantsFromApi(location, category, KingsConstants.CONTESTANTS_PAGE_MIN_SIZE - contestants.size()));
         }
         return contestants;
     }
 
-    private List<Contestant> getNewContestantFromZomato(Location location, Category category, int numNeeded) throws IOException {
+    @Override
+    public List<Contestant> getNewContestantsFromApi(Location location, Category category, int numNeeded) throws IOException {
         int page = 0;
         List<Contestant> insertedContestants = new ArrayList<>();
         if (exhaustedCategories.getUnchecked(category.getCategoryId())) {
@@ -345,7 +346,7 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
         Map<Long, Category> categories = categoryCache.getUnchecked(locationId);
         return topCategoryIds.getUnchecked(locationId)
                 .stream()
-                .map(categoryId -> categories.get(categoryId))
+                .map(categories::get)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
@@ -359,7 +360,7 @@ public final class RestaurantCategoryManager implements CategoryTypeManager {
         String apiLocationId = parentLocation.map(Location::getApiProviderId).orElse(location.getApiProviderId());
 
         Response<CuisinesResult> response = zomatoService
-                .cuisines(Integer.valueOf(ZomatoConstants.locationApiProviderIdToId(apiLocationId)))
+                .cuisines(ZomatoConstants.locationApiProviderIdToId(apiLocationId))
                 .execute();
         if (!response.isSuccessful()) {
             throw new WebApplicationException("zomato request failed", HttpStatus.INTERNAL_SERVER_ERROR_500);

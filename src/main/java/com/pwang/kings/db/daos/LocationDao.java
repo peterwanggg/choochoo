@@ -42,6 +42,18 @@ public interface LocationDao {
     )
     Optional<Location> getByApiId(@Bind("api_provider_type") String apiProviderType, @Bind("api_provider_id") String apiProviderId);
 
+    @SingleValueResult(Location.class)
+    @SqlQuery(
+            "SELECT l.*\n" +
+                    "FROM common.contestant co,\n" +
+                    "     common.category ca,\n" +
+                    "     common.location l\n" +
+                    "WHERE co.category_id = ca.category_id\n" +
+                    "  AND ca.location_id = l.location_id\n" +
+                    "  AND co.contestant_id = :contestantId"
+    )
+    Optional<Location> getByContestantId(@Bind("contestantId") Long contestantId);
+
 
     @SqlQuery(
             "SELECT * FROM common.location"
