@@ -10,11 +10,11 @@ import java.util.Optional;
 /**
  * @author pwang on 1/11/18.
  */
-@JsonDeserialize(as = com.pwang.kings.objects.api.kings.ImmutableSubmitBoutResponse.class)
-@JsonSerialize(as = com.pwang.kings.objects.api.kings.ImmutableSubmitBoutResponse.class)
+@JsonDeserialize(as = ImmutableNextContestantResponse.class)
+@JsonSerialize(as = ImmutableNextContestantResponse.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Value.Immutable
-public interface SubmitBoutResponse {
+public interface NextContestantResponse {
 
     Optional<ContestantEntry> nextContestant();
 }

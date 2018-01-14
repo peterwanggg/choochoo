@@ -10,7 +10,6 @@ import com.pwang.kings.matchers.PersonalizedContestantMatcher;
 import com.pwang.kings.objects.action.Bout;
 import com.pwang.kings.objects.action.ImmutableBout;
 import com.pwang.kings.objects.api.kings.*;
-import com.pwang.kings.objects.model.Category;
 import com.pwang.kings.objects.model.CategoryType;
 import com.pwang.kings.objects.model.Contestant;
 import com.pwang.kings.objects.model.KingsUser;
@@ -59,8 +58,9 @@ public final class BoutResource implements BoutService {
     }
 
     @Override
-    public SubmitBoutResponse submit(
+    public NextContestantResponse submit(
             KingsUser kingsUser,
+            String categoryType,
             Long categoryId,
             long winnerContestantId,
             long loserContestantId,
@@ -69,9 +69,8 @@ public final class BoutResource implements BoutService {
         // get contestant/category/categoryManager
         Contestant nextContestant = contestantDao.getById(nextContestantId).orElseThrow(
                 () -> new WebApplicationException("could not find contestant " + nextContestantId, HttpStatus.BAD_REQUEST_400));
-        Category category = categoryDao.getById(nextContestant.getCategoryId())
-                .orElseThrow(() -> new WebApplicationException("could not find categoryId " + nextContestant.getCategoryId(), HttpStatus.BAD_REQUEST_400));
-        CategoryTypeManager categoryTypeManager = categoryTypeManagerFactory.getCategoryManager(category.getCategoryType());
+        CategoryTypeManager categoryTypeManager = categoryTypeManagerFactory.getCategoryManager(
+                CategoryType.valueOf(categoryType));
 
         // create and submit bout
         Bout bout = ImmutableBout.builder()
@@ -83,13 +82,21 @@ public final class BoutResource implements BoutService {
         boutDao.create(bout);
 
         // find next contestant
-        Optional<ContestantEntry> matchEntry = Optional.empty();
+        return ImmutableNextContestantResponse.builder()
+                .nextContestant(getNextContestant(
+                        kingsUser.getKingsUserId(),
+                        nextContestant,
+                        categoryTypeManager))
+                .build();
+    }
+
+    private Optional<ContestantEntry> getNextContestant(Long kingsUserId, Contestant nextContestant, CategoryTypeManager categoryTypeManager) {
         Optional<Contestant> match = contestantMatcher.findNextMatch(
-                kingsUser.getKingsUserId(),
+                kingsUserId,
                 nextContestant,
                 categoryTypeManager);
         if (match.isPresent()) {
-            matchEntry = Optional.of(
+            return Optional.of(
                     ContestantStatsUtil.fetchAndJoinContestantStats(
                             ImmutableList.of(match.get()),
                             contestantStatsDao,
@@ -97,14 +104,11 @@ public final class BoutResource implements BoutService {
                     ).get(0)
             );
         }
-        return ImmutableSubmitBoutResponse.builder()
-                .nextContestant(matchEntry)
-                .build();
-
+        return Optional.empty();
     }
 
     @Override
-    public GetMatchResponse getNextBout(KingsUser kingsUser, String categoryType, Long categoryId) {
+    public GetMatchResponse getMatchForCategory(KingsUser kingsUser, String categoryType, Long categoryId) {
 
         CategoryTypeManager categoryTypeManager = categoryTypeManagerFactory.getCategoryManager(
                 CategoryType.valueOf(categoryType));
@@ -133,6 +137,41 @@ public final class BoutResource implements BoutService {
         return ImmutableGetMatchResponse.builder()
                 .match(Optional.empty())
                 .build();
+    }
+
+    @Override
+    public GetMatchResponse getMatchForContestant(KingsUser kingsUser, String categoryType, Long contestantId) {
+        // get contestant/category/categoryManager
+        Contestant nextContestant = contestantDao.getById(contestantId).orElseThrow(
+                () -> new WebApplicationException("could not find contestant " + contestantId, HttpStatus.BAD_REQUEST_400));
+        CategoryTypeManager categoryTypeManager = categoryTypeManagerFactory.getCategoryManager(
+                CategoryType.valueOf(categoryType));
+
+
+        Optional<ContestantEntry> otherContestant = getNextContestant(
+                kingsUser.getKingsUserId(),
+                nextContestant,
+                categoryTypeManager);
+
+        return otherContestant.map(otherE -> ImmutableGetMatchResponse.builder()
+                .match(ImmutableContestantEntryPair.builder()
+                        .left(
+                                ContestantStatsUtil.fetchAndJoinContestantStats(
+                                        ImmutableList.of(nextContestant),
+                                        contestantStatsDao,
+                                        contestantRankDao
+                                ).get(0))
+                        .right(
+                                otherE)
+                        .build()
+                )
+                .build()
+        ).orElse(
+                ImmutableGetMatchResponse.builder()
+                        .match(Optional.empty())
+                        .build()
+        );
+
     }
 
 }

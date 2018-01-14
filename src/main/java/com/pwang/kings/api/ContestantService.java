@@ -1,6 +1,5 @@
 package com.pwang.kings.api;
 
-import com.pwang.kings.objects.api.kings.ChallengerResponse;
 import com.pwang.kings.objects.api.kings.ContestantsResponse;
 import com.pwang.kings.objects.model.Contestant;
 import com.pwang.kings.objects.model.KingsUser;
@@ -20,22 +19,19 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public interface ContestantService {
 
-    @Path("/challenger")
-    @GET
-    ChallengerResponse getContestantsForChallenger(
-            @Auth KingsUser kingsUser,
-            @NotNull @QueryParam("lat") Double lat,
-            @NotNull @QueryParam("lon") Double lon,
-            @NotNull @QueryParam("challenger-contestant-id") Long contestantId,
-            @Nullable @QueryParam("page") Integer page);
+//    @Path("/challenger")
+//    @GET
+//    ChallengerResponse getContestantsForChallenger(
+//            @Auth KingsUser kingsUser,
+//            @NotNull @QueryParam("challenger-contestant-id") Long contestantId,
+//            @Nullable @QueryParam("page") Integer page, Long locationId);
 
-    @Path("/category/{category-type}")
+    @Path("/category/{category-type}/{category-id}")
     @GET
     ContestantsResponse getContestantsForCategory(
-            @NotNull @QueryParam("lat") Double lat,
-            @NotNull @QueryParam("lon") Double lon,
             @NotNull @PathParam("category-type") String categoryType,
-            @NotNull @QueryParam("category-id") Long categoryId,
+            @NotNull @PathParam("category-id") Long categoryId,
+            @NotNull @QueryParam("location-id") Long locationId,
             @Nullable @QueryParam("page") Integer page);
 
     @Path("/search/{category-type}")

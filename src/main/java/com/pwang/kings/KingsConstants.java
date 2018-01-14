@@ -5,5 +5,5 @@ package com.pwang.kings;
  */
 // should probably be configs
 public interface KingsConstants {
-    int CONTESTANTS_PAGE_MIN_SIZE = 15;
+    int CONTESTANTS_PAGE_MIN_SIZE = Integer.MAX_VALUE;
 }
