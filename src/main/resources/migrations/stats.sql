@@ -41,7 +41,7 @@ CREATE UNIQUE INDEX contestant_stats_idx ON stats.contestant (contestant_id);
 
 
 CREATE TABLE stats.contestant_rank (
-    contestant_id BIGSERIAL NOT NULL REFERENCES common.contestant (contestant_id),
+    contestant_id BIGSERIAL PRIMARY KEY REFERENCES common.contestant (contestant_id),
     category_id BIGSERIAL NOT NULL REFERENCES common.category (category_id),
     rank INT NOT NULL,
     rank_type text NOT NULL

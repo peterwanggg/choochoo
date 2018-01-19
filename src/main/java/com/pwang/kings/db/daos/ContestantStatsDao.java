@@ -1,5 +1,6 @@
 package com.pwang.kings.db.daos;
 
+import com.pwang.kings.db.util.SqlLogger;
 import com.pwang.kings.objects.stats.ContestantStats;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
@@ -13,6 +14,7 @@ import java.util.Optional;
 /**
  * @author pwang on 1/3/18.
  */
+@SqlLogger
 @UseStringTemplate3StatementLocator
 public interface ContestantStatsDao {
 

@@ -109,6 +109,7 @@ public class KingsApplication extends Application<KingsConfiguration> {
         final KingsUserDao kingsUserDao = jdbi.onDemand(KingsUserDao.class);
         final ContestantStatsDao contestantStatsDao = jdbi.onDemand(ContestantStatsDao.class);
         final ContestantRankDao contestantRankDao = jdbi.onDemand(ContestantRankDao.class);
+        final ContestantSkipsDao contestantSkipsDao = jdbi.onDemand(ContestantSkipsDao.class);
 
         // category manager
         CategoryTypeManagerFactory categoryTypeManagerFactory = new CategoryTypeManagerFactory(
@@ -133,9 +134,8 @@ public class KingsApplication extends Application<KingsConfiguration> {
         environment.jersey().register(new BoutResource(
                 categoryTypeManagerFactory, boutDao, categoryDao, contestantStatsDao, contestantRankDao, contestantDao, locationDao));
         environment.jersey().register(new ContestantResource(
-                contestantDao,
-                categoryDao,
                 categoryTypeManagerFactory,
+                contestantSkipsDao,
                 contestantStatsDao,
                 contestantRankDao, locationDao));
         environment.jersey().register(new CategoryResource(

@@ -60,6 +60,13 @@ CREATE TABLE common.bout (
 CREATE INDEX bout_winner_idx ON common.bout(winner_contestant_id, category_id, kings_user_id);
 CREATE INDEX bout_loser_idx ON common.bout(loser_contestant_id, category_id, kings_user_id);
 
+CREATE TABLE common.contestant_skips (
+    kings_user_id BIGSERIAL NOT NULL REFERENCES common.kings_user (kings_user_id),
+    category_id BIGSERIAL NOT NULL REFERENCES common.category (category_id),
+    contestant_ids BIGINT[] NOT NULL default '{}',
 
+    CONSTRAINT skips_user_category UNIQUE (kings_user_id, category_id)
+);
 
-insert into common.kings_user (name) values ('pete');
+INSERT INTO common.kings_user (name) VALUES ('pete');
+INSERT INTO common.kings_user (name) VALUES ('laura');
