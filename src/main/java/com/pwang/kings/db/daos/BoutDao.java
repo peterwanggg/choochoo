@@ -44,7 +44,11 @@ public interface BoutDao {
                     "       AND ((winner_contestant_id = :nextContestantId\n" +
                     "             AND loser_contestant_id = top.top_id)\n" +
                     "            OR (loser_contestant_id = :nextContestantId\n" +
-                    "                AND winner_contestant_id = top.top_id))) LIMIT 1"
+                    "                AND winner_contestant_id = top.top_id))) AND\n" +
+                    "    top.top_id NOT IN\n" +
+                    "       (SELECT unnest(contestant_ids) FROM common.contestant_skips WHERE\n" +
+                    "           kings_user_id = :kingsUserId and category_id = :categoryId)\n" +
+                    "LIMIT 1"
     )
     Optional<Long> getBestContestantFromBout(
             @Bind("kingsUserId") Long userId,
@@ -68,7 +72,11 @@ public interface BoutDao {
                     "       AND ((winner_contestant_id = :nextContestantId\n" +
                     "             AND loser_contestant_id = top.contestant_id)\n" +
                     "            OR (loser_contestant_id = :nextContestantId\n" +
-                    "                AND winner_contestant_id = top.contestant_id))) LIMIT 1;"
+                    "                AND winner_contestant_id = top.contestant_id))) AND\n" +
+                    "    contestant_id NOT IN\n" +
+                    "       (SELECT unnest(contestant_ids) FROM common.contestant_skips WHERE \n" +
+                    "           kings_user_id = :kingsUserId and category_id = :categoryId)\n" +
+                    "LIMIT 1"
     )
     Optional<Long> getBestContestantFromContestant(
             @Bind("kingsUserId") Long userId,
@@ -103,7 +111,14 @@ public interface BoutDao {
                     "       AND ((winner_contestant_id = a_id\n" +
                     "             AND loser_contestant_id = b_id)\n" +
                     "            OR (loser_contestant_id = a_id\n" +
-                    "                AND winner_contestant_id = b_id))) LIMIT 1"
+                    "                AND winner_contestant_id = b_id))) AND\n" +
+                    "    a_id NOT IN " +
+                    "       (SELECT unnest(contestant_ids) FROM common.contestant_skips WHERE \n" +
+                    "           kings_user_id = :kingsUserId and category_id = :categoryId) AND\n" +
+                    "    b_id NOT IN \n" +
+                    "       (SELECT unnest(contestant_ids) FROM common.contestant_skips WHERE\n" +
+                    "           kings_user_id = :kingsUserId and category_id = :categoryId)\n" +
+                    "LIMIT 1"
     )
     Optional<LongPair> getBestNewMatch(
             @Bind("kingsUserId") Long userId,

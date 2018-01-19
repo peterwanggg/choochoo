@@ -1,6 +1,5 @@
 package com.pwang.kings.resources;
 
-import com.google.common.collect.ImmutableList;
 import com.pwang.kings.api.ContestantService;
 import com.pwang.kings.categories.CategoryTypeManager;
 import com.pwang.kings.categories.CategoryTypeManagerFactory;
@@ -10,7 +9,10 @@ import com.pwang.kings.db.daos.ContestantStatsDao;
 import com.pwang.kings.db.daos.LocationDao;
 import com.pwang.kings.objects.api.kings.ContestantsResponse;
 import com.pwang.kings.objects.api.kings.ImmutableContestantsResponse;
-import com.pwang.kings.objects.model.*;
+import com.pwang.kings.objects.model.CategoryType;
+import com.pwang.kings.objects.model.Contestant;
+import com.pwang.kings.objects.model.KingsUser;
+import com.pwang.kings.objects.model.Location;
 import com.pwang.kings.stats.ContestantStatsUtil;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.http.HttpStatus;

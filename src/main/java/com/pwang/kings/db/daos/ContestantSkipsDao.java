@@ -23,11 +23,11 @@ public interface ContestantSkipsDao {
 
     @SqlUpdate(
             "INSERT INTO common.contestant_skips AS s\n" +
-            "VALUES (:kingsUserId,\n" +
-            "        :categoryId,\n" +
-            "        array[ :contestantId ] ) ON conflict ON CONSTRAINT skips_user_category DO\n" +
-            "UPDATE\n" +
-            "SET contestant_ids = array_cat(s.contestant_ids, array[ :contestantId ]::bigint[] );"
+                    "VALUES (:kingsUserId,\n" +
+                    "        :categoryId,\n" +
+                    "        array[ :contestantId ] ) ON conflict ON CONSTRAINT skips_user_category DO\n" +
+                    "UPDATE\n" +
+                    "SET contestant_ids = array_cat(s.contestant_ids, array[ :contestantId ]::bigint[] );"
     )
     void addById(@Bind("kingsUserId") Long kingsUserId,
                  @Bind("categoryId") Long categoryId,
@@ -35,9 +35,9 @@ public interface ContestantSkipsDao {
 
     @SqlUpdate(
             "UPDATE common.contestant_skips AS s\n" +
-            "SET contestant_ids = array_remove(s.contestant_ids, :contestantId::bigint)\n" +
-            "WHERE s.category_id = :categoryId\n" +
-            "  AND s.kings_user_id = :kingsUserId"
+                    "SET contestant_ids = array_remove(s.contestant_ids, :contestantId::bigint)\n" +
+                    "WHERE s.category_id = :categoryId\n" +
+                    "  AND s.kings_user_id = :kingsUserId"
     )
     void removeById(@Bind("kingsUserId") Long kingsUserId,
                     @Bind("categoryId") Long categoryId,
