@@ -11,6 +11,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author pwang on 12/26/17.
@@ -50,5 +51,11 @@ public interface ContestantService {
             @Auth KingsUser kingsUser,
             @NotNull @PathParam("category-id") Long categoryId,
             @NotNull @PathParam("contestant-id") Long contestantId);
+
+    @Path("/skip/{category-id}")
+    @GET
+    Set<Long> getSkips(
+            @Auth KingsUser kingsUser,
+            @NotNull @PathParam("category-id") Long categoryId);
 
 }

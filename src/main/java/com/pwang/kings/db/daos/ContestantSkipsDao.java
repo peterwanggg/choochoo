@@ -17,9 +17,10 @@ public interface ContestantSkipsDao {
 
     @SingleValueResult(ContestantSkips.class)
     @SqlQuery(
-            "SELECT * from common.contestant_skips WHERE kings_user_id = :kingsUserId"
+            "SELECT * from common.contestant_skips WHERE category_id = :categoryId"
     )
-    Optional<ContestantSkips> getById(@Bind("kingsUserId") Long kingsUserId);
+    Optional<ContestantSkips> getByCategoryId(@Bind("kingsUserId") Long kingsUserId,
+                                              @Bind("categoryId") Long categoryId);
 
     @SqlUpdate(
             "INSERT INTO common.contestant_skips AS s\n" +

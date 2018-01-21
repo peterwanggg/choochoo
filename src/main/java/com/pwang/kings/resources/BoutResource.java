@@ -148,7 +148,6 @@ public final class BoutResource implements BoutService {
             Long contestantId,
             @Nullable Long skipContestantId
     ) {
-
         // get contestant/category/categoryManager
         Contestant mainContestant = contestantDao.getById(contestantId).orElseThrow(
                 () -> new WebApplicationException("could not find contestant " + contestantId, HttpStatus.BAD_REQUEST_400));
@@ -160,30 +159,25 @@ public final class BoutResource implements BoutService {
         CategoryTypeManager categoryTypeManager = categoryTypeManagerFactory.getCategoryManager(
                 CategoryType.valueOf(categoryType));
 
-
-        Optional<ContestantEntry> otherContestant = getNextContestant(
-                kingsUser.getKingsUserId(),
-                mainContestant,
-                categoryTypeManager);
-
-        return otherContestant.map(otherE -> ImmutableGetMatchResponse.builder()
-                .match(ImmutableContestantEntryPair.builder()
-                        .left(
-                                ContestantStatsUtil.fetchAndJoinContestantStats(
-                                        ImmutableList.of(mainContestant),
-                                        contestantStatsDao,
-                                        contestantRankDao
-                                ).get(0))
-                        .right(
-                                otherE)
+        return getNextContestant(kingsUser.getKingsUserId(), mainContestant, categoryTypeManager)
+                .map(otherE -> ImmutableGetMatchResponse.builder()
+                        .match(ImmutableContestantEntryPair.builder()
+                                .left(
+                                        ContestantStatsUtil.fetchAndJoinContestantStats(
+                                                ImmutableList.of(mainContestant),
+                                                contestantStatsDao,
+                                                contestantRankDao
+                                        ).get(0))
+                                .right(
+                                        otherE)
+                                .build()
+                        )
                         .build()
-                )
-                .build()
-        ).orElse(
-                ImmutableGetMatchResponse.builder()
-                        .match(Optional.empty())
-                        .build()
-        );
+                ).orElse(
+                        ImmutableGetMatchResponse.builder()
+                                .match(Optional.empty())
+                                .build()
+                );
 
     }
 

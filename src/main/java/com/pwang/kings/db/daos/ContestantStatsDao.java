@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * @author pwang on 1/3/18.
  */
-@SqlLogger
+//@SqlLogger
 @UseStringTemplate3StatementLocator
 public interface ContestantStatsDao {
 

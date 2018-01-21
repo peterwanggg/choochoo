@@ -9,10 +9,7 @@ import com.pwang.kings.db.daos.ContestantStatsDao;
 import com.pwang.kings.db.daos.LocationDao;
 import com.pwang.kings.objects.api.kings.ContestantsResponse;
 import com.pwang.kings.objects.api.kings.ImmutableContestantsResponse;
-import com.pwang.kings.objects.model.CategoryType;
-import com.pwang.kings.objects.model.Contestant;
-import com.pwang.kings.objects.model.KingsUser;
-import com.pwang.kings.objects.model.Location;
+import com.pwang.kings.objects.model.*;
 import com.pwang.kings.stats.ContestantStatsUtil;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.http.HttpStatus;
@@ -21,8 +18,10 @@ import javax.annotation.Nullable;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 
 /**
@@ -109,6 +108,13 @@ public final class ContestantResource implements ContestantService {
     public Response deleteSkip(KingsUser kingsUser, Long categoryId, Long contestantId) {
         contestantSkipsDao.removeById(kingsUser.getKingsUserId(), categoryId, contestantId);
         return Response.ok().build();
+    }
+
+    @Override
+    public Set<Long> getSkips(KingsUser kingsUser, Long categoryId) {
+        return contestantSkipsDao.getByCategoryId(kingsUser.getKingsUserId(), categoryId)
+                .map(ContestantSkips::contestantIds)
+                .orElse(new HashSet<>());
     }
 
 

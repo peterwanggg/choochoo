@@ -66,20 +66,7 @@ public interface ContestantDao {
             @Bind("limit") Integer limit,
             @Bind("offset") Integer offset);
 
-    // TODO: this is not quite right
-//    @SqlQuery(
-//            "SELECT * FROM common.contestant WHERE " +
-//                    " category_id = :category_id AND " +
-//                    " contestant_id NOT IN " +
-//                    " (SELECT winner_contestant_id FROM common.bout WHERE " +
-//                    "    kings_user_id = :kings_user_id AND " +
-//                    "    category_id = :category_id " +
-//                    "  UNION " +
-//                    "  SELECT loser_contestant_id FROM common.bout WHERE " +
-//                    "    kings_user_id = :kings_user_id AND " +
-//                    "    category_id = :category_id) " +
-//                    "    order by contestant_id asc limit :limit offset :offset"
-//    )
+
     @SqlQuery(
             "SELECT * FROM common.contestant WHERE " +
                     " category_id = :category_id " +
