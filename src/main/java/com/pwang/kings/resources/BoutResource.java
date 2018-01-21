@@ -18,6 +18,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.http.HttpStatus;
 
+import javax.annotation.Nullable;
 import javax.ws.rs.WebApplicationException;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +34,7 @@ public final class BoutResource implements BoutService {
     private final ContestantMatcher contestantMatcher;
 
     private final BoutDao boutDao;
-    private final CategoryDao categoryDao;
+    private final ContestantSkipsDao contestantSkipsDao;
     private final ContestantStatsDao contestantStatsDao;
     private final ContestantRankDao contestantRankDao;
     private final ContestantDao contestantDao;
@@ -42,14 +43,15 @@ public final class BoutResource implements BoutService {
             CategoryTypeManagerFactory categoryTypeManagerFactory,
             BoutDao boutDao,
 
-            CategoryDao categoryDao, ContestantStatsDao contestantStatsDao,
+            ContestantSkipsDao contestantSkipsDao,
+            ContestantStatsDao contestantStatsDao,
             ContestantRankDao contestantRankDao,
             ContestantDao contestantDao,
             LocationDao locationDao) {
         this.categoryTypeManagerFactory = categoryTypeManagerFactory;
 
         this.boutDao = boutDao;
-        this.categoryDao = categoryDao;
+        this.contestantSkipsDao = contestantSkipsDao;
 
         this.contestantMatcher = new PersonalizedContestantMatcher(boutDao, contestantDao, contestantRankDao, locationDao);
         this.contestantStatsDao = contestantStatsDao;
@@ -140,24 +142,35 @@ public final class BoutResource implements BoutService {
     }
 
     @Override
-    public GetMatchResponse getMatchForContestant(KingsUser kingsUser, String categoryType, Long contestantId) {
+    public GetMatchResponse getMatchForContestant(
+            KingsUser kingsUser,
+            String categoryType,
+            Long contestantId,
+            @Nullable Long skipContestantId
+    ) {
+
         // get contestant/category/categoryManager
-        Contestant nextContestant = contestantDao.getById(contestantId).orElseThrow(
+        Contestant mainContestant = contestantDao.getById(contestantId).orElseThrow(
                 () -> new WebApplicationException("could not find contestant " + contestantId, HttpStatus.BAD_REQUEST_400));
+        // skip if necessary
+        if (skipContestantId != null) {
+            contestantSkipsDao.addById(kingsUser.getKingsUserId(), mainContestant.getCategoryId(), skipContestantId);
+        }
+
         CategoryTypeManager categoryTypeManager = categoryTypeManagerFactory.getCategoryManager(
                 CategoryType.valueOf(categoryType));
 
 
         Optional<ContestantEntry> otherContestant = getNextContestant(
                 kingsUser.getKingsUserId(),
-                nextContestant,
+                mainContestant,
                 categoryTypeManager);
 
         return otherContestant.map(otherE -> ImmutableGetMatchResponse.builder()
                 .match(ImmutableContestantEntryPair.builder()
                         .left(
                                 ContestantStatsUtil.fetchAndJoinContestantStats(
-                                        ImmutableList.of(nextContestant),
+                                        ImmutableList.of(mainContestant),
                                         contestantStatsDao,
                                         contestantRankDao
                                 ).get(0))

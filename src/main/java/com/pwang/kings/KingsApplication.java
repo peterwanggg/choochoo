@@ -132,7 +132,7 @@ public class KingsApplication extends Application<KingsConfiguration> {
 
         // register resources
         environment.jersey().register(new BoutResource(
-                categoryTypeManagerFactory, boutDao, categoryDao, contestantStatsDao, contestantRankDao, contestantDao, locationDao));
+                categoryTypeManagerFactory, boutDao, contestantSkipsDao, contestantStatsDao, contestantRankDao, contestantDao, locationDao));
         environment.jersey().register(new ContestantResource(
                 categoryTypeManagerFactory,
                 contestantSkipsDao,

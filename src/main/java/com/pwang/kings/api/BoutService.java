@@ -5,6 +5,7 @@ import com.pwang.kings.objects.api.kings.NextContestantResponse;
 import com.pwang.kings.objects.model.KingsUser;
 import io.dropwizard.auth.Auth;
 
+import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -40,7 +41,8 @@ public interface BoutService {
     GetMatchResponse getMatchForContestant(
             @Auth KingsUser kingsUser,
             @NotNull @PathParam("category-type") String categoryType,
-            @NotNull @PathParam("contestant-id") Long contestantId);
+            @NotNull @PathParam("contestant-id") Long contestantId,
+            @Nullable @QueryParam("skip-contestant-id") Long skipContestantId);
 
 
 }
